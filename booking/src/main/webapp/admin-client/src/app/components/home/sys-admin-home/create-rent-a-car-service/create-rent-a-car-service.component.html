@@ -1,0 +1,59 @@
+<form [formGroup]="createNewRentACarForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name:
+    <input type="text" formControlName="name" placeholder="Enter name">
+    <div *ngIf="submitted && createNewRentACarForm.controls.name.errors">
+      <div *ngIf="createNewRentACarForm.controls.name.errors.required">Name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Street name:
+    <input type="text" formControlName="streetName" placeholder="Enter street name">
+    <div *ngIf="submitted && createNewRentACarForm.controls.streetName.errors">
+      <div *ngIf="createNewRentACarForm.controls.streetName.errors.required">Street name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Building number:
+    <input type="text" formControlName="buildingNumber" placeholder="Enter building number">
+    <div *ngIf="submitted && createNewRentACarForm.controls.buildingNumber.errors">
+      <div *ngIf="createNewRentACarForm.controls.buildingNumber.errors.required">Building number is required</div>
+    </div>
+  </label>
+
+  <label>
+    City:
+    <input type="text" formControlName="city" placeholder="Enter city">
+    <div *ngIf="submitted && createNewRentACarForm.controls.city.errors">
+      <div *ngIf="createNewRentACarForm.controls.city.errors.required">City is required</div>
+    </div>
+  </label>
+
+  <label>
+    Country:
+    <input type="text" formControlName="country" placeholder="Enter country">
+    <div *ngIf="submitted && createNewRentACarForm.controls.country.errors">
+      <div *ngIf="createNewRentACarForm.controls.country.errors.required">Country is required</div>
+    </div>
+  </label>
+
+  <label>
+    Description:
+    <input type="text" formControlName="description" placeholder="Enter description">
+    <div *ngIf="submitted && createNewRentACarForm.controls.description.errors">
+      <div *ngIf="createNewRentACarForm.controls.description.errors.required">Description is required</div>
+    </div>
+  </label>
+
+  <input type="submit" value="Create">
+
+</form>
+
+{{createNewRentACarForm.controls.name.value}}
+{{createNewRentACarForm.controls.streetName.value}}
+{{createNewRentACarForm.controls.buildingNumber.value}}
+{{createNewRentACarForm.controls.city.value}}
+{{createNewRentACarForm.controls.country.value}}
+{{createNewRentACarForm.controls.description.value}}

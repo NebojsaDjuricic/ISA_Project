@@ -1,0 +1,57 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  
+    <div class="col-md-3">
+        <div class="form-group">
+            Start date:
+  
+            <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+                <input type="date" class="form-control date" formControlName="startDate">
+            </div>
+        </div>
+      </div>
+  
+  <div class="col-md-3">
+    <div class="form-group">
+        Start place:
+  <input type="text" class="form-control date" formControlName="startPlace">
+    </div>
+  </div>
+  
+
+  <div class="col-md-3">
+      <div class="form-group">
+          End date:
+
+          <div class="form-field">
+              <i class="icon icon-calendar2"></i>
+              <input type="date" class="form-control date" formControlName="endDate">
+          </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group">
+          End place:
+          <input type="text" class="form-control date" formControlName="endPlace">
+      </div>
+    </div>
+  
+  <!--
+  Vehicle type:
+  <input type="text" formControlName="type">
+  -->
+  <div class="col-md-3">
+      <div class="form-group">
+          Number of passagers:
+          <input type="number" class="form-control date" formControlName="passangers">
+        </div>
+        </div>
+ 
+
+  <input type="submit" class="btn btn-primary btn-block" value="Search">
+</form>
+
+
+
+

@@ -1,0 +1,41 @@
+<app-nav></app-nav>
+
+<div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div class="container">
+      <div id="login-box">
+        <div class="left">
+
+          <h1>Login form</h1>
+          <br>
+          <label>
+            Username:
+            <input type="email" placeholder="Enter your username" formControlName="email">
+            <div *ngIf="submitted && loginForm.controls.email.errors">
+              <div *ngIf="loginForm.controls.email.errors.required">Enter email</div>
+            </div>
+          </label>
+
+          <label>
+            Password:
+            <input type="password" placeholder="Enter your password" formControlName="password">
+            <div *ngIf="submitted && loginForm.controls.password.errors">
+              <div *ngIf="loginForm.controls.password.errors.required">Enter password</div>
+            </div>
+          </label>
+
+          <input type="submit" value="Login">
+
+          <br>
+          <br>
+          Don't have account?<a routerLink="/register"> Register</a>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

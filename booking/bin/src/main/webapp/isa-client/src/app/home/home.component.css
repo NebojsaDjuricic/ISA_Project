@@ -1,0 +1,35 @@
+.center {
+  text-align: center;
+}
+
+div.container {
+  width: 105%;
+}
+
+.row {
+  position: relative;
+  margin-top: 10%;
+  padding-left: 2%;
+}
+
+#myCarousel, #myCarousel2, #myCarousel3 {
+  width: 28vw;
+}
+
+#flights {
+  padding-right: 3%;
+}
+
+#hotels {
+  padding-right: 7.5%;
+}
+
+#cars {
+  padding-right: 9%;
+}
+
+.carousel:hover {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}

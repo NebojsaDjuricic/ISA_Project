@@ -1,0 +1,61 @@
+<form [formGroup]="createAdminForm" (ngSubmit)="onSubmit()">
+  <label>
+    Username:
+    <input type="text" formControlName="username" placeholder="Enter your username">
+    <div *ngIf="submitted && createAdminForm.controls.username.errors">
+      <div *ngIf="createAdminForm.controls.username.errors.required">Username is required</div>
+    </div>
+  </label>
+
+  <label>
+      Password:
+      <input type="password" formControlName="password" placeholder="Enter your password">
+      <div *ngIf="submitted && createAdminForm.controls.password.errors">
+        <div *ngIf="createAdminForm.controls.password.errors.required">Password is required</div>
+      </div>
+  </label>
+
+  <label>
+      Repeat password:
+      <input type="password" formControlName="passwordRepeat" placeholder="Repeat your password">
+      <div *ngIf="submitted && createAdminForm.controls.passwordRepeat.errors">
+        <div *ngIf="createAdminForm.controls.passwordRepeat.errors.required">Repeat your password</div>
+      </div>
+  </label>
+
+  <label>
+      Email:
+      <input type="email" formControlName="email" placeholder="Enter your email address">
+      <div *ngIf="submitted && createAdminForm.controls.email.errors">
+        <div *ngIf="createAdminForm.controls.email.errors.required">Email is required</div>
+      </div>
+  </label>
+
+  <label>
+    Role
+    <select formControlName="role">
+      <option value="SYSTEM_ADMIN">System admin</option>
+      <option value="AIRLINE_ADMIN">Airline admin</option>
+      <option value="HOTEL_ADMIN">Hotel admin</option>
+      <option value="RENT_A_CAR_SERVICE_ADMIN">Rent-a-car service admin</option>
+    </select>
+  </label>
+
+  <label>
+    Editing object ID
+    <input type="text" formControlName="editingObjectID" placeholder="Enter editing object's ID">
+    <div *ngIf="submitted && createAdminForm.controls.editingObjectID.errors">
+      <div *ngIf="createAdminForm.controls.editingObjectID.errors.required">Editing object's ID is required</div>
+    </div>
+  </label>
+
+  <input type="submit" value="Create">
+
+</form>
+
+{{createAdminForm.controls.username.value}}
+{{createAdminForm.controls.password.value}}
+{{createAdminForm.controls.passwordRepeat.value}}
+{{createAdminForm.controls.email.value}}
+{{createAdminForm.controls.role.value}}
+{{createAdminForm.controls.editingObjectID.value}}

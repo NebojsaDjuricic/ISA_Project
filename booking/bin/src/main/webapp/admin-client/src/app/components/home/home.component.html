@@ -1,0 +1,23 @@
+<app-nav></app-nav>
+
+<p *ngIf="noLoggedAdmin">
+  home works! No logged admin
+</p>
+
+<p *ngIf="sysAdminIsLogged">
+  System Admin
+  <app-sys-admin-home></app-sys-admin-home>
+</p>
+
+<p *ngIf="airlineAdminIsLogged">
+  Airline Admin
+</p>
+
+<p *ngIf="hotelAdminIsLogged">
+  Hotel Admin
+</p>
+
+<p *ngIf="carAdminIsLogged">
+  Rent-A-Car Service Admin  
+  <app-rent-a-car-service-admin></app-rent-a-car-service-admin>
+</p>

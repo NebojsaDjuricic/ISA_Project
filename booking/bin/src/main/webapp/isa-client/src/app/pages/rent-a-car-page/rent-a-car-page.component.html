@@ -1,0 +1,24 @@
+<app-nav></app-nav>
+
+<div *ngIf="company">
+  <h1> {{ company.name }} </h1>
+  <h5> {{ company.description }}</h5>
+  <h5> {{ company.rating }} </h5>
+  <h5> {{ company.address.streetName }} {{ company.address.buildingNumber }},
+    {{ company.address.city }}, {{ company.address.country }}</h5>
+  <ul>
+    <li *ngFor="let branch of company.branches">
+      {{ branch.name }}
+      <ul>
+        <li *ngFor="let vehicle of branch.vehicles" >
+          <p *ngIf="vehicle.status=='IN_SERVICE'">
+              {{ vehicle.brand }} - {{ vehicle.model}} is {{ vehicle.status }}
+          </p>
+
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <button>Book a car!</button>
+</div>

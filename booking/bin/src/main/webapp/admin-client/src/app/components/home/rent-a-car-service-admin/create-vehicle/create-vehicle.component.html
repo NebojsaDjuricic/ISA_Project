@@ -1,0 +1,36 @@
+<form [formGroup]="createVehicleForm" (ngSubmit)="onSubmit()">
+
+  <label>
+    Brand:
+    <input type="text" formControlName="brand" placeholder="Enter vehicle brand">
+    <div *ngIf="submitted && createVehicleForm.controls.brand.errors">
+      <div *ngIf="createVehicleForm.controls.brand.errors.required">Brand is required</div>
+    </div>
+  </label>
+
+  <label>
+    Model:
+    <input type="text" formControlName="model" placeholder="Enter vehicle model">
+    <div *ngIf="submitted && createVehicleForm.controls.model.errors">
+      <div *ngIf="createVehicleForm.controls.model.errors.required">Model is required</div>
+    </div>
+  </label>
+
+  <label>
+    Licence:
+    <input type="text" formControlName="licence" placeholder="Enter vehicle licence">
+    <div *ngIf="submitted && createVehicleForm.controls.licence.errors">
+      <div *ngIf="createVehicleForm.controls.licence.errors.required">Licence is required</div>
+    </div>
+  </label>
+
+  <label>
+    Price:
+    <input type="text" formControlName="price" placeholder="Enter vehicle price">
+    <div *ngIf="submitted && createVehicleForm.controls.price.errors">
+      <div *ngIf="createVehicleForm.controls.price.errors.required">Price is required</div>
+    </div>
+  </label>
+
+  <input type="submit" value="Create">
+</form>

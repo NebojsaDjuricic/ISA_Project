@@ -1,0 +1,94 @@
+
+#hotelsMiddle, #hotelsLower {
+  width: 90vw;
+  margin: auto;
+}
+
+.hotelsContainer {
+  padding: 1rem 5rem;
+}
+
+.eachHotel {
+  margin-bottom: 0.75rem;
+  background-color: bisque;
+  height: 23vh;
+  display: flex;
+
+}
+
+.hotelPicture img{
+  width: 12vw;
+  height: 22.5vh;
+}
+
+.hotelsContentLower {
+  display: flex;
+}
+
+.hotelContent {
+  width: 100%;
+  display: grid;
+}
+
+
+#add_price {
+  display: inline-flex;
+}
+
+.hotelRating {
+  width: 50%;
+  font-size: 23px;
+  margin-left: 16px;
+
+
+}
+
+.hotelDetails {
+  width: 50%;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.hotelAddServices {
+  width: 90%;
+  margin-left: 10px;
+
+}
+
+.hotelPrice {
+  text-align: right;
+  font-size: 2.7rem;
+  height: 36px;
+  width: 10%;
+  line-height: 32px;
+  margin-right: 5px;
+}
+
+.hotelPrice p {
+  margin-right: 2%;
+}
+
+.circle {
+  background-color: #00d775;
+  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  border-radius: 50%;
+  color: #FFFFFF;
+}
+
+.hotelTitle {
+  margin-left: 16px;
+}
+
+
+#additionalServices {
+
+
+   /*namesti da izgleda lepo*/
+
+
+}

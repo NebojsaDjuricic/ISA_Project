@@ -1,0 +1,11 @@
+<app-nav></app-nav>
+
+<p>
+  show-all-rent-a-car-services works!
+</p>
+
+<app-rent-a-car-search></app-rent-a-car-search>
+
+<div *ngFor="let info of data | async">
+  <a routerLink="/rent-a-car/{{info.id}}">{{ info.name }}</a>
+</div>

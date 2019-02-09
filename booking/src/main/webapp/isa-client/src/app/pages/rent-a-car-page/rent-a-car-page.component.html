@@ -1,0 +1,39 @@
+<app-nav></app-nav>
+
+<div class="jumbotron" *ngIf="company">
+  <h1 class="display-3"> {{ company.name }} </h1>
+  <h5 class="lead"> 
+    <p class="text-muted">
+        {{ company.description }} 
+    </p>
+  </h5>
+  <h5 class="lead"> 
+      <p class="input-group-addon">
+          {{ company.rating }}
+      </p>
+    </h5>
+  <h5 class="lead"> 
+    <p class="text-muted">
+        {{ company.address.streetName }} {{ company.address.buildingNumber }},
+    {{ company.address.city }}, {{ company.address.country }}
+    </p>
+  </h5>
+  <ul class="myul">
+    <li  *ngFor="let branch of company.branches">
+      <p class="card-title">
+          {{ branch.name }}
+      </p>
+     
+      <ul class="card">
+        <li class="card-block" *ngFor="let vehicle of branch.vehicles" >
+          <p class="card-text" *ngIf="vehicle.status=='IN_SERVICE'">
+              {{ vehicle.brand }} - {{ vehicle.model}}
+          </p>
+
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <button class="btn btn-primary" >Book a car!</button>
+</div>
