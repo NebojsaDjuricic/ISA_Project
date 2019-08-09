@@ -9,13 +9,20 @@ import { HotelService } from '../../services/hotel.service';
   styleUrls: ['./show-all-hotels.component.css']
 })
 export class ShowAllHotelsComponent implements OnInit {
-
+  selectedHotel: Hotel;
   hotels: Observable<Hotel[]>;
 
   constructor(private hotelService: HotelService) { }
 
   ngOnInit() {
-    this.getAllHotels();
+    // this.getAllHotels();
+
+    this.hotelService.hotelSelected
+      .subscribe(
+        (hotel: Hotel) => {
+          this.selectedHotel = hotel;
+        }
+      );
   }
 
   getAllHotels() {

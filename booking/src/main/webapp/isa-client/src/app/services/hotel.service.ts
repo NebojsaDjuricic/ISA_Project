@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Hotel } from '../model/hotel';
 import { Observable } from 'rxjs';
@@ -11,9 +11,10 @@ import { map } from 'rxjs/operators';
 
 export class HotelService {
   private backEndUrl = 'http://localhost:8080/hotels';
-
   hotels: Observable<Hotel[]>;
-  returnedHotel: Observable<Hotel>;
+
+  // added
+  hotelSelected = new EventEmitter<Hotel>();
 
   constructor(private http: HttpClient) { }
 

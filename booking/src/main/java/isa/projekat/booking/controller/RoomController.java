@@ -18,6 +18,7 @@ import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Hotel;
 import isa.projekat.booking.domain.Room;
 import isa.projekat.booking.domain.dto.RoomDTO;
+import isa.projekat.booking.domain.dto.RoomSearchQuery;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IHotelService;
 import isa.projekat.booking.service.IRoomService;
@@ -122,5 +123,15 @@ public class RoomController {
 		return new ResponseEntity<>(newRoom, HttpStatus.OK);
 	}
 	
+	@RequestMapping(
+            value = "/search",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+	public ResponseEntity<Object> search(@RequestBody RoomSearchQuery query) {
+		
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
 	
 }

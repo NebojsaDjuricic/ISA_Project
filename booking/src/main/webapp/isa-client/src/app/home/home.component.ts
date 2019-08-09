@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
 
   private isUserLoggedIn: boolean;
 
-  constructor(private auth: AuthServiceService) { 
+  constructor(private auth: AuthServiceService) {
     this.isUserLoggedIn = false;
 
     if ( this.auth.getToken() != null) {

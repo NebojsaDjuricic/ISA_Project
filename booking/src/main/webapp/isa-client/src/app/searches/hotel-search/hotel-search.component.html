@@ -1,0 +1,85 @@
+<div id="colorlib-reservation">
+  <div class="container">
+    <!--<div class="row">-->
+    <div class="col-md-12 search-wrap">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" method="post" class="colorlib-form">
+        <div class="row">
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="hotel">Find hotels</label>
+              <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+<!--                                                                                       formControlName=""-->
+                <input type="text" id="hotel" class="form-control date" placeholder="Enter city, country or hotel name" >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="checkInDate">Check-in:</label>
+              <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+                <input type="date" id="dateIn" class="form-control date" placeholder="Check-in date" formControlName="checkInDate">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="checkOutDate">Check-out:</label>
+              <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+                <input type="date" id="dateOut" class="form-control date" placeholder="Check-out date" formControlName="checkOutDate">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="guests">Guests</label>
+              <div class="form-field">
+                <i class="icon icon-arrow-down3"></i>
+                <select name="people" id="people" class="form-control" formControlName="guests">
+                  <option value="#">1</option>
+                  <option value="#">2</option>
+                  <option value="#">3</option>
+                  <option value="#">4</option>
+                  <option value="#">5</option>
+                  <option value="#">6</option>
+                  <option value="#">7</option>
+                  <option value="#">8</option>
+                  <option value="#">9</option>
+                  <option value="#">10</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="rooms">Rooms</label>
+              <div class="form-field">
+                <i class="icon icon-arrow-down3"></i>
+                <select name="room" id="room" class="form-control" formControlName="rooms">
+                  <option value="#">1</option>
+                  <option value="#">2</option>
+                  <option value="#">3</option>
+                  <option value="#">4</option>
+                  <option value="#">5</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <input type="submit" name="submit" id="submit" value="Search" class="btn btn-primary btn-block">
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <!--</div>-->
+  </div>
+</div>

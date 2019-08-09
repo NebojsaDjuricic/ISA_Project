@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import isa.projekat.booking.domain.Address;
+import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Hotel;
+import isa.projekat.booking.domain.Room;
 import isa.projekat.booking.domain.dto.HotelDTO;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.service.IAdministratorService;
@@ -108,5 +110,21 @@ public class HotelController {
 		hotelService.save(newHotel);
 		
 		return new ResponseEntity<>(newHotel, HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="/rooms/{adminId}",
+			method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+	public ResponseEntity<Object> getRooms(@PathVariable("adminId")String adminId) {
+		Administrator administrator = administratorService.findById(adminId);
+		String hotelId = administrator.getEditingObjectID();
+		
+		Hotel hotel = hotelService.findById(hotelId);
+		
+		ArrayList<Room> rooms = hotel.getRooms();
+		
+		return new ResponseEntity<>(rooms, HttpStatus.OK);
 	}
 }

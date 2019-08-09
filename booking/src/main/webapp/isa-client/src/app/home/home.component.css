@@ -3,29 +3,14 @@
 }
 
 div.container {
-  width: 105%;
+  width: 100%;
 }
 
 .row {
   position: relative;
+  widht: 100%;
   margin-top: 10%;
-  padding-left: 2%;
-}
 
-#myCarousel, #myCarousel2, #myCarousel3 {
-  width: 28vw;
-}
-
-#flights {
-  padding-right: 3%;
-}
-
-#hotels {
-  padding-right: 7.5%;
-}
-
-#cars {
-  padding-right: 9%;
 }
 
 .carousel:hover {

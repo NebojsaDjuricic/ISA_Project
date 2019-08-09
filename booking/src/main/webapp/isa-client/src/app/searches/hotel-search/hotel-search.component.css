@@ -1,0 +1,26 @@
+.container {
+  width: 90vw;
+
+}
+
+#submit {
+  color: white;
+  background-color: #00d775;
+}
+
+#colorlib-reservation .container{
+  background-color: darkslategray;
+}
+
+.form-group {
+  text-align: center;
+}
+
+.col-md-2 input {
+  position: relative;
+  top: 33%;
+}
+
+.row {
+  display: flex;
+}

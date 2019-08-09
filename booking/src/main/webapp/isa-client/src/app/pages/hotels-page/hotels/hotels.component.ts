@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Hotel } from '../../model/hotel';
-import { HotelService } from '../../services/hotel.service';
-import { ActivatedRoute } from '@angular/router';
+import { Hotel } from '../../../model/hotel';
+import { HotelService } from '../../../services/hotel.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-hotels',
@@ -10,17 +11,18 @@ import { Location } from '@angular/common';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-
+  hotels: Observable<Hotel[]>;
   hotel: Hotel;
 
   constructor(
     private hotelService: HotelService,
     private route: ActivatedRoute,
-    private location: Location
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getInfo();
+    // this.getInfo();
+    this.hotels = this.hotelService.getAll();
   }
 
   getInfo() {
@@ -31,5 +33,6 @@ export class HotelsComponent implements OnInit {
       }
     );
   }
+
 
 }

@@ -1,0 +1,17 @@
+<app-nav></app-nav>
+
+<div class="row">
+  <div class="col-xs 12">
+    <app-hotel-item
+      *ngFor="let hotelElement of hotels; let i = index"
+      [hotel]="hotelElement"
+      [index]="i">
+    </app-hotel-item>
+  </div>
+</div>
+
+<!--      <div *ngIf="hotel">-->
+<!--        <h1>{{hotel.name}}</h1>-->
+<!--        <h5>{{hotel.description}}</h5>-->
+<!--        <h4>Rating: {{hotel.rating}}</h4>-->
+<!--      </div>-->

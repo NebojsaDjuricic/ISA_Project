@@ -1,4 +1,15 @@
 #navListFHC {
   position: relative;
   padding-left: 100px;
+
+}
+
+ul li a {
+  margin-left: 10px;
+  margin-right: 10px;
+  list-style:none;
+}
+
+#navListFHC a {
+  font-size: 20px;
 }

@@ -3,7 +3,7 @@ package isa.projekat.booking.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("Users")
+@Document(collection="Users")
 public class User {
 
     public User() {
