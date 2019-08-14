@@ -21,14 +21,19 @@ public class Hotel {
 	private int stars;
 	private ArrayList<Room> rooms;
 	private ArrayList<AdditionalService> additionalServices;
+	private String imageURLs;
+	// private admin
 	
 	public Hotel() {
 		super();
 	}
 
-	public Hotel(String id, String name, Address address, String phoneNumber, String contactEmail, String description,
-			String website, Double rating, int numberOfFloors, int stars, ArrayList<Room> rooms,
-			ArrayList<AdditionalService> additionalServices) {
+	public Hotel(String id, String name, Address address,
+				String phoneNumber, String contactEmail, 
+				String description, String website,
+				Double rating, int numberOfFloors,
+				int stars, ArrayList<Room> rooms,
+				ArrayList<AdditionalService> additionalServices) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,7 +49,25 @@ public class Hotel {
 		this.additionalServices = additionalServices;
 	}
 
-
+// dodato polje za slike
+	public Hotel(String id, String name, Address address, String phoneNumber, String contactEmail, String description,
+			String website, Double rating, int numberOfFloors, int stars, ArrayList<Room> rooms,
+			ArrayList<AdditionalService> additionalServices, String imageURL) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.contactEmail = contactEmail;
+		this.description = description;
+		this.website = website;
+		this.rating = rating;
+		this.numberOfFloors = numberOfFloors;
+		this.stars = stars;
+		this.rooms = rooms;
+		this.additionalServices = additionalServices;
+		this.setImageURL(imageURL);
+	}
 
 	public String getId() {
 		return id;
@@ -140,6 +163,14 @@ public class Hotel {
 
 	public void setAdditionalServices(ArrayList<AdditionalService> additionalServices) {
 		this.additionalServices = additionalServices;
+	}
+
+	public String getImageURL() {
+		return imageURLs;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURLs = imageURL;
 	}
 	
 	

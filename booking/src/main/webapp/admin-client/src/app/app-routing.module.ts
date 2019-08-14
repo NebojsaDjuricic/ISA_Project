@@ -8,10 +8,12 @@ import { CreateNewAdminComponent } from './components/home/sys-admin-home/create
 import { CreateVehicleComponent } from './components/home/rent-a-car-service-admin/create-vehicle/create-vehicle.component';
 import { CreateBranchComponent } from './components/home/rent-a-car-service-admin/create-branch/create-branch.component';
 import { EditVehicleComponent } from './components/home/rent-a-car-service-admin/edit-vehicle/edit-vehicle.component';
+import {AuthComponent} from './components/auth/auth.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  // { path: 'login', component: AuthComponent },
   { path: '', component: HomeComponent },
   { path: 'add-rent-a-car-service', component: CreateRentACarServiceComponent },
   { path: 'add-new-admin', component: CreateNewAdminComponent },

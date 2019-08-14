@@ -1,3 +1,69 @@
-<p>
-  create-room works!
-</p>
+<app-nav></app-nav>
+
+<form [formGroup]="createRoomForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>
+      Add to hotel:
+      <select formControlName="hotel">
+        <option *ngFor="let hotel of hotels" value="{{hotel.id}}">{{hotel.name}}</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Room Status:
+      <input type="text" formControlName="roomStatus" placeholder="Choose room status">
+      <div *ngIf="submitted && createRoomForm.controls.roomStatus.errors">
+        <div *ngIf="createRoomForm.controls.roomStatus.errors.required">Room status is required!</div>
+      </div>
+    </label>
+  </div>
+
+
+  <div class="form-group">
+    <label>
+      Room Type:
+      <input type="text" formControlName="roomType" placeholder="Choose room type">
+      <div *ngIf="submitted && createRoomForm.controls.roomType.errors">
+        <div *ngIf="createRoomForm.controls.roomType.errors.required">Room type is required!</div>
+      </div>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Floor:
+      <input type="text" formControlName="floor" placeholder="Enter room capacity">
+      <div *ngIf="submitted && createRoomForm.controls.floor.errors">
+        <div *ngIf="createRoomForm.controls.floor.errors.required">Floor is required</div>
+      </div>
+    </label>
+  </div>
+
+<!--  <div class="form-group">-->
+<!--    <label>-->
+<!--      Capacity:-->
+<!--      <input type="text" formControlName="floor" placeholder="Enter room capacity">-->
+<!--      <div *ngIf="submitted && createRoomForm.controls.floor.errors">-->
+<!--        <div *ngIf="createRoomForm.controls.floor.errors.required">Floor is required</div>-->
+<!--      </div>-->
+<!--    </label>-->
+<!--  </div>-->
+
+<!--  <div class="form-group">-->
+<!--    <label>-->
+<!--      Price:-->
+<!--      <input type="text" formControlName="price" placeholder="Enter vehicle price">-->
+<!--      <div *ngIf="submitted && createRoomForm.controls.price.errors">-->
+<!--        <div *ngIf="createRoomForm.controls.price.errors.required">Price is required</div>-->
+<!--      </div>-->
+<!--    </label>-->
+<!--  </div>-->
+
+
+  <button type="submit" class="btn btn-primary">Create Room</button>
+</form>
+
+{{createRoomForm.controls.hotel.value}}
+

@@ -1,12 +1,61 @@
-<ul class="nav" *ngIf="userIsLoggedIn">
-  <li class="nav-item">
-    <button class="btn btn-primary" (click)="logout()">Logout</button>
-  </li>
-</ul>
+<!--<ul class="nav" *ngIf="userIsLoggedIn">-->
+<!--  <li class="nav-item">-->
+<!--    <button class="btn btn-primary" (click)="logout()">Logout</button>-->
+<!--  </li>-->
+<!--</ul>-->
 
-<ul class="nav" *ngIf="!userIsLoggedIn">
-  <li class="nav-item">
-    <a class="nav-link" href="/login">Login</a>
-  </li>
-</ul>
+<!--<ul class="nav" *ngIf="!userIsLoggedIn">-->
+<!--  <li class="nav-item">-->
+<!--    <a class="nav-link" href="/login">Login</a>-->
+<!--  </li>-->
+<!--</ul>-->
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle">
+        <span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
+      </button>
+      <a routerLink="/" class="navbar-brand"><span class="glyphicon glyphicon-home"></span> Admin Home</a>
+    </div>
+    <div class="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn">
+          <a routerLink="/flights">Flights</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn">
+          <a routerLink="/hotels">Hotels</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn">
+          <a routerLink="/rent-a-cars">Rent A Car Services</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn">
+          <a routerLink="/admins">Admins</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="!userIsLoggedIn">
+          <a routerLink="/login">Login</a>
+        </li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="userIsLoggedIn">
+          <a style="cursor: pointer;"
+             (click)="logout()">Logout</a>
+        </li>
+<!--        <li class="dropdown" appDropdown *ngIf="userIsLoggedIn">-->
+<!--          <a class="dropdown-toggle"-->
+<!--             role="button" style="cursor: pointer;">Manage <span class="caret"></span> </a>-->
+<!--          <ul class="dropdown-menu">-->
+<!--            <li><a style="cursor: pointer;"-->
+<!--                   (click)="onSaveData()">Save Data</a></li>-->
+<!--            <li><a style="cursor: pointer;"-->
+<!--                   (click)="onFetchData()">Fetch Data</a></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
 

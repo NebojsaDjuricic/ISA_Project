@@ -8,16 +8,19 @@ public class Administrator {
 
     @Id
     private String username;
-    private String password;
     private String email;
+    private String password;
+    private String newPassword;
     private AdministatorType type;
+    private boolean activated;
+    private boolean changedPass;
     private String editingObjectID;
 
     public Administrator() {
 
     }
 
-    public Administrator(String username, String password, String email, AdministatorType type) {
+    public Administrator(String username, String email, String password, AdministatorType type) {
         this.setEmail(email);
         this.setPassword(password);
         this.setUsername(username);
@@ -40,7 +43,15 @@ public class Administrator {
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getEmail() {
         return email;
     }
 
@@ -63,4 +74,20 @@ public class Administrator {
     public void setEditingObjectID(String editingObjectID) {
         this.editingObjectID = editingObjectID;
     }
+    
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+
+	public boolean isChangedPass() {
+		return changedPass;
+	}
+
+	public void setChangedPass(boolean changedPass) {
+		this.changedPass = changedPass;
+	}
 }

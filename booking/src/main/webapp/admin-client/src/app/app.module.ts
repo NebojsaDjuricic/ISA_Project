@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,8 @@ import { CreateNewHotelComponent } from './components/home/sys-admin-home/create
 import { CreateRoomComponent } from './components/home/hotel-admin/create-room/create-room.component';
 import { EditRoomComponent } from './components/home/hotel-admin/edit-room/edit-room.component';
 import { RoomListComponent } from './components/home/hotel-admin/room-list/room-list.component';
+import { AuthComponent } from './components/auth/auth.component';
+import {PlaceholderDirective} from './components/auth/placeholder.directive';
 
 
 @NgModule({
@@ -41,13 +43,16 @@ import { RoomListComponent } from './components/home/hotel-admin/room-list/room-
     CreateNewHotelComponent,
     CreateRoomComponent,
     EditRoomComponent,
-    RoomListComponent
+    RoomListComponent,
+    AuthComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

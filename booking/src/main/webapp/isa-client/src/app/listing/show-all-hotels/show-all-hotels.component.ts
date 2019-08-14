@@ -12,17 +12,18 @@ export class ShowAllHotelsComponent implements OnInit {
   selectedHotel: Hotel;
   hotels: Observable<Hotel[]>;
 
+  // constructor() { }
   constructor(private hotelService: HotelService) { }
 
   ngOnInit() {
-    // this.getAllHotels();
+    this.getAllHotels();
 
-    this.hotelService.hotelSelected
-      .subscribe(
-        (hotel: Hotel) => {
-          this.selectedHotel = hotel;
-        }
-      );
+    // this.hotelService.hotelSelected
+    //   .subscribe(
+    //     (hotel: Hotel) => {
+    //       this.selectedHotel = hotel;
+    //     }
+    //   );
   }
 
   getAllHotels() {

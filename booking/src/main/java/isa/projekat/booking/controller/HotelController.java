@@ -1,10 +1,12 @@
 package isa.projekat.booking.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mongodb.internal.thread.DaemonThreadFactory;
+
 import isa.projekat.booking.domain.Address;
 import isa.projekat.booking.domain.Administrator;
+import isa.projekat.booking.domain.Branch;
 import isa.projekat.booking.domain.Hotel;
+import isa.projekat.booking.domain.RentACarService;
 import isa.projekat.booking.domain.Room;
+import isa.projekat.booking.domain.dto.BranchDTO;
 import isa.projekat.booking.domain.dto.HotelDTO;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
+import isa.projekat.booking.domain.dto.RoomDTO;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IHotelService;
 import isa.projekat.booking.service.IRoomService;
@@ -48,7 +56,7 @@ public class HotelController {
 			)
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<Collection<Hotel>> getAllHotels() {
-		ArrayList<Hotel> hotels = (ArrayList<Hotel>) hotelService.findAll();
+		ArrayList<Hotel> hotels = hotelService.getAll();
 		
 		if(hotels != null) {
 			return new ResponseEntity<Collection<Hotel>>(hotels, HttpStatus.OK);
@@ -91,7 +99,7 @@ public class HotelController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-	public ResponseEntity<Object> addHotel(@RequestBody HotelDTO hotelDto) {
+	public ResponseEntity<Hotel> addHotel(@RequestBody HotelDTO hotelDto) {
 		
 		Hotel newHotel = new Hotel();
 		newHotel.setId(UUID.randomUUID().toString().substring(0, 5));
@@ -106,20 +114,20 @@ public class HotelController {
 		newHotel.setAddress(address);
 		newHotel.setRooms(new ArrayList<>());
 		newHotel.setAdditionalServices(new ArrayList<>());
+//		newHotel.setImageURL(null);
 		
 		hotelService.save(newHotel);
 		
 		return new ResponseEntity<>(newHotel, HttpStatus.OK);
 	}
 	
+	
 	@RequestMapping(
-			value="/rooms/{adminId}",
+			value="/{hotelId}/rooms",
 			method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-	public ResponseEntity<Object> getRooms(@PathVariable("adminId")String adminId) {
-		Administrator administrator = administratorService.findById(adminId);
-		String hotelId = administrator.getEditingObjectID();
+	public ResponseEntity<Object> getRooms(@PathVariable("hotelId")String hotelId) {
 		
 		Hotel hotel = hotelService.findById(hotelId);
 		

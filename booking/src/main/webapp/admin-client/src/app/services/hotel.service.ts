@@ -6,7 +6,7 @@ import {Hotel} from '../model/hotel';
 @Injectable({
   providedIn: 'root'
 })
-export class HotelServiceService {
+export class HotelService {
 
   private backEndUrl = 'http://localhost:8080/hotels';
 
@@ -21,4 +21,11 @@ export class HotelServiceService {
   getHotel(id: String): Observable<Hotel> {
     return this.http.get<Hotel>(this.backEndUrl + '/' + id);
   }
+
+  addHotel(hotel: Hotel) {
+    return this.http.post(this.backEndUrl + '/addHotel', hotel, this.httpOptions);
+  }
+
+  editHotel() {}
+
 }

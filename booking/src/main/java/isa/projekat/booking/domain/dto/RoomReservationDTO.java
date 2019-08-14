@@ -1,12 +1,16 @@
 package isa.projekat.booking.domain.dto;
 
+import java.util.ArrayList;
+
 public class RoomReservationDTO {
 	
 	private String roomId;
-	private String checkInDate;
-	private String checkOutDate;
-	private String guests;
-	private String rooms;
+//	private String checkInDate;
+//	private String checkOutDate;
+//	private PriceDTO priceDTO;
+	private ArrayList<PriceDTO> pricesDTO;
+	private int guests;
+	private int rooms;
 	
 	public RoomReservationDTO() {
 		
@@ -20,35 +24,51 @@ public class RoomReservationDTO {
 		this.roomId = roomId;
 	}
 
-	public String getCheckInDate() {
-		return checkInDate;
+//	public String getCheckInDate() {
+//		return checkInDate;
+//	}
+//
+//	public void setCheckInDate(String checkInDate) {
+//		this.checkInDate = checkInDate;
+//	}
+//
+//	public String getCheckOutDate() {
+//		return checkOutDate;
+//	}
+//
+//	public void setCheckOutDate(String checkOutDate) {
+//		this.checkOutDate = checkOutDate;
+//	}
+
+//	public PriceDTO getPriceDTO() {
+//		return priceDTO;
+//	}
+//
+//	public void setPriceDTO(PriceDTO priceDTO) {
+//		this.priceDTO = priceDTO;
+//	}
+
+	public ArrayList<PriceDTO> getPricesDTO() {
+		return pricesDTO;
 	}
 
-	public void setCheckInDate(String checkInDate) {
-		this.checkInDate = checkInDate;
+	public void setPricesDTO(ArrayList<PriceDTO> pricesDTO) {
+		this.pricesDTO = pricesDTO;
 	}
 
-	public String getCheckOutDate() {
-		return checkOutDate;
-	}
-
-	public void setCheckOutDate(String checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-
-	public String getGuests() {
+	public int getGuests() {
 		return guests;
 	}
 
-	public void setGuests(String guests) {
+	public void setGuests(int guests) {
 		this.guests = guests;
 	}
 
-	public String getRooms() {
+	public int getRooms() {
 		return rooms;
 	}
 
-	public void setRooms(String rooms) {
+	public void setRooms(int rooms) {
 		this.rooms = rooms;
 	}
 	

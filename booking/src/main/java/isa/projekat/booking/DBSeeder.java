@@ -350,10 +350,11 @@ public class DBSeeder implements CommandLineRunner {
         room1.setStatus(RoomStatus.AVAILABLE);
         room1.setType(RoomType.SINGLE);
         room1.setCapacity(1);
-      //  room1.setPricePerNight(30);
         room1.setFloor(1);
-        room1.setRating(3.6);
-        // Additional services
+        
+        // cene za svaku sobu u odredjenom periodu
+        //  room1.setPricePerNight(30);
+
 
         Room room2 = new Room();
         String roomID2 = UUID.randomUUID().toString();
@@ -363,8 +364,6 @@ public class DBSeeder implements CommandLineRunner {
         room2.setCapacity(1);
       //  room2.setPricePerNight(36);
         room2.setFloor(1);
-        room2.setRating(3.5);
-        // Additional services
 
         Room room3 = new Room();
         String roomID3 = UUID.randomUUID().toString();
@@ -374,8 +373,6 @@ public class DBSeeder implements CommandLineRunner {
         room3.setCapacity(2);
      //   room3.setPricePerNight(42);
         room3.setFloor(2);
-        room3.setRating(3.9);
-        // Additional services
 
         Room room4 = new Room();
         String roomID4 = UUID.randomUUID().toString();
@@ -385,8 +382,6 @@ public class DBSeeder implements CommandLineRunner {
         room4.setCapacity(2);
      //   room4.setPricePerNight(46);
         room4.setFloor(2);
-        room4.setRating(3.5);
-        // Additional services
 
         Room room5 = new Room();
         String roomID5 = UUID.randomUUID().toString();
@@ -396,8 +391,6 @@ public class DBSeeder implements CommandLineRunner {
         room5.setCapacity(3);
     //    room5.setPricePerNight(33);
         room5.setFloor(3);
-        room5.setRating(3.7);
-        // Additional services
 
         Room room6 = new Room();
         String roomID6 = UUID.randomUUID().toString();
@@ -407,8 +400,6 @@ public class DBSeeder implements CommandLineRunner {
         room6.setCapacity(3);
      //   room6.setPricePerNight(43);
         room6.setFloor(3);
-        room6.setRating(4.0);
-        // Additional services
 
         Room room7 = new Room();
         String roomID7 = UUID.randomUUID().toString();
@@ -418,8 +409,6 @@ public class DBSeeder implements CommandLineRunner {
         room7.setCapacity(4);
     //    room7.setPricePerNight(26);
         room7.setFloor(4);
-        room7.setRating(3.8);
-        // Additional services
 
         Room room8 = new Room();
         String roomID8 = UUID.randomUUID().toString();
@@ -429,8 +418,6 @@ public class DBSeeder implements CommandLineRunner {
         room8.setCapacity(4);
      //   room8.setPricePerNight(31);
         room8.setFloor(4);
-        room8.setRating(3.9);
-        // Additional services
 
         //Adding ROOMS to DB
         ArrayList<Room> rooms = new ArrayList<>();
@@ -459,48 +446,32 @@ public class DBSeeder implements CommandLineRunner {
                         + "U hotelu se služi doručak na bazi švedskog stola.",
                 "http://www.hotelfelix.pl", 3.8, 3, 2,
                 new ArrayList<Room>(Arrays.asList(
-                        new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.SINGLE, 1, 1, 3.6, 
-                        		new ArrayList<AdditionalService>(Arrays.asList(
-                        				new AdditionalService(1, "WIFI", 0),
-                        				new AdditionalService(7, "TV", 0),
-                        				new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                        				)
-                        				),
+                        new Room("1101", RoomStatus.AVAILABLE, RoomType.SINGLE, 1, 1, 
                         		new ArrayList<Price>(Arrays.asList(
-                        				new Price("felixRoom1Price1", 25, "1/05/2019", "15/05/2019"),
-                        				new Price("felixRoom1Price2", 28, "16/05/2019", "31/05/2019"),
-                        				new Price("felixRoom1Price3", 30, "1/06/2019", "30/06/2019")
+	                        				new Price("felixRoom1Price1", 25, "1/05/2019", "15/05/2019"),
+	                        				new Price("felixRoom1Price2", 28, "16/05/2019", "31/05/2019"),
+	                        				new Price("felixRoom1Price3", 30, "1/06/2019", "30/06/2019")
                         				)
-                        				) ),
+                        			) 
+                        		),
                         
-                        new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.DOUBLE, 2, 2, 3.5,
-                        		new ArrayList<AdditionalService>(Arrays.asList(
-                        				new AdditionalService(1, "WIFI", 0),
-                        				new AdditionalService(7, "TV", 0),
-                        				new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                        				)
-                        				),
+                        new Room("2201", RoomStatus.AVAILABLE, RoomType.DOUBLE, 2, 2,
                         		new ArrayList<Price>(Arrays.asList(
-                        				new Price("felixRoom2Price1", 30, "1/05/2019", "15/05/2019"),
-                        				new Price("felixRoom2Price2", 35, "16/05/2019", "31/05/2019"),
-                        				new Price("felixRoom2Price3", 40, "1/06/2019", "30/06/2019")
+	                        				new Price("felixRoom2Price1", 30, "1/05/2019", "15/05/2019"),
+	                        				new Price("felixRoom2Price2", 35, "16/05/2019", "31/05/2019"),
+	                        				new Price("felixRoom2Price3", 40, "1/06/2019", "30/06/2019")
                         				)
-                        				) ),
-                        new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.TRIPLE, 3, 3, 3.7,
-                        		new ArrayList<AdditionalService>(Arrays.asList(
-                        				new AdditionalService(1, "WIFI", 0),
-                        				new AdditionalService(7, "TV", 0),
-                        				new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                        				)
-                        				),
+                        			) 
+                        		),
+                        new Room("3301", RoomStatus.AVAILABLE, RoomType.TRIPLE, 3, 3,
                         		new ArrayList<Price>(Arrays.asList(
-                        				new Price("felixRoom3Price1", 35, "1/05/2019", "15/05/2019"),
-                        				new Price("felixRoom3Price2", 38, "16/05/2019", "31/05/2019"),
-                        				new Price("felixRoom3Price3", 43, "1/06/2019", "30/06/2019")
+	                        				new Price("felixRoom3Price1", 35, "1/05/2019", "15/05/2019"),
+	                        				new Price("felixRoom3Price2", 38, "16/05/2019", "31/05/2019"),
+	                        				new Price("felixRoom3Price3", 43, "1/06/2019", "30/06/2019")
                         				)
-                        				) 
+                        			) 
                         		)
-                )
+                	)
                 ),
                 new ArrayList<AdditionalService>(Arrays.asList(
                         new AdditionalService(1, "WIFI", 0),
@@ -535,77 +506,47 @@ public class DBSeeder implements CommandLineRunner {
                      + "U okviru objekta postoji i zimska bašta sa japanskim vrtom.",
              "http://www.tophotel.cz", 3.3, 4, 4,
              new ArrayList<Room>(Arrays.asList(
-                     new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.SINGLE, 1, 1, 3.5,
-                    		 new ArrayList<AdditionalService>(Arrays.asList(
-                     				new AdditionalService(1, "WIFI", 0),
-                     				new AdditionalService(7, "TV", 0),
-                                    new AdditionalService(8, "AIR CONDITION", 20),
-                                    new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                     				)
-                     				),
+                     new Room("1101", RoomStatus.AVAILABLE, RoomType.SINGLE, 1, 1,
                      		new ArrayList<Price>(Arrays.asList(
-                     				new Price("topRoom1Price1", 35, "1/05/2019", "15/05/2019"),
-                     				new Price("topRoom1Price2", 40, "16/05/2019", "31/05/2019"),
-                     				new Price("topRoom1Price3", 45, "1/06/2019", "30/06/2019")
+	                     				new Price("topRoom1Price1", 35, "1/05/2019", "15/05/2019"),
+	                     				new Price("topRoom1Price2", 40, "16/05/2019", "31/05/2019"),
+	                     				new Price("topRoom1Price3", 45, "1/06/2019", "30/06/2019")
                      				)
-                     				)),
-                     new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.DOUBLE, 2, 2, 3.9,
-                    		 new ArrayList<AdditionalService>(Arrays.asList(
-                     				new AdditionalService(1, "WIFI", 0),
-                     				new AdditionalService(7, "TV", 0),
-                                    new AdditionalService(8, "AIR CONDITION", 20),
-                                    new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                     				)
-                     				),
+                     			)
+                     		),
+                     new Room("2201", RoomStatus.AVAILABLE, RoomType.DOUBLE, 2, 2,
                      		new ArrayList<Price>(Arrays.asList(
-                     				new Price("topRoom2Price1", 50, "1/05/2019", "15/05/2019"),
-                     				new Price("topRoom2Price2", 60, "16/05/2019", "31/05/2019"),
-                     				new Price("topRoom2Price3", 70, "1/06/2019", "30/06/2019")
+	                     				new Price("topRoom2Price1", 50, "1/05/2019", "15/05/2019"),
+	                     				new Price("topRoom2Price2", 60, "16/05/2019", "31/05/2019"),
+	                     				new Price("topRoom2Price3", 70, "1/06/2019", "30/06/2019")
                      				)
-                     				)),
-                     new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.TRIPLE, 3, 3, 4.0,
-                    		 new ArrayList<AdditionalService>(Arrays.asList(
-                     				new AdditionalService(1, "WIFI", 0),
-                     				new AdditionalService(7, "TV", 0),
-                                    new AdditionalService(8, "AIR CONDITION", 20),
-                                    new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                     				)
-                     				),
+                     			)
+                     		),
+                     new Room("3301", RoomStatus.AVAILABLE, RoomType.TRIPLE, 3, 3,
                      		new ArrayList<Price>(Arrays.asList(
-                     				new Price("topRoom3Price1", 75, "1/05/2019", "15/05/2019"),
-                     				new Price("topRoom3Price2", 85, "16/05/2019", "31/05/2019"),
-                     				new Price("topRoom3Price3", 95, "1/06/2019", "30/06/2019")
+	                     				new Price("topRoom3Price1", 75, "1/05/2019", "15/05/2019"),
+	                     				new Price("topRoom3Price2", 85, "16/05/2019", "31/05/2019"),
+	                     				new Price("topRoom3Price3", 95, "1/06/2019", "30/06/2019")
                      				)
-                     				)),
-                     new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.QUAD, 4, 4, 3.8,
-                    		 new ArrayList<AdditionalService>(Arrays.asList(
-                     				new AdditionalService(1, "WIFI", 0),
-                     				new AdditionalService(7, "TV", 0),
-                                    new AdditionalService(8, "AIR CONDITION", 20),
-                                    new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                     				)
-                     				),
+                     			)
+                     		),
+                     new Room("4401", RoomStatus.AVAILABLE, RoomType.QUAD, 4, 4,
                      		new ArrayList<Price>(Arrays.asList(
-                     				new Price("topRoom4Price1", 80, "1/05/2019", "15/05/2019"),
-                     				new Price("topRoom4Price2", 100, "16/05/2019", "31/05/2019"),
-                     				new Price("topRoom4Price3", 130, "1/06/2019", "30/06/2019")
+	                     				new Price("topRoom4Price1", 80, "1/05/2019", "15/05/2019"),
+	                     				new Price("topRoom4Price2", 100, "16/05/2019", "31/05/2019"),
+	                     				new Price("topRoom4Price3", 130, "1/06/2019", "30/06/2019")
                      				)
-                     				)),
-                     new Room(UUID.randomUUID().toString().substring(0, 4), RoomStatus.AVAILABLE, RoomType.QUAD, 4, 4, 3.9,
-                    		 new ArrayList<AdditionalService>(Arrays.asList(
-                     				new AdditionalService(1, "WIFI", 0),
-                     				new AdditionalService(7, "TV", 0),
-                                    new AdditionalService(8, "AIR CONDITION", 20),
-                                    new AdditionalService(12, "PRIVATE BATHROOM", 0)
-                     				)
-                     				),
+                     			)
+                     		),
+                     new Room("4402", RoomStatus.AVAILABLE, RoomType.QUAD, 4, 4,
                      		new ArrayList<Price>(Arrays.asList(
-                     				new Price("topRoom5Price1", 85, "1/05/2019", "15/05/2019"),
-                     				new Price("topRoom5Price2", 98, "16/05/2019", "31/05/2019"),
-                     				new Price("topRoom5Price3", 130, "1/06/2019", "30/06/2019")
+	                     				new Price("topRoom5Price1", 85, "1/05/2019", "15/05/2019"),
+	                     				new Price("topRoom5Price2", 98, "16/05/2019", "31/05/2019"),
+	                     				new Price("topRoom5Price3", 130, "1/06/2019", "30/06/2019")
                      				)
-                     				))
-             )
+                     			)
+                     		)
+            	)
              ),
              new ArrayList<AdditionalService>(Arrays.asList(
                      new AdditionalService(1, "WIFI", 0),
@@ -622,7 +563,7 @@ public class DBSeeder implements CommandLineRunner {
                      new AdditionalService(16, "BOWLING HALL", 20),
                      new AdditionalService(17, "GYM", 15),
                      new AdditionalService(18, "SOLARIUM", 10)
-             )
+            	)
              )
      );
      
@@ -631,29 +572,29 @@ public class DBSeeder implements CommandLineRunner {
         //---------------- ADMINISTRATORS ----------------//
         Administrator admin1 = new Administrator(
                 "sys_admin1",
-                "sys_admin1",
                 "sys_admin1@isa.com",
+                "sys_admin1",
                 AdministatorType.SYSTEM_ADMIN
         );
 
         Administrator admin2 = new Administrator(
                 "air_admin",
-                "air_admin",
                 "air_admin@isa.com",
+                "air_admin",
                 AdministatorType.AIRLINE_ADMIN
         );
 
         Administrator admin3 = new Administrator(
                 "hotel_admin",
-                "hotel_admin",
                 "hotel_admin@isa.com",
+                "hotel_admin",
                 AdministatorType.HOTEL_ADMIN
         );
 
         Administrator admin4 = new Administrator(
                 "car_admin",
-                "car_admin",
                 "car_admin@isa.com",
+                "car_admin",
                 AdministatorType.RENT_A_CAR_SERVICE_ADMIN
         );
 

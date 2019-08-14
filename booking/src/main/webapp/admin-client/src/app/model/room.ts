@@ -1,4 +1,4 @@
-import {AdditionalService} from './additionalService';
+
 import {Price} from './price';
 
 export class Room {
@@ -7,11 +7,10 @@ export class Room {
   type: RoomType.Value;
   capacity: number;
   floor: number;
-  rating: number;
-  additionalServices: AdditionalService[];
   prices: Price[];
 
   constructor() {
+    this.status = RoomStatus.Value.AVAILABLE;
   }
 }
 

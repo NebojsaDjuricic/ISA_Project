@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Administrator } from 'src/app/model/administrator';
 import { AuthServiceService } from '../../services/auth-service.service';
@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
     this.admin.password = this.loginForm.controls.password.value;
 
     this.loginService.login(
-      this.admin
+      this.admin.username,
+      this.admin.password
     )
     .subscribe( res => {
       if ( res['token'] == null ) {
@@ -48,5 +49,24 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  // added new
+  // login(form: NgForm) {
+  //   this.admin.username = this.loginForm.controls.username.value;
+  //   this.admin.password = this.loginForm.controls.password.value;
+  //
+  //   this.loginService.login(
+  //     this.admin
+  //   )
+  //     .subscribe( res => {
+  //       if ( res['token'] == null ) {
+  //
+  //       } else {
+  //         console.log('Logovanje: ' + res['token']);
+  //         this.auth.setUser(res);
+  //         this.router.navigate(['/']);
+  //       }
+  //     });
+  // }
 
 }

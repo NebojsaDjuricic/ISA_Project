@@ -18,12 +18,8 @@ public class RoomDTO {
 	private RoomType type;
 	private int capacity;
 	private int floor;
-	private Double rating;
-	private ArrayList<AdditionalService> additionalServices;
 	private ArrayList<Price> prices;
-	private String admin;
 	private String hotelID;
-	//private Administrator administrator;
 	
 	
 	public String getId() {
@@ -66,22 +62,6 @@ public class RoomDTO {
 		this.floor = floor;
 	}
 
-	public Double getRating() {
-		return rating;
-	}
-
-	public void setRating(Double rating) {
-		this.rating = rating;
-	}
-
-	public ArrayList<AdditionalService> getAdditionalServices() {
-		return additionalServices;
-	}
-
-	public void setAdditionalServices(ArrayList<AdditionalService> additionalServices) {
-		this.additionalServices = additionalServices;
-	}
-
 	public ArrayList<Price> getPrices() {
 		return prices;
 	}
@@ -90,13 +70,6 @@ public class RoomDTO {
 		this.prices = prices;
 	}
 
-	public String getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(String admin) {
-		this.admin = admin;
-	}
 
 	public String getHotelID() {
 		return hotelID;
@@ -105,14 +78,5 @@ public class RoomDTO {
 	public void setHotelID(String hotelID) {
 		this.hotelID = hotelID;
 	}
-	
-
-//	public Administrator getAdministrator() {
-//		return administrator;
-//	}
-//
-//	public void setAdministrator(Administrator administrator) {
-//		this.administrator = administrator;
-//	}	
 	
 }

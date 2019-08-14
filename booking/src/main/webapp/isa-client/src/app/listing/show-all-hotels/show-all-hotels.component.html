@@ -1,10 +1,8 @@
 <app-nav></app-nav>
 
-
 <div>
 
   <div id="hotelsUpper">
-
     <div id="hotelsTitle">
       <h1>Search Hotels</h1>
     </div>
@@ -12,8 +10,6 @@
     <app-hotel-search></app-hotel-search>
 
   </div>
-
-
 
 <!--  <div id="hotelsMiddle">-->
 <!--    <div id="hotelsMap">-->
@@ -31,61 +27,63 @@
 
 <!--    </div>-->
 
-
 <!--  </div>-->
 
+
+
+
+
+
+
+
+
   <div id="hotelsLower" class="row">
-    <div id="hotelsContainer" class="col-md-5">
+    <div id="hotelsContainer" class="col-md-12">
 
-      <app-hotels></app-hotels>
+<!--      <app-hotels></app-hotels>-->
 
-<!--      <div class="eachHotel" *ngFor="let hotel of hotels | async">-->
-<!--        &lt;!&ndash;<div class="hotelPicture">&ndash;&gt;-->
-<!--          &lt;!&ndash;<img alt="hotel image" src="/assets/hotel1.jpg">&ndash;&gt;-->
-<!--        &lt;!&ndash;</div>&ndash;&gt;-->
-
-<!--        <div class="hotelContent">-->
-<!--          <div class="hotelTitle">-->
-<!--            <h2><a routerLink="/hotels/{{hotel.id}}" class="eachHotelLink">{{hotel.name}}-->
-<!--            </a></h2>-->
-<!--          </div>-->
-<!--        <div id="add_price">-->
-<!--          <div class="hotelAddServices" *ngIf="hotel">-->
-<!--            <span id="additionalServices" *ngFor="let addS of hotel.additionalServices"><b>  -  </b> {{addS.service}} </span>-->
-
-<!--          </div>-->
-
-<!--          <div class="hotelPrice">-->
-<!--            &lt;!&ndash; NAJJEFTINIJA CENA SOBE U TOM HOTELU &ndash;&gt;-->
-<!--            <p>$43</p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--          <div class="hotelsContentLower">-->
-<!--            <div class="hotelRating">-->
-<!--              <span class="circle">{{hotel.rating}}</span>-->
-<!--            </div>-->
-<!--            <div class="hotelDetails">-->
-<!--              <button class="btn btn-primary" type="button">See Details</button>-->
-<!--            </div>-->
-<!--          </div>-->
-
-
+      <div class="eachHotel row" *ngFor="let hotel of hotels | async">
+<!--        <div class="hotelPicture">-->
+<!--        <img alt="hotel image" src="/assets/hotel1.jpg">-->
 <!--        </div>-->
 
+        <div class="hotelContent">
+          <div class="hotelTitle">
+            <h2>
+              <a routerLink="/hotels/{{hotel.id}}" class="eachHotelLink">{{hotel.name}}</a>
+            </h2>
+          </div>
+          <div id="add_price">
+            <div class="hotelAddServices" *ngIf="hotel">
+              <span id="additionalServices" *ngFor="let addS of hotel.additionalServices"><b>  -  </b> {{addS.service}} </span>
 
+            </div>
 
+            <div class="hotelPrice">
+              <!-- NAJJEFTINIJA CENA SOBE U TOM HOTELU -->
+              <p>$43</p>
+            </div>
+          </div>
+          <div class="hotelsContentLower">
+            <div class="hotelRating">
+              <span class="circle">{{hotel.rating}}</span>
+            </div>
+            <div class="hotelDetails">
+              <button class="btn btn-primary" type="button">See Details</button>
+            </div>
+          </div>
 
-<!--      </div>-->
-
-
-
+        </div>
+      </div>
 
     </div>
-    <div class="col-md-7">
-      <router-outlet></router-outlet>
 
-    </div>
+<!--    <div class="col-md-7">-->
+<!--      <router-outlet></router-outlet>-->
+<!--    </div>-->
+
   </div>
+
 
 </div>
 

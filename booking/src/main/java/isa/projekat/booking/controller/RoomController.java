@@ -34,11 +34,8 @@ public class RoomController {
 	@Autowired
 	private IHotelService hotelService;
 	
-	@Autowired
-	private IAdministratorService administratorService;
-	
 	@RequestMapping(
-            value="/getRoom/{id}",
+            value="/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -50,7 +47,7 @@ public class RoomController {
 	}
 	
 	@RequestMapping(
-            value = "/addRoom",
+            value = "/add",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -66,9 +63,11 @@ public class RoomController {
 			newRoom.setType(roomDto.getType());
 			newRoom.setCapacity(roomDto.getCapacity());
 			newRoom.setFloor(roomDto.getFloor());
-			newRoom.setRating(0.0);
-			newRoom.setAdditionalServices(roomDto.getAdditionalServices());
 			newRoom.setPrices(roomDto.getPrices());
+			
+	        // razmisli kako bi ovo uradio
+	        // newRoom.setPrices(prices);
+	        // newRoom.setHotel(hotel);
 			
 			roomService.save(newRoom);
 			
@@ -86,23 +85,21 @@ public class RoomController {
 	
 	
 	@RequestMapping(
-            value = "/saveRoom",
+            value = "/edit",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-	public ResponseEntity<Object> saveRoom(@RequestBody RoomDTO roomDto) {
+	public ResponseEntity<Object> editRoom(@RequestBody RoomDTO roomDto) {
 		
 		Room newRoom = new Room();
 		newRoom.setId(roomDto.getId());
 		newRoom.setStatus(roomDto.getStatus());
-		newRoom.setAdditionalServices(roomDto.getAdditionalServices());
 		newRoom.setPrices(roomDto.getPrices());
 		
 		roomService.save(newRoom);
 		
 		String hotelId = roomDto.getHotelID();
-		String adminId = roomDto.getAdmin();
 		
 		Hotel hotel = hotelService.findById(hotelId);
 		ArrayList<Room> rooms = hotel.getRooms();
@@ -110,7 +107,6 @@ public class RoomController {
 		for(int i = 0; i < rooms.size(); i++) {
 			if(rooms.get(i).getId().equals(newRoom.getId())) {
 				rooms.get(i).setStatus(newRoom.getStatus());
-				rooms.get(i).setAdditionalServices(newRoom.getAdditionalServices());
 				rooms.get(i).setPrices(newRoom.getPrices());
 				break;
 			}

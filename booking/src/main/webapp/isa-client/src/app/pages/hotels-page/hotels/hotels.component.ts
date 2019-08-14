@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Hotel } from '../../../model/hotel';
 import { HotelService } from '../../../services/hotel.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Location } from '@angular/common';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -11,7 +10,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-  hotels: Observable<Hotel[]>;
+  // hotels: Observable<Hotel[]>;
   hotel: Hotel;
 
   constructor(
@@ -21,8 +20,8 @@ export class HotelsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.getInfo();
-    this.hotels = this.hotelService.getAll();
+    this.getInfo();
+    // this.hotels = this.hotelService.getAll();
   }
 
   getInfo() {

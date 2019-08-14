@@ -1,7 +1,7 @@
 <app-nav></app-nav>
 
 <p *ngIf="noLoggedAdmin">
-  
+
 </p>
 
 <p *ngIf="sysAdminIsLogged">
@@ -14,10 +14,10 @@
 </p>
 
 <p *ngIf="hotelAdminIsLogged">
-  Hotel Admin
+  <app-hotel-admin></app-hotel-admin>
 </p>
 
 <p *ngIf="carAdminIsLogged">
-   
+
   <app-rent-a-car-service-admin></app-rent-a-car-service-admin>
 </p>

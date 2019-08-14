@@ -7,6 +7,9 @@ import {Hotel} from '../../../../model/hotel';
   styleUrls: ['./hotel-item.component.css']
 })
 export class HotelItemComponent implements OnInit {
+  // hotel: Hotel;
+  // index: number;
+
   @Input() hotel: Hotel;
   @Input() index: number;
 

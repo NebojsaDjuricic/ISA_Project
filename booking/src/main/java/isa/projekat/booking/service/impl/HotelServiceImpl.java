@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import isa.projekat.booking.domain.Hotel;
-import isa.projekat.booking.domain.dto.HotelDTO;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.repository.HotelRepository;
 import isa.projekat.booking.service.IHotelService;
@@ -23,10 +22,12 @@ public class HotelServiceImpl implements IHotelService {
 	public Hotel save(Hotel hotel) {
 		return hotelRepository.save(hotel);
 	}
-
+	
 	@Override
-	public List<Hotel> findAll() {
-		return hotelRepository.findAll();			
+	public ArrayList<Hotel> getAll() {
+		List<Hotel> hotels = hotelRepository.findAll();
+		
+		return (ArrayList<Hotel>) hotels;			
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class HotelServiceImpl implements IHotelService {
 	public ArrayList<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto) {
 		ArrayList<Hotel> hotels = null;
 		//ArrayList<Hotel> hotelRating = null;
-		ArrayList<Hotel> hotelDate = null;
+//		ArrayList<Hotel> hotelDate = null;
 		
 		if (ordinarySearchDto.getCity() == null && ordinarySearchDto.getHotelName() == null
 				&& ordinarySearchDto.getCountry() == null) {

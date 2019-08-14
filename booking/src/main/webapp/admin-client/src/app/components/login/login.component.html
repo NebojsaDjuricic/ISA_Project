@@ -1,29 +1,36 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+<form [formGroup]="loginForm"
+      (ngSubmit)="login()"
+      >
 
   <div class="container">
     <div id="login-box">
       <div class="left">
-        <label>
-            Username:
-            <input type="text" formControlName="username">
-          </label>
+        <label>Username:
+          <input type="text"
+                 formControlName="username"
+                 ngModel
+                 required>
+        </label>
 
-
-          <label>
-              Password:
-              <input type="password" formControlName="password">
-            </label>
-            
-            <input type="submit" value="Login">
+        <label>Password:
+          <input type="password"
+                 formControlName="password"
+                 ngModel
+                 required>
+        </label>
+        <button class="btn btn-primary"
+                type="submit"
+                [disabled]="!loginForm.valid">Login</button>
+<!--        <input type="submit" value="Login" [disabled]="!authForm">-->
       </div>
     </div>
-    
+
 
   </div>
 
-  
-  
-  
+
+
+
 
 </form>
 

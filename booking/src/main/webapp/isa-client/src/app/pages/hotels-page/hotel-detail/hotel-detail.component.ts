@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Hotel} from '../../../model/hotel';
 import {HotelService} from '../../../services/hotel.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-hotel-detail',
@@ -9,7 +10,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   styleUrls: ['./hotel-detail.component.css']
 })
 export class HotelDetailComponent implements OnInit {
-  hotel: Hotel;
+  // hotel: Observable<Hotel>;
+  hotel: Observable<Hotel>;
   id: string;
 
   constructor(private hotelService: HotelService,
@@ -21,12 +23,20 @@ export class HotelDetailComponent implements OnInit {
   }
 
   getInfo() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.hotelService.getHotel(id).subscribe(
-      retVal => {
-        this.hotel = retVal;
-      }
-    );
+    // const id = this.route.snapshot.paramMap.get('id');
+    // this.hotelService.getHotel(id).subscribe(
+    //   retVal => {
+    //     this.hotel = retVal;
+    //   }
+    // );
+
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = params.id;
+          this.hotel = this.hotelService.getHotel(this.id);
+        }
+      );
   }
 
 }

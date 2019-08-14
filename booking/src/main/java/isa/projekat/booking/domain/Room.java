@@ -14,30 +14,47 @@ public class Room {
 	private RoomStatus status;	
 	private RoomType type;
 	private int capacity;
-	//private int pricePerNight;
 	private int floor;
-	private Double rating;
-	private ArrayList<AdditionalService> additionalServices;
 	private ArrayList<Price> prices;
+//	private Hotel hotel;
 	
 	public Room() {
 		super();
 	}
 	
-	public Room(String id, RoomStatus status, RoomType type, int capacity,  int floor, Double rating,
-			ArrayList<AdditionalService> additionalServices, ArrayList<Price> prices) {
+	public Room(String id, RoomStatus status, 
+				RoomType type, int capacity,  
+				int floor, ArrayList<Price> prices) {
 		super();
 		this.id = id;
 		this.status = status;
 		this.type = type;
 		this.capacity = capacity;
-		//this.pricePerNight = pricePerNight;
 		this.floor = floor;
-		this.rating = rating;
-		this.additionalServices = additionalServices;
 		this.prices = prices;
 	}
 
+// dodato kom hotelu pripada
+//	public Room(String id, RoomStatus status, 
+//				RoomType type, int capacity, int floor,
+//			 	ArrayList<Price> prices, Hotel hotel) {
+//		super();
+//		this.id = id;
+//		this.status = status;
+//		this.type = type;
+//		this.capacity = capacity;
+//		this.floor = floor;
+//		this.prices = prices;
+//		this.hotel = hotel;
+//	}
+//	
+//	public Hotel getHotel() {
+//		return hotel;
+//	}
+//
+//	public void setHotel(Hotel hotel) {
+//		this.hotel = hotel;
+//	}
 
 	public String getId() {
 		return id;
@@ -87,22 +104,6 @@ public class Room {
 		this.floor = floor;
 	}
 
-	public Double getRating() {
-		return rating;
-	}
-
-	public void setRating(Double d) {
-		this.rating = d;
-	}
-
-	public ArrayList<AdditionalService> getAdditionalServices() {
-		return additionalServices;
-	}
-
-	public void setAdditionalServices(ArrayList<AdditionalService> additionalServices) {
-		this.additionalServices = additionalServices;
-	}
-
 	public ArrayList<Price> getPrices() {
 		return prices;
 	}
@@ -110,6 +111,8 @@ public class Room {
 	public void setPrices(ArrayList<Price> prices) {
 		this.prices = prices;
 	}
+
+
 	
 	
 }

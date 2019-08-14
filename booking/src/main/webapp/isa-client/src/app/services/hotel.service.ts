@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Hotel } from '../model/hotel';
-import { Observable } from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import { Response } from '@angular/http';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ export class HotelService {
   hotels: Observable<Hotel[]>;
 
   // added
-  hotelSelected = new EventEmitter<Hotel>();
+  hotelChanged = new Subject<Observable<Hotel[]>>();
 
   constructor(private http: HttpClient) { }
 

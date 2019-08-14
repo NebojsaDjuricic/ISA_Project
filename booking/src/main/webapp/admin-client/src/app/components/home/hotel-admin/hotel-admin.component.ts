@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Hotel} from '../../../model/hotel';
 import {AuthServiceService} from '../../../services/auth-service.service';
-import {HotelServiceService} from '../../../services/hotel-service.service';
+import {HotelService} from '../../../services/hotel.service';
 
 @Component({
   selector: 'app-hotel-admin',
@@ -15,7 +15,7 @@ export class HotelAdminComponent implements OnInit {
 
   constructor(
     private auth: AuthServiceService,
-    private hotelService: HotelServiceService
+    private hotelService: HotelService
   ) { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class HotelAdminComponent implements OnInit {
       res => {
         this.hotel = res;
       }
-    )
+    );
   }
 
 }
