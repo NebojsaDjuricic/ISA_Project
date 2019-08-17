@@ -9,12 +9,16 @@ import { CreateVehicleComponent } from './components/home/rent-a-car-service-adm
 import { CreateBranchComponent } from './components/home/rent-a-car-service-admin/create-branch/create-branch.component';
 import { EditVehicleComponent } from './components/home/rent-a-car-service-admin/edit-vehicle/edit-vehicle.component';
 import {AuthComponent} from './components/auth/auth.component';
+import {CreateRoomComponent} from './components/home/hotel-admin/create-room/create-room.component';
+import {CreateNewHotelComponent} from './components/home/sys-admin-home/create-new-hotel/create-new-hotel.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // { path: 'login', component: AuthComponent },
   { path: '', component: HomeComponent },
+  { path: 'addRoom', component: CreateRoomComponent },
+  { path: 'add-hotel', component: CreateNewHotelComponent },
   { path: 'add-rent-a-car-service', component: CreateRentACarServiceComponent },
   { path: 'add-new-admin', component: CreateNewAdminComponent },
   { path: 'add-vehicle', component: CreateVehicleComponent },

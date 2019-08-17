@@ -1,3 +1,15 @@
-<p>
-  hotel-admin works!
-</p>
+<div *ngIf="hotel != null">
+  <h1 class="display-3">
+    {{hotel.name}}
+  </h1>
+
+</div>
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" routerLink='/addRoom'>Add new room</a>
+    </li>
+
+  </ul>
+</nav>

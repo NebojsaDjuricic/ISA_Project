@@ -1,55 +1,118 @@
-<form [formGroup]="createNewRentACarForm" (ngSubmit)="onSubmit()">
-  <label>
-    Name:
-    <input type="text" formControlName="name" placeholder="Enter name">
-    <div *ngIf="submitted && createNewRentACarForm.controls.name.errors">
-      <div *ngIf="createNewRentACarForm.controls.name.errors.required">Name is required</div>
-    </div>
-  </label>
+<app-nav></app-nav>
 
-  <label>
-    Street name:
-    <input type="text" formControlName="streetName" placeholder="Enter street name">
-    <div *ngIf="submitted && createNewRentACarForm.controls.streetName.errors">
-      <div *ngIf="createNewRentACarForm.controls.streetName.errors.required">Street name is required</div>
-    </div>
-  </label>
+<h2>Create new Rent-a-car Service</h2>
 
-  <label>
-    Building number:
-    <input type="text" formControlName="buildingNumber" placeholder="Enter building number">
-    <div *ngIf="submitted && createNewRentACarForm.controls.buildingNumber.errors">
-      <div *ngIf="createNewRentACarForm.controls.buildingNumber.errors.required">Building number is required</div>
-    </div>
-  </label>
+<hr>
+<div class="row">
+  <div class="col-xs-12 col-md-8 col-md-offset-3">
 
-  <label>
-    City:
-    <input type="text" formControlName="city" placeholder="Enter city">
-    <div *ngIf="submitted && createNewRentACarForm.controls.city.errors">
-      <div *ngIf="createNewRentACarForm.controls.city.errors.required">City is required</div>
-    </div>
-  </label>
+    <form [formGroup]="createNewRentACarForm"
+          (ngSubmit)="onSubmit()"
+          class="form-horizontal">
 
-  <label>
-    Country:
-    <input type="text" formControlName="country" placeholder="Enter country">
-    <div *ngIf="submitted && createNewRentACarForm.controls.country.errors">
-      <div *ngIf="createNewRentACarForm.controls.country.errors.required">Country is required</div>
-    </div>
-  </label>
+      <div class="form-group">
+        <label class="col-xs-2">Name:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 formControlName="name"
+                 class="form-control"
+                 placeholder="Enter name"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createNewRentACarForm.controls.name.valid &&
+             createNewRentACarForm.controls.name.touched">
+        Name is required
+        </span>
+      </div>
 
-  <label>
-    Description:
-    <input type="text" formControlName="description" placeholder="Enter description">
-    <div *ngIf="submitted && createNewRentACarForm.controls.description.errors">
-      <div *ngIf="createNewRentACarForm.controls.description.errors.required">Description is required</div>
-    </div>
-  </label>
+      <div class="form-group">
+        <label class="col-xs-2">Street name:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 formControlName="streetName"
+                 class="form-control"
+                 placeholder="Enter street name"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createNewRentACarForm.controls.streetName.valid &&
+             createNewRentACarForm.controls.streetName.touched">
+        Street name is required
+        </span>
+      </div>
 
-  <input type="submit" value="Create">
+      <div class="form-group">
+        <label class="col-xs-2">Building number:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 formControlName="buildingNumber"
+                 class="form-control"
+                 placeholder="Enter building number"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createNewRentACarForm.controls.buildingNumber.valid &&
+             createNewRentACarForm.controls.buildingNumber.touched">
+        Building number is required
+        </span>
+      </div>
 
-</form>
+      <div class="form-group">
+        <label class="col-xs-2">City:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 formControlName="city"
+                 class="form-control"
+                 placeholder="Enter city"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createNewRentACarForm.controls.city.valid &&
+             createNewRentACarForm.controls.city.touched">
+        City is required
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-2">Country:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 formControlName="country"
+                 class="form-control"
+                 placeholder="Enter name"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createNewRentACarForm.controls.country.valid &&
+             createNewRentACarForm.controls.country.touched">
+        Country is required
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-2">Description: </label>
+        <div class="col-xs-6">
+          <textarea type="text"
+                    class="form-control"
+                    formControlName="description"
+                    placeholder="Enter hotel description"
+                    rows="6"></textarea>
+        </div>
+        <span class="help-block"
+              *ngIf="!createNewRentACarForm.controls.description.valid &&
+               createNewRentACarForm.controls.description.touched">
+          Description is required
+        </span>
+      </div>
+
+      <div class="col-xs-10 col-xs-offset-2">
+        <button type="submit"
+                class="btn btn-success"
+                [disabled]="!createNewRentACarForm.valid">Create</button> |
+        <button type="button"
+                class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
 
 {{createNewRentACarForm.controls.name.value}}
 {{createNewRentACarForm.controls.streetName.value}}

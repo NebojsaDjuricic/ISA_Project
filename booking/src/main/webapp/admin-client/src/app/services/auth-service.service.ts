@@ -24,16 +24,16 @@ export class AuthServiceService {
   private user: any | null;
 
   // added new
-  admin = new BehaviorSubject<Administrator>(null);
-  private tokenExpirationTimer: any;
+  // admin = new BehaviorSubject<Administrator>(null);
+  // private tokenExpirationTimer: any;
 
-  // constructor() { }
+  constructor() { }
 
   // added new
-  constructor(private http: HttpClient,
-              private router: Router) {
-
-  }
+  // constructor(private http: HttpClient,
+  //             private router: Router) {
+  //
+  // }
 
   // added new
   // login(username: string, password: string) {
@@ -82,8 +82,6 @@ export class AuthServiceService {
   public getAdminUsername(): any | null {
     return localStorage.getItem('username');
   }
-
-
 
 
 

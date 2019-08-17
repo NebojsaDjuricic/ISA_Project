@@ -7,16 +7,7 @@ public class HotelDTO {
 
 	private String name;
     private String description;
-    private Address address;
-    
-    public Hotel createHotel(HotelDTO hotelDto) {
-    	Hotel hotel = new Hotel();
-    	hotel.setName(hotelDto.getName());
-    	hotel.setDescription(hotelDto.getDescription());
-    	hotel.setAddress(hotelDto.getAddress());
-    	
-    	return hotel;
-    }
+    private AddressDTO address;
     
 	public String getName() {
 		return name;
@@ -30,10 +21,10 @@ public class HotelDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Address getAddress() {
+	public AddressDTO getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
+	public void setAddress(AddressDTO address) {
 		this.address = address;
 	}
 }

@@ -16,7 +16,7 @@ export class CreateRoomComponent implements OnInit {
   createRoomForm: FormGroup;
   room: RoomDTO;
   hotels: Hotel[] = [];
-  submitted = false;
+  // submitted = false;
 
   constructor(private formBuilder: FormBuilder,
               private roomService: RoomService,
@@ -36,10 +36,24 @@ export class CreateRoomComponent implements OnInit {
 
       }
     );
+
+    this.hotelService.getHotels()
+      .subscribe(
+        res => {
+          this.hotels = res;
+          console.log('Hotels size: ' + this.hotels.length);
+          console.log('Hotels : ' + JSON.stringify(this.hotels));
+        }
+      );
+
     this.room = new RoomDTO();
   }
 
   onSubmit() {
+
+  }
+
+  onCancel() {
 
   }
 }

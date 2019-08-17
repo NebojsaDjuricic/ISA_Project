@@ -99,7 +99,7 @@ public class HotelController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-	public ResponseEntity<Hotel> addHotel(@RequestBody HotelDTO hotelDto) {
+	public ResponseEntity<Object> addHotel(@RequestBody Hotel hotelDto) {
 		
 		Hotel newHotel = new Hotel();
 		newHotel.setId(UUID.randomUUID().toString().substring(0, 5));
@@ -114,6 +114,11 @@ public class HotelController {
 		newHotel.setAddress(address);
 		newHotel.setRooms(new ArrayList<>());
 		newHotel.setAdditionalServices(new ArrayList<>());
+		newHotel.setNumberOfFloors(hotelDto.getNumberOfFloors());
+		newHotel.setStars(hotelDto.getStars());
+		newHotel.setWebsite(hotelDto.getWebsite());
+		newHotel.setContactEmail(hotelDto.getContactEmail());
+		newHotel.setPhoneNumber(hotelDto.getPhoneNumber());
 //		newHotel.setImageURL(null);
 		
 		hotelService.save(newHotel);
@@ -130,6 +135,22 @@ public class HotelController {
 	public ResponseEntity<Object> getRooms(@PathVariable("hotelId")String hotelId) {
 		
 		Hotel hotel = hotelService.findById(hotelId);
+		
+		ArrayList<Room> rooms = hotel.getRooms();
+		
+		return new ResponseEntity<>(rooms, HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value="/{adminId}/hotels",
+			method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+	public ResponseEntity<Object> getHotelRooms(@PathVariable("adminId")String adminId) {
+		
+		Administrator admin = administratorService.findById(adminId);
+		String hotelID = admin.getEditingObjectID();
+		Hotel hotel = hotelService.findById(hotelID);
 		
 		ArrayList<Room> rooms = hotel.getRooms();
 		

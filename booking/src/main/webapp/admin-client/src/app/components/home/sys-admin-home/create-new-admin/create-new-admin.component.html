@@ -1,57 +1,124 @@
-<form [formGroup]="createAdminForm" (ngSubmit)="onSubmit()">
-  <label>
-    Username:
-    <input type="text" formControlName="username" placeholder="Enter your username">
-    <div *ngIf="submitted && createAdminForm.controls.username.errors">
-      <div *ngIf="createAdminForm.controls.username.errors.required">Username is required</div>
-    </div>
-  </label>
+<app-nav></app-nav>
 
-  <label>
-      Password:
-      <input type="password" formControlName="password" placeholder="Enter your password">
-      <div *ngIf="submitted && createAdminForm.controls.password.errors">
-        <div *ngIf="createAdminForm.controls.password.errors.required">Password is required</div>
+<h2>Create new Admin</h2>
+
+<hr>
+<div class="row">
+  <div class="col-xs-12 col-md-8 col-md-offset-3">
+
+    <form [formGroup]="createAdminForm"
+          (ngSubmit)="onSubmit()"
+          class="form-horizontal">
+
+      <div class="form-group">
+        <label class="col-xs-2">Username:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 formControlName="username"
+                 placeholder="Enter admin username"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createAdminForm.controls.username.valid &&
+              createAdminForm.controls.username.touched">
+          Username is required
+        </span>
       </div>
-  </label>
 
-  <label>
-      Repeat password:
-      <input type="password" formControlName="passwordRepeat" placeholder="Repeat your password">
-      <div *ngIf="submitted && createAdminForm.controls.passwordRepeat.errors">
-        <div *ngIf="createAdminForm.controls.passwordRepeat.errors.required">Repeat your password</div>
+      <div class="form-group">
+        <label class="col-xs-2">Password:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 formControlName="password"
+                 placeholder="Enter admin password"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createAdminForm.controls.password.valid &&
+              createAdminForm.controls.password.touched">
+          Password is required
+        </span>
       </div>
-  </label>
 
-  <label>
-      Email:
-      <input type="email" formControlName="email" placeholder="Enter your email address">
-      <div *ngIf="submitted && createAdminForm.controls.email.errors">
-        <div *ngIf="createAdminForm.controls.email.errors.required">Email is required</div>
+      <div class="form-group">
+        <label class="col-xs-2">Repeat password:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 formControlName="passwordRepeat"
+                 placeholder="Enter your username"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createAdminForm.controls.passwordRepeat.valid &&
+              createAdminForm.controls.passwordRepeat.touched">
+          Repeat password
+        </span>
       </div>
-  </label>
 
-  <label>
-    Role
-    <select formControlName="role">
-      <option value="SYSTEM_ADMIN">System admin</option>
-      <option value="AIRLINE_ADMIN">Airline admin</option>
-      <option value="HOTEL_ADMIN">Hotel admin</option>
-      <option value="RENT_A_CAR_SERVICE_ADMIN">Rent-a-car service admin</option>
-    </select>
-  </label>
+      <div class="form-group">
+        <label class="col-xs-2">Email:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 formControlName="email"
+                 placeholder="Enter admin email"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createAdminForm.controls.email.valid &&
+              createAdminForm.controls.email.touched">
+          Email is required
+        </span>
+      </div>
 
-  <label>
-    Editing object ID
-    <input type="text" formControlName="editingObjectID" placeholder="Enter editing object's ID">
-    <div *ngIf="submitted && createAdminForm.controls.editingObjectID.errors">
-      <div *ngIf="createAdminForm.controls.editingObjectID.errors.required">Editing object's ID is required</div>
-    </div>
-  </label>
+      <div class="form-group">
+        <label class="col-xs-2">Role:</label>
+        <div class="col-xs-6">
+          <select formControlName="role"
+                  class="mdb-select md-form">
+            <option value="" disabled selected>Choose admin role</option>
+            <option value="SYSTEM_ADMIN">System admin</option>
+            <option value="AIRLINE_ADMIN">Airline admin</option>
+            <option value="HOTEL_ADMIN">Hotel admin</option>
+            <option value="RENT_A_CAR_SERVICE_ADMIN">Rent-a-car service admin</option>
+          </select>
+        </div>
+        <span class="help-block"
+              *ngIf="!createAdminForm.controls.role.valid &&
+              createAdminForm.controls.role.touched">
+          Admin role is required
+        </span>
+      </div>
 
-  <input type="submit" value="Create">
 
-</form>
+<!--   OVDE MOZDA NAPRAVITI DA SE PRVO PROVERI VREDNOST POLJA ROLE I ONDA
+   U ZAVISNOSTI OD TOGA DA MU SE PONUDE ODGOVARAJUCI OBJEKTI KOJIMA MOZE DA UPRAVLJA-->
+      <div class="form-group">
+        <label class="col-xs-2">Editing object ID:</label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 formControlName="editingObjectID"
+                 placeholder="Enter editing object's ID"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!createAdminForm.controls.editingObjectID.valid &&
+              createAdminForm.controls.editingObjectID.touched">
+          Editing object's ID is required
+        </span>
+      </div>
+
+      <div class="col-xs-10 col-xs-offset-2">
+        <button type="submit"
+                class="btn btn-success"
+                [disabled]="!createAdminForm.valid">Create Admin</button> |
+        <button type="button"
+                class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
 
 {{createAdminForm.controls.username.value}}
 {{createAdminForm.controls.password.value}}

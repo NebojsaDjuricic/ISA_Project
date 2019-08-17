@@ -47,7 +47,7 @@ public class RoomController {
 	}
 	
 	@RequestMapping(
-            value = "/add",
+            value = "/addRoom",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -85,7 +85,7 @@ public class RoomController {
 	
 	
 	@RequestMapping(
-            value = "/edit",
+            value = "/editRoom",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE

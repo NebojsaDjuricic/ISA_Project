@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Administrator } from 'src/app/model/administrator';
 import { AdminServiceService } from '../../../../services/admin-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-new-admin',
@@ -15,7 +16,9 @@ export class CreateNewAdminComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private adminService: AdminServiceService
+    private adminService: AdminServiceService,
+    private router: Router,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
@@ -52,4 +55,7 @@ export class CreateNewAdminComponent implements OnInit {
     );
   }
 
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
 }

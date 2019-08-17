@@ -1,0 +1,19 @@
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+.row {
+  width: 100vw;
+  margin-top: 3%;
+}
+
+h2 {
+  padding-left: 36vw;
+}
+
+label {
+  margin: 0;
+  padding-top: 6px;
+  font-size: 16px;
+}

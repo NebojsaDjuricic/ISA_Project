@@ -27,7 +27,20 @@ public class Administrator {
         this.setType(type);
     }
 
-    public String getUsername() {
+    public Administrator(String username, String email, String password, String newPassword, AdministatorType type,
+			boolean activated, boolean changedPass, String editingObjectID) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.newPassword = newPassword;
+		this.type = type;
+		this.activated = activated;
+		this.changedPass = changedPass;
+		this.editingObjectID = editingObjectID;
+	}
+
+	public String getUsername() {
         return username;
     }
 

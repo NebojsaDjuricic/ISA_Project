@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RentACar } from '../../../../model/rent-a-car';
 import { RentACarServiceServiceService } from '../../../../services/rent-a-car-service-service.service';
 import { Address } from 'src/app/model/address';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-rent-a-car-service',
@@ -17,7 +18,9 @@ export class CreateRentACarServiceComponent implements OnInit {
 
   constructor(
     private rent_a_car_service: RentACarServiceServiceService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.createNewRentACarForm = this.formBuilder.group({
@@ -52,6 +55,12 @@ export class CreateRentACarServiceComponent implements OnInit {
         console.log(res);
       }
     );
+
+    this.createNewRentACarForm.reset();
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 }
