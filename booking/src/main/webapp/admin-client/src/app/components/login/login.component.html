@@ -1,38 +1,57 @@
-<form [formGroup]="loginForm"
-      (ngSubmit)="login()"
-      >
+<app-nav></app-nav>
+<div>
+  <form [formGroup]="loginForm"
+        (ngSubmit)="login()"
+        >
 
-  <div class="container">
-    <div id="login-box">
-      <div class="left">
-        <label>Username:
-          <input type="text"
-                 formControlName="username"
-                 ngModel
-                 required>
-        </label>
+    <div class="container">
+      <div id="login-box">
+        <div class="left">
+          <h1>Login form</h1>
+          <hr>
+          <div class="form-group">
+            <label>Username:
+              <input type="text"
+                     formControlName="username"
+                     required>
+            </label>
+            <span class="help-block"
+                  *ngIf="!loginForm.controls.username.valid &&
+                     loginForm.controls.username.touched">
+                Please enter your username
+            </span>
+          </div>
 
-        <label>Password:
-          <input type="password"
-                 formControlName="password"
-                 ngModel
-                 required>
-        </label>
-        <button class="btn btn-primary"
-                type="submit"
-                [disabled]="!loginForm.valid">Login</button>
-<!--        <input type="submit" value="Login" [disabled]="!authForm">-->
+          <br>
+
+          <div class="form-group">
+            <label>Password:
+              <input type="password"
+                     formControlName="password"
+                     required>
+            </label>
+            <span class="help-block"
+                  *ngIf="!loginForm.controls.password.valid &&
+                     loginForm.controls.password.touched">
+                Please enter your password
+            </span>
+          </div>
+
+          <button [ngClass]="!loginForm.valid ? 'btn btn-danger' : 'btn btn-success'"
+                  type="submit"
+                  [disabled]="!loginForm.valid">Login</button>
+<!--          <input type="submit" value="Login" [disabled]="!loginForm">-->
+        </div>
       </div>
+
+
     </div>
 
 
-  </div>
 
 
 
-
-
-</form>
-
+  </form>
+</div>
 
 

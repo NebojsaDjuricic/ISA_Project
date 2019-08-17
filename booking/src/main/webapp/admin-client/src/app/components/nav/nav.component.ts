@@ -12,6 +12,7 @@ import {LoginService} from '../../services/login.service';
 export class NavComponent implements OnInit {
 
   userIsLoggedIn = false;
+  whichUserType: any;
 
   // added
   private userSub: Subscription;
@@ -25,6 +26,26 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     this.userIsLoggedIn = this.auth.getUser() != null;
     console.log('LoggedIn: ' + this.userIsLoggedIn);
+    const userType = this.auth.getUser();
+    let split = null;
+    let userTIP = null;
+    if (userType) {
+      split = userType.split('.', 3);
+      userTIP = split[1];
+    }
+    console.log('User type: ' + userTIP);
+
+    if (userTIP === 'SYSTEM_ADMIN') {
+      this.whichUserType = 'SYSTEM ADMIN';
+    } else if (userTIP === 'HOTEL_ADMIN') {
+      this.whichUserType = 'HOTEL ADMIN';
+    } else if (userTIP === 'AIRLINE_ADMIN') {
+      this.whichUserType = 'AIRLINE ADMIN';
+    } else if (userTIP === 'RENT_A_CAR_SERVICE_ADMIN') {
+      this.whichUserType = 'RENT A CAR ADMIN';
+    } else {
+      this.whichUserType = 'Home';
+    }
     // this.userSub = this.loginService.userAdmin.subscribe(
     //   admin => {
     //     this.userIsLoggedIn = !admin;

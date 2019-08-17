@@ -26,7 +26,9 @@
             </div>
           </label>
 
-          <input type="submit" value="Login">
+          <button [ngClass]="!loginForm.valid ? 'btn btn-danger' : 'btn btn-success'"
+                  type="submit"
+                  [disabled]="!loginForm.valid">Login</button>
 
           <br>
           <br>

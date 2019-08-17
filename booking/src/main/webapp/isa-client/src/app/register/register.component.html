@@ -68,7 +68,9 @@
               </div>
           </label>
 
-          <input type="submit" value="Register">
+          <button [ngClass]="!registerForm.valid ? 'btn btn-danger' : 'btn btn-success'"
+                  type="submit"
+                  [disabled]="!registerForm.valid">Register</button>
 
           <br>
           <br>

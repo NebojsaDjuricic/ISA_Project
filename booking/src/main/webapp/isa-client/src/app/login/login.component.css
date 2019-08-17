@@ -53,7 +53,7 @@ input[type="password"]:focus {
   transition: 0.2s ease;
 }
 
-input[type="submit"] {
+button {
   margin-top: 28px;
   width: 120px;
   height: 32px;
@@ -68,14 +68,15 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus {
+button:hover,
+button:focus {
   opacity: 0.8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transition: 0.1s ease;
+  background: #16a085;
 }
 
-input[type="submit"]:active {
+button:active {
   opacity: 1;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: 0.1s ease;
