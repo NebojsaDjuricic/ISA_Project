@@ -1,104 +1,150 @@
 <app-nav></app-nav>
 
+<h2>Create new Room</h2>
+
+<hr>
+
 <div class="row">
-  <div class="col-xs-12">
-    <form [formGroup]="createRoomForm" (ngSubmit)="onSubmit()">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <form [formGroup]="createRoomForm"
+          (ngSubmit)="onSubmit()"
+          class="form-horizontal">
+
+      <div class="form-group">
+        <label class="col-xs-2">
+          Add to hotel:
+        </label>
+        <div class="col-xs-6">
+          <select class="form-control"
+                  formControlName="hotel"
+                  *ngIf="hotels">
+            <option value="" disabled selected>Choose hotel</option>
+            <option value="{{hotels.id}}">{{hotels.name}}</option>
+          </select>
+        </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.hotel.valid &&
+               createRoomForm.controls.hotel.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-2">
+          Room Status:
+        </label>
+        <div class="col-xs-6">
+          <select class="form-control"
+                  formControlName="roomStatus">
+            <option value="" disabled selected>Choose Room Status</option>
+            <option value="AVAILABLE" selected>Available</option>
+          </select>
+        </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.roomStatus.valid &&
+               createRoomForm.controls.roomStatus.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-2">
+          Room Type:
+        </label>
+        <div class="col-xs-6">
+          <select class="form-control"
+                  formControlName="roomType"
+                  [ngModel]="mymodel"
+                  (change)="onChanges()">
+            <option value="" disabled selected>Choose Room Type</option>
+            <option value="SINGLE" >Single</option>
+            <option value="DOUBLE" >Double</option>
+            <option value="TRIPLE" >Triple</option>
+            <option value="QUAD" >Quad</option>
+          </select>
+        </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.roomType.valid &&
+               createRoomForm.controls.roomType.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-2">
+          Floor:
+        </label>
+        <div class="col-xs-6">
+          <input type="number" class="form-control"
+                 formControlName="floor"
+                 placeholder="Enter room floor">
+        </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.floor.valid &&
+               createRoomForm.controls.floor.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
 
 
       <div class="form-group">
-        <label>
-          Add to hotel:
-          <select formControlName="hotel">
-            <option *ngFor="let hotel of hotels" value="{{hotel.id}}">{{hotel.name}}</option>
-          </select>
+        <label class="col-xs-2">
+          Capacity:
         </label>
+        <div class="col-xs-6">
+          <input type="number" class="form-control"
+                 formControlName="capacity"
+                 placeholder="Enter room capacity"
+                 value="{{mymodel}}">
+        </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.capacity.valid &&
+               createRoomForm.controls.capacity.touched">
+          {{ errorMessage }}
+        </span>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label>
-              Room Status:
-              <select>
-                <option formControlName="roomStatus"
-                        *ngFor="let status of room"></option>
-              </select>
-              <div *ngIf="submitted && createRoomForm.controls.roomStatus.errors">
-                <div *ngIf="createRoomForm.controls.roomStatus.errors.required">Room status is required!</div>
-              </div>
-            </label>
-          </div>
+      <div class="form-group">
+        <label class="col-xs-2">
+          Room ID:
+        </label>
+        <div class="col-xs-6">
+          <input type="text" class="form-control"
+                 formControlName="roomID"
+                 placeholder="Enter room ID">
         </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.roomID.valid &&
+               createRoomForm.controls.roomID.touched">
+          {{ errorMessage }}
+        </span>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label>
-              Room Type:
-              <input type="text" formControlName="roomType" placeholder="Choose room type">
-              <div *ngIf="submitted && createRoomForm.controls.roomType.errors">
-                <div *ngIf="createRoomForm.controls.roomType.errors.required">Room type is required!</div>
-              </div>
-            </label>
-          </div>
+      <div class="form-group">
+        <label class="col-xs-2">
+          Price:
+        </label>
+        <div class="col-xs-6">
+          <input type="number" class="form-control"
+                 formControlName="pricePerNight"
+                 placeholder="Enter room price">
         </div>
+        <span class="help-block"
+              *ngIf="!createRoomForm.controls.pricePerNight.valid &&
+               createRoomForm.controls.pricePerNight.touched">
+          {{ errorMessage }}
+        </span>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label>
-              Floor:
-              <input type="text" formControlName="floor" placeholder="Enter room floor">
-              <div *ngIf="submitted && createRoomForm.controls.floor.errors">
-                <div *ngIf="createRoomForm.controls.floor.errors.required">Floor is required</div>
-              </div>
-            </label>
-          </div>
-        </div>
+      <div class="col-xs-10 col-xs-offset-2">
+        <button type="submit"
+                class="btn btn-success"
+                [disabled]="!createRoomForm.valid">Create Room</button> |
+        <button type="button"
+                class="btn btn-danger" (click)="onCancel()">Cancel</button>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label>
-              Capacity:
-              <input type="text" formControlName="capacity" placeholder="Enter room capacity">
-              <div *ngIf="submitted && createRoomForm.controls.capacity.errors">
-                <div *ngIf="createRoomForm.controls.floor.errors.required">Room capacity is required</div>
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label>
-              Price:
-              <input type="text" formControlName="price" placeholder="Enter room price">
-              <div *ngIf="submitted && createRoomForm.controls.price.errors">
-                <div *ngIf="createRoomForm.controls.price.errors.required">Price is required</div>
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <button type="submit"
-                  class="btn btn-success"
-                  [disabled]="!createRoomForm.valid">Create Room</button>
-          <button type="button"
-                  class="btn btn-danger" (click)="onCancel()">Cancel</button>
-        </div>
-      </div>
     </form>
-
-    {{createRoomForm.controls.hotel.value}}
 
   </div>
 </div>

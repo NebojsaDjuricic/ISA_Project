@@ -46,7 +46,7 @@
           <input type="text"
                  class="form-control"
                  formControlName="passwordRepeat"
-                 placeholder="Enter your username"/>
+                 placeholder="Repeat password"/>
         </div>
         <span class="help-block"
               *ngIf="!createAdminForm.controls.passwordRepeat.valid &&
@@ -74,7 +74,8 @@
         <label class="col-xs-2">Role:</label>
         <div class="col-xs-6">
           <select formControlName="role"
-                  class="mdb-select md-form">
+                  class="mdb-select md-form"
+                  style="height: 33px;">
             <option value="" disabled selected>Choose admin role</option>
             <option value="SYSTEM_ADMIN">System admin</option>
             <option value="AIRLINE_ADMIN">Airline admin</option>

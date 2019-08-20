@@ -1,16 +1,15 @@
 <app-nav></app-nav>
 
-<p *ngIf="noLoggedAdmin">
 
-</p>
+<h1 *ngIf="noLoggedAdmin" style="text-align: center">
+  WELCOME ADMIN!
+</h1>
 
 <p *ngIf="sysAdminIsLogged">
-  System Admin
   <app-sys-admin-home></app-sys-admin-home>
 </p>
 
 <p *ngIf="airlineAdminIsLogged">
-  Airline Admin
 </p>
 
 <p *ngIf="hotelAdminIsLogged">

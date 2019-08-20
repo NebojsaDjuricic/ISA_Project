@@ -34,6 +34,9 @@ public class RoomController {
 	@Autowired
 	private IHotelService hotelService;
 	
+	@Autowired
+    private IAdministratorService administratorService;
+	
 	@RequestMapping(
             value="/{id}",
             method = RequestMethod.GET,
@@ -54,18 +57,19 @@ public class RoomController {
     )
 	public ResponseEntity<Object> addNewRoom(@RequestBody RoomDTO roomDto) {
 		
-		Room fromDB = roomService.findById(roomDto.getId());
+//		Room fromDB = roomService.findById(roomDto.getId());
 		
-		if(fromDB == null) {
+//		if(fromDB == null) {
 			Room newRoom = new Room();
 			newRoom.setId(roomDto.getId());
 			newRoom.setStatus(roomDto.getStatus());
 			newRoom.setType(roomDto.getType());
 			newRoom.setCapacity(roomDto.getCapacity());
 			newRoom.setFloor(roomDto.getFloor());
-			newRoom.setPrices(roomDto.getPrices());
+//			newRoom.setPrices(roomDto.getPrices());
+			newRoom.setPricePerNight(roomDto.getPricePerNight());
 			
-	        // razmisli kako bi ovo uradio
+
 	        // newRoom.setPrices(prices);
 	        // newRoom.setHotel(hotel);
 			
@@ -78,9 +82,9 @@ public class RoomController {
 			hotelService.save(hotel);
 			
 			return new ResponseEntity<>(newRoom, HttpStatus.OK);
-		}
+//		}
 		
-		return new ResponseEntity<>(null, HttpStatus.OK);
+//		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
 	
@@ -95,11 +99,16 @@ public class RoomController {
 		Room newRoom = new Room();
 		newRoom.setId(roomDto.getId());
 		newRoom.setStatus(roomDto.getStatus());
-		newRoom.setPrices(roomDto.getPrices());
+		newRoom.setPricePerNight(roomDto.getPricePerNight());
+		newRoom.setType(roomDto.getType());
+		newRoom.setCapacity(roomDto.getCapacity());
+		newRoom.setFloor(roomDto.getFloor());
+		newRoom.setRating(roomDto.getRating());
 		
 		roomService.save(newRoom);
 		
 		String hotelId = roomDto.getHotelID();
+		String adminID = roomDto.getAdmin();
 		
 		Hotel hotel = hotelService.findById(hotelId);
 		ArrayList<Room> rooms = hotel.getRooms();
@@ -107,7 +116,11 @@ public class RoomController {
 		for(int i = 0; i < rooms.size(); i++) {
 			if(rooms.get(i).getId().equals(newRoom.getId())) {
 				rooms.get(i).setStatus(newRoom.getStatus());
-				rooms.get(i).setPrices(newRoom.getPrices());
+				rooms.get(i).setPricePerNight(newRoom.getPricePerNight());
+				rooms.get(i).setType(newRoom.getType());
+				rooms.get(i).setCapacity(newRoom.getCapacity());
+				rooms.get(i).setFloor(newRoom.getFloor());
+				rooms.get(i).setRating(newRoom.getRating());
 				break;
 			}
 		}

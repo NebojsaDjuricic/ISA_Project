@@ -11,11 +11,11 @@ import { EditVehicleComponent } from './components/home/rent-a-car-service-admin
 import {AuthComponent} from './components/auth/auth.component';
 import {CreateRoomComponent} from './components/home/hotel-admin/create-room/create-room.component';
 import {CreateNewHotelComponent} from './components/home/sys-admin-home/create-new-hotel/create-new-hotel.component';
+import {EditRoomComponent} from './components/home/hotel-admin/edit-room/edit-room.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  // { path: 'login', component: AuthComponent },
   { path: '', component: HomeComponent },
   { path: 'addRoom', component: CreateRoomComponent },
   { path: 'add-hotel', component: CreateNewHotelComponent },
@@ -23,7 +23,8 @@ const routes: Routes = [
   { path: 'add-new-admin', component: CreateNewAdminComponent },
   { path: 'add-vehicle', component: CreateVehicleComponent },
   { path: 'add-branch', component: CreateBranchComponent },
-  { path: 'edit-vehicle/:branchID/:vehicleID', component: EditVehicleComponent}
+  { path: 'edit-vehicle/:branchID/:vehicleID', component: EditVehicleComponent},
+  { path: 'edit-room/:hotelID/:roomID', component: EditRoomComponent},
 ];
 
 @NgModule({

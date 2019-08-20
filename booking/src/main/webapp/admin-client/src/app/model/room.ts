@@ -7,10 +7,13 @@ export class Room {
   type: RoomType.Value;
   capacity: number;
   floor: number;
-  prices: Price[];
+  // prices: Price[];
+  pricePerNight: number;
+  rating: number;
 
   constructor() {
     this.status = RoomStatus.Value.AVAILABLE;
+    this.rating = 0.0;
   }
 }
 

@@ -33,9 +33,9 @@ export class HotelService {
     return this.http.get<Room[]>(this.backEndUrl + '/' + hotelID + '/rooms');
   }
 
-  // getHotelRooms(adminID: String) {
-  //   return this.http.get<Hotel[]>(this.backEndUrl + '/' + adminID + '/hotels');
-  // }
+  getAdminHotel(adminID: String) {
+    return this.http.get<Hotel>(this.backEndUrl + '/' + adminID + '/hotels');
+  }
 
   getHotels() {
     return this.http.get<Hotel[]>(this.backEndUrl);

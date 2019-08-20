@@ -16,6 +16,8 @@ public class Room {
 	private int capacity;
 	private int floor;
 	private ArrayList<Price> prices;
+	private int pricePerNight;
+	private Double rating;
 //	private Hotel hotel;
 	
 	public Room() {
@@ -23,8 +25,21 @@ public class Room {
 	}
 	
 	public Room(String id, RoomStatus status, 
-				RoomType type, int capacity,  
-				int floor, ArrayList<Price> prices) {
+			RoomType type, int capacity, int floor,
+			int pricePerNight, Double rating) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.type = type;
+		this.capacity = capacity;
+		this.floor = floor;
+		this.pricePerNight = pricePerNight;
+		this.setRating(rating);
+	}
+	
+	public Room(String id, RoomStatus status, 
+				RoomType type, int capacity, int floor,
+				ArrayList<Price> prices, Double rating) {
 		super();
 		this.id = id;
 		this.status = status;
@@ -32,6 +47,7 @@ public class Room {
 		this.capacity = capacity;
 		this.floor = floor;
 		this.prices = prices;
+		this.setRating(rating);
 	}
 
 // dodato kom hotelu pripada
@@ -110,6 +126,22 @@ public class Room {
 
 	public void setPrices(ArrayList<Price> prices) {
 		this.prices = prices;
+	}
+
+	public int getPricePerNight() {
+		return pricePerNight;
+	}
+
+	public void setPricePerNight(int pricePerNight) {
+		this.pricePerNight = pricePerNight;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
 	}
 
 

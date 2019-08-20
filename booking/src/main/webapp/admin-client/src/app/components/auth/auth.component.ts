@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class AuthComponent implements OnInit {
 
   error: string = null;
-  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
   private closeSub: Subscription;
 
   constructor(private authService: AuthServiceService,

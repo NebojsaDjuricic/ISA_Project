@@ -146,14 +146,14 @@ public class HotelController {
 			method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-	public ResponseEntity<Object> getHotelRooms(@PathVariable("adminId")String adminId) {
+	public ResponseEntity<Object> getAdminHotels(@PathVariable("adminId")String adminId) {
 		
 		Administrator admin = administratorService.findById(adminId);
 		String hotelID = admin.getEditingObjectID();
 		Hotel hotel = hotelService.findById(hotelID);
 		
-		ArrayList<Room> rooms = hotel.getRooms();
+//		ArrayList<Room> rooms = hotel.getRooms();
 		
-		return new ResponseEntity<>(rooms, HttpStatus.OK);
+		return new ResponseEntity<>(hotel, HttpStatus.OK);
 	}
 }

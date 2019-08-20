@@ -19,6 +19,9 @@ public class RoomDTO {
 	private int capacity;
 	private int floor;
 	private ArrayList<Price> prices;
+	private int pricePerNight;
+	private Double rating;
+    private String admin;
 	private String hotelID;
 	
 	
@@ -77,6 +80,30 @@ public class RoomDTO {
 
 	public void setHotelID(String hotelID) {
 		this.hotelID = hotelID;
+	}
+
+	public int getPricePerNight() {
+		return pricePerNight;
+	}
+
+	public void setPricePerNight(int pricePerNight) {
+		this.pricePerNight = pricePerNight;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+
+	public String getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 	
 }

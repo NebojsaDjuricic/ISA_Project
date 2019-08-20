@@ -345,79 +345,78 @@ public class DBSeeder implements CommandLineRunner {
         //------------------ ROOMS ------------------//
 
         Room room1 = new Room();
-        String roomID1 = UUID.randomUUID().toString();
-        room1.setId(roomID1.substring(0, 5));
+        room1.setId("felix.1101");
         room1.setStatus(RoomStatus.AVAILABLE);
         room1.setType(RoomType.SINGLE);
         room1.setCapacity(1);
         room1.setFloor(1);
         
         // cene za svaku sobu u odredjenom periodu
-        //  room1.setPricePerNight(30);
-
+        room1.setPricePerNight(30);
+        room1.setRating(0.0);
 
         Room room2 = new Room();
-        String roomID2 = UUID.randomUUID().toString();
-        room2.setId(roomID2.substring(0, 5));
+        room2.setId("top.1101");
         room2.setStatus(RoomStatus.AVAILABLE);
         room2.setType(RoomType.SINGLE);
         room2.setCapacity(1);
-      //  room2.setPricePerNight(36);
+        room2.setPricePerNight(36);
         room2.setFloor(1);
+        room2.setRating(0.0);
 
         Room room3 = new Room();
-        String roomID3 = UUID.randomUUID().toString();
-        room3.setId(roomID3.substring(0, 5));
+        room3.setId("felix.2201");
         room3.setStatus(RoomStatus.AVAILABLE);
         room3.setType(RoomType.DOUBLE);
         room3.setCapacity(2);
-     //   room3.setPricePerNight(42);
+        room3.setPricePerNight(42);
         room3.setFloor(2);
+        room3.setRating(0.0);
 
         Room room4 = new Room();
-        String roomID4 = UUID.randomUUID().toString();
-        room4.setId(roomID4.substring(0, 5));
+        room4.setId("top.2201");
         room4.setStatus(RoomStatus.AVAILABLE);
         room4.setType(RoomType.DOUBLE);
         room4.setCapacity(2);
-     //   room4.setPricePerNight(46);
+        room4.setPricePerNight(46);
         room4.setFloor(2);
+        room4.setRating(0.0);
 
         Room room5 = new Room();
-        String roomID5 = UUID.randomUUID().toString();
-        room5.setId(roomID5.substring(0, 5));
+        room5.setId("felix.3301");
         room5.setStatus(RoomStatus.AVAILABLE);
         room5.setType(RoomType.TRIPLE);
         room5.setCapacity(3);
-    //    room5.setPricePerNight(33);
+        room5.setPricePerNight(33);
         room5.setFloor(3);
+        room5.setRating(0.0);
 
         Room room6 = new Room();
-        String roomID6 = UUID.randomUUID().toString();
-        room6.setId(roomID6.substring(0, 5));
+        room6.setId("top.3301");
         room6.setStatus(RoomStatus.AVAILABLE);
         room6.setType(RoomType.TRIPLE);
         room6.setCapacity(3);
-     //   room6.setPricePerNight(43);
+        room6.setPricePerNight(43);
         room6.setFloor(3);
+        room6.setRating(0.0);
 
         Room room7 = new Room();
-        String roomID7 = UUID.randomUUID().toString();
-        room7.setId(roomID7.substring(0, 5));
+        room7.setId("top.4401");
         room7.setStatus(RoomStatus.AVAILABLE);
         room7.setType(RoomType.QUAD);
         room7.setCapacity(4);
-    //    room7.setPricePerNight(26);
+        room7.setPricePerNight(26);
         room7.setFloor(4);
+        room7.setRating(0.0);
 
         Room room8 = new Room();
-        String roomID8 = UUID.randomUUID().toString();
-        room8.setId(roomID8.substring(0, 5));
+        room8.setId("top.4402");
         room8.setStatus(RoomStatus.AVAILABLE);
         room8.setType(RoomType.QUAD);
         room8.setCapacity(4);
-     //   room8.setPricePerNight(31);
+        room8.setPricePerNight(31);
         room8.setFloor(4);
+        room8.setRating(0.0);
 
         //Adding ROOMS to DB
         ArrayList<Room> rooms = new ArrayList<>();
@@ -435,7 +434,7 @@ public class DBSeeder implements CommandLineRunner {
 
         //------------------ HOTELS ------------------//
 
-        Hotel hotel1 = new Hotel(UUID.randomUUID().toString().substring(0, 5),
+        Hotel hotel1 = new Hotel("hotel_Felix_Krakow",
                 "Hotel Felix", new Address("Osiedle Złotej Jesieni", "15", "Kraków", "Poland", new GSPcoordinate(50.088, 20.028)),
                 "+48 12 361 96 03", "felix@hotelfelix.pl",
                 "Hotel Felix je hotel sa 2 zvezdice, smešten u četvrti Nova Huta u Krakovu. "
@@ -444,33 +443,9 @@ public class DBSeeder implements CommandLineRunner {
                         + "Hotel je dobro povezan linijama tramvaja sa Glavnim trgom, četvrti Kazimir i Arenom Tauron."
                         + "Tokom boravka u hotelu Felix možete obići jedinstvenu četvrt Nova Huta, posetiti Glavni trg i livnicu Tadeuš Sendsimir."
                         + "U hotelu se služi doručak na bazi švedskog stola.",
-                "http://www.hotelfelix.pl", 3.8, 3, 2,
+                "http://www.hotelfelix.pl", 0.0, 3, 2,
                 new ArrayList<Room>(Arrays.asList(
-                        new Room("1101", RoomStatus.AVAILABLE, RoomType.SINGLE, 1, 1, 
-                        		new ArrayList<Price>(Arrays.asList(
-	                        				new Price("felixRoom1Price1", 25, "1/05/2019", "15/05/2019"),
-	                        				new Price("felixRoom1Price2", 28, "16/05/2019", "31/05/2019"),
-	                        				new Price("felixRoom1Price3", 30, "1/06/2019", "30/06/2019")
-                        				)
-                        			) 
-                        		),
-                        
-                        new Room("2201", RoomStatus.AVAILABLE, RoomType.DOUBLE, 2, 2,
-                        		new ArrayList<Price>(Arrays.asList(
-	                        				new Price("felixRoom2Price1", 30, "1/05/2019", "15/05/2019"),
-	                        				new Price("felixRoom2Price2", 35, "16/05/2019", "31/05/2019"),
-	                        				new Price("felixRoom2Price3", 40, "1/06/2019", "30/06/2019")
-                        				)
-                        			) 
-                        		),
-                        new Room("3301", RoomStatus.AVAILABLE, RoomType.TRIPLE, 3, 3,
-                        		new ArrayList<Price>(Arrays.asList(
-	                        				new Price("felixRoom3Price1", 35, "1/05/2019", "15/05/2019"),
-	                        				new Price("felixRoom3Price2", 38, "16/05/2019", "31/05/2019"),
-	                        				new Price("felixRoom3Price3", 43, "1/06/2019", "30/06/2019")
-                        				)
-                        			) 
-                        		)
+                        room1, room3, room5
                 	)
                 ),
                 new ArrayList<AdditionalService>(Arrays.asList(
@@ -485,7 +460,7 @@ public class DBSeeder implements CommandLineRunner {
         
      hotelRepository.save(hotel1);
 
-     Hotel hotel2 = new Hotel(UUID.randomUUID().toString().substring(0, 5),
+     Hotel hotel2 = new Hotel("hotel_Top_Prague",
              "Top Hotel", new Address("Blažimská", "1781/4", "Prague", "Czech Republic", new GSPcoordinate(50.041, 14.495)),
              "+420 267 284 111", "booking@tophotel.cz",
              "Objekat TOP HOTEL Praha smešten je na 800 metara od tržnog centra Chodov. "
@@ -504,48 +479,9 @@ public class DBSeeder implements CommandLineRunner {
                      + "Smeštajni objekat takođe nudi 3 bara, bar u foajeu sa zimskom baštom i prostor za sedenje na otvorenom. "
                      + "U baru u foajeu možete da uživate u osveženjima. "
                      + "U okviru objekta postoji i zimska bašta sa japanskim vrtom.",
-             "http://www.tophotel.cz", 3.3, 4, 4,
+             "http://www.tophotel.cz", 0.0, 4, 4,
              new ArrayList<Room>(Arrays.asList(
-                     new Room("1101", RoomStatus.AVAILABLE, RoomType.SINGLE, 1, 1,
-                     		new ArrayList<Price>(Arrays.asList(
-	                     				new Price("topRoom1Price1", 35, "1/05/2019", "15/05/2019"),
-	                     				new Price("topRoom1Price2", 40, "16/05/2019", "31/05/2019"),
-	                     				new Price("topRoom1Price3", 45, "1/06/2019", "30/06/2019")
-                     				)
-                     			)
-                     		),
-                     new Room("2201", RoomStatus.AVAILABLE, RoomType.DOUBLE, 2, 2,
-                     		new ArrayList<Price>(Arrays.asList(
-	                     				new Price("topRoom2Price1", 50, "1/05/2019", "15/05/2019"),
-	                     				new Price("topRoom2Price2", 60, "16/05/2019", "31/05/2019"),
-	                     				new Price("topRoom2Price3", 70, "1/06/2019", "30/06/2019")
-                     				)
-                     			)
-                     		),
-                     new Room("3301", RoomStatus.AVAILABLE, RoomType.TRIPLE, 3, 3,
-                     		new ArrayList<Price>(Arrays.asList(
-	                     				new Price("topRoom3Price1", 75, "1/05/2019", "15/05/2019"),
-	                     				new Price("topRoom3Price2", 85, "16/05/2019", "31/05/2019"),
-	                     				new Price("topRoom3Price3", 95, "1/06/2019", "30/06/2019")
-                     				)
-                     			)
-                     		),
-                     new Room("4401", RoomStatus.AVAILABLE, RoomType.QUAD, 4, 4,
-                     		new ArrayList<Price>(Arrays.asList(
-	                     				new Price("topRoom4Price1", 80, "1/05/2019", "15/05/2019"),
-	                     				new Price("topRoom4Price2", 100, "16/05/2019", "31/05/2019"),
-	                     				new Price("topRoom4Price3", 130, "1/06/2019", "30/06/2019")
-                     				)
-                     			)
-                     		),
-                     new Room("4402", RoomStatus.AVAILABLE, RoomType.QUAD, 4, 4,
-                     		new ArrayList<Price>(Arrays.asList(
-	                     				new Price("topRoom5Price1", 85, "1/05/2019", "15/05/2019"),
-	                     				new Price("topRoom5Price2", 98, "16/05/2019", "31/05/2019"),
-	                     				new Price("topRoom5Price3", 130, "1/06/2019", "30/06/2019")
-                     				)
-                     			)
-                     		)
+                     room2, room4, room6, room7, room8
             	)
              ),
              new ArrayList<AdditionalService>(Arrays.asList(

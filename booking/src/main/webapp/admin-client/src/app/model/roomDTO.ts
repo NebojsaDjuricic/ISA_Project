@@ -6,11 +6,15 @@ export class RoomDTO {
   type: RoomType.Value;
   capacity: number;
   floor: number;
-  prices: Price[];
+  // prices: Price[];
+  pricePerNight: number;
   hotelID: String;
+  admin: String;
+  rating: number;
 
   constructor() {
     this.status = RoomStatus.Value.AVAILABLE;
+    this.rating = 0.0;
   }
 
 }

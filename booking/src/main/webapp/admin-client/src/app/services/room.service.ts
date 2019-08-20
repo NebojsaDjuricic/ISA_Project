@@ -19,7 +19,7 @@ export class RoomService {
   constructor(private http: HttpClient) { }
 
   addRoom(room: Room) {
-    return this.http.post(this.backEndUrl + '/add', room, this.httpOptions);
+    return this.http.post(this.backEndUrl + '/addRoom', room, this.httpOptions);
   }
 
   getRoom(id: String) {
@@ -27,7 +27,7 @@ export class RoomService {
   }
 
   editRoom(room: RoomDTO) {
-    return this.http.post(this.backEndUrl + '/edit' + room, this.httpOptions);
+    return this.http.post(this.backEndUrl + '/editRoom', room, this.httpOptions);
   }
 
 }
