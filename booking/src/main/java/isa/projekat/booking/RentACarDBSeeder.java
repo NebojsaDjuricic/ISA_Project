@@ -16,11 +16,13 @@ import isa.projekat.booking.domain.GSPcoordinate;
 import isa.projekat.booking.domain.RentACarService;
 import isa.projekat.booking.domain.Vehicle;
 import isa.projekat.booking.domain.VehicleDiscount;
+import isa.projekat.booking.domain.VehicleReservation;
 import isa.projekat.booking.domain.VehicleStatus;
 import isa.projekat.booking.repository.AdministratorRepository;
 import isa.projekat.booking.repository.BranchRepository;
 import isa.projekat.booking.repository.RentACarServiceRepository;
 import isa.projekat.booking.repository.VehicleRepository;
+import isa.projekat.booking.repository.VehicleReservationsRepository;
 
 @Component
 public class RentACarDBSeeder implements CommandLineRunner {
@@ -36,6 +38,9 @@ public class RentACarDBSeeder implements CommandLineRunner {
     
     @Autowired
     private AdministratorRepository administratorRepository;
+    
+    @Autowired
+    private VehicleReservationsRepository vehicleReservationRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -44,6 +49,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
 		vehicleRepository.deleteAll();
         branchRepository.deleteAll();
         rentACarServiceRepository.deleteAll();
+        vehicleReservationRepository.deleteAll();
         
       //---------------- VEHICLES ----------------//
         Vehicle v1 = new Vehicle();
@@ -249,6 +255,17 @@ public class RentACarDBSeeder implements CommandLineRunner {
         admin4.setEditingObjectID(rent1.getId());
         
         administratorRepository.insert(admin4);
+        
+        
+      //---------------- RESERVATIONS ----------------//
+        
+        VehicleReservation vehRes1 = new VehicleReservation();
+        vehRes1.setStartDate(LocalDate.of(2019, 5, 12));
+        vehRes1.setEndDate(LocalDate.of(2019, 5, 15));
+        vehRes1.setVehicleID(v1.getLicenceID());
+        vehRes1.setRating(4.5);
+        
+        vehicleReservationRepository.insert(vehRes1);
 		
 	}
 
