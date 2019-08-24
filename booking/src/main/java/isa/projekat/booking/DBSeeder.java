@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -82,49 +86,67 @@ public class DBSeeder implements CommandLineRunner {
 
         //---------------- VEHICLES ----------------//
         Vehicle v1 = new Vehicle();
+        v1.setName("Fiat Punto");
         v1.setBrand("Fiat");
         v1.setModel("Punto");
         v1.setLicenceID("NS-123-XZ");
+        v1.setManufacturingYear(2007);
+        v1.setNumberOfSeats(4);
         v1.setPrice(100.0);
         v1.setRating(4.2);
         v1.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v2 = new Vehicle();
+        v2.setName("Tesla Model 3");
         v2.setBrand("Tesla");
         v2.setModel("Model 3");
         v2.setLicenceID("NS-345-TS");
+        v2.setManufacturingYear(2013);
+        v2.setNumberOfSeats(2);
         v2.setPrice(1100.0);
         v2.setRating(4.9);
         v2.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v3 = new Vehicle();
+        v3.setName("Open Astra");
         v3.setBrand("Opel");
         v3.setModel("Astra");
         v3.setLicenceID("NS-156-PF");
+        v3.setManufacturingYear(2004);
+        v3.setNumberOfSeats(4);
         v3.setPrice(120.0);
         v3.setRating(4.1);
         v3.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v4 = new Vehicle();
+        v4.setName("Toyota Yaris");
         v4.setBrand("Toyota");
         v4.setModel("Yaris");
         v4.setLicenceID("NS-543-EZ");
+        v4.setManufacturingYear(2001);
+        v4.setNumberOfSeats(4);
         v4.setPrice(110.0);
         v4.setRating(3.2);
         v4.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v5 = new Vehicle();
+        v5.setName("Zastava Yugo");
         v5.setBrand("Zastava");
         v5.setModel("Yugo");
         v5.setLicenceID("NS-555-YU");
+        v5.setManufacturingYear(1979);
+        v5.setNumberOfSeats(4);
         v5.setPrice(50.0);
         v5.setRating(5.0);
         v5.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v6 = new Vehicle();
+        v6.setName("Zastava Stojadin");
         v6.setBrand("Zastava");
         v6.setModel("Stojadin");
         v6.setLicenceID("NS-123-YU");
+        v6.setManufacturingYear(1975);
+        v6.setNumberOfSeats(4);
         v6.setPrice(50.0);
         v6.setRating(5.0);
         v6.setStatus(VehicleStatus.OUT_OF_SERVICE);
@@ -226,6 +248,17 @@ public class DBSeeder implements CommandLineRunner {
         rent1.setDescription("Prvi osnovani Rent-a-Car servis");
         rent1.setName("Giga rent");
         rent1.setRating(4.0);
+        
+        VehicleDiscount vehDis1 = new VehicleDiscount();
+        vehDis1.setVehicleID(v1.getLicenceID());
+        vehDis1.setDiscount(10.0);
+        LocalDate sd1 = LocalDate.of(2019, 8, 11);
+        vehDis1.setDiscountStartDate(sd1);
+        vehDis1.setDiscountEndDate(LocalDate.of(2019, 8, 30));
+        
+        ArrayList<VehicleDiscount> vehdisclist1 = new ArrayList<VehicleDiscount>();
+        vehdisclist1.add(vehDis1);
+        rent1.setVehiclesOnDiscount(vehdisclist1);
 
         RentACarService rent2 = new RentACarService();
         rent2.setId(Calendar.getInstance().getTimeInMillis()+"2");

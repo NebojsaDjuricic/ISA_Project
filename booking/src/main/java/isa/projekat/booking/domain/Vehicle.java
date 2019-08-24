@@ -70,4 +70,28 @@ public class Vehicle {
     public void setStatus(VehicleStatus status) {
         this.status = status;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getManufacturingYear() {
+		return manufacturingYear;
+	}
+
+	public void setManufacturingYear(int manufacturingYear) {
+		this.manufacturingYear = manufacturingYear;
+	}
+
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
+	}
 }
