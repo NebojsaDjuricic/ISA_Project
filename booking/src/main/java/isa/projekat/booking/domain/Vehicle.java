@@ -6,14 +6,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Vehicles")
 public class Vehicle {
 
-    private String brand;
-    private String model;
-
     @Id
     private String licenceID;
-    private VehicleStatus status;
-    private Double price;
+    private String name;
+    private String brand;
+    private String model;
+    private int manufacturingYear;
+    private int numberOfSeats;
+    //private VehicleType vehicleType;
     private Double rating;
+    private Double price;
+    private VehicleStatus status;
+    
 
     public Vehicle() {
 
@@ -66,4 +70,28 @@ public class Vehicle {
     public void setStatus(VehicleStatus status) {
         this.status = status;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getManufacturingYear() {
+		return manufacturingYear;
+	}
+
+	public void setManufacturingYear(int manufacturingYear) {
+		this.manufacturingYear = manufacturingYear;
+	}
+
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
+	}
 }

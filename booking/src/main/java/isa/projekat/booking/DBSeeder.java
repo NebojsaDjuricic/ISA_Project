@@ -6,23 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 @Component
 public class DBSeeder implements CommandLineRunner {
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
-
-    @Autowired
-    private BranchRepository branchRepository;
-
-    @Autowired
-    private RentACarServiceRepository rentACarServiceRepository;
-
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -42,9 +38,7 @@ public class DBSeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         userRepository.deleteAll();
-        vehicleRepository.deleteAll();
-        branchRepository.deleteAll();
-        rentACarServiceRepository.deleteAll();
+        
         roomRepository.deleteAll();
         hotelRepository.deleteAll();
         additionalServiceRepository.deleteAll();
@@ -80,168 +74,7 @@ public class DBSeeder implements CommandLineRunner {
         
         userRepository.saveAll(users);
 
-        //---------------- VEHICLES ----------------//
-        Vehicle v1 = new Vehicle();
-        v1.setBrand("Fiat");
-        v1.setModel("Punto");
-        v1.setLicenceID("NS-123-XZ");
-        v1.setPrice(100.0);
-        v1.setRating(4.2);
-        v1.setStatus(VehicleStatus.IN_SERVICE);
-
-        Vehicle v2 = new Vehicle();
-        v2.setBrand("Tesla");
-        v2.setModel("Model 3");
-        v2.setLicenceID("NS-345-TS");
-        v2.setPrice(1100.0);
-        v2.setRating(4.9);
-        v2.setStatus(VehicleStatus.IN_SERVICE);
-
-        Vehicle v3 = new Vehicle();
-        v3.setBrand("Opel");
-        v3.setModel("Astra");
-        v3.setLicenceID("NS-156-PF");
-        v3.setPrice(120.0);
-        v3.setRating(4.1);
-        v3.setStatus(VehicleStatus.IN_SERVICE);
-
-        Vehicle v4 = new Vehicle();
-        v4.setBrand("Toyota");
-        v4.setModel("Yaris");
-        v4.setLicenceID("NS-543-EZ");
-        v4.setPrice(110.0);
-        v4.setRating(3.2);
-        v4.setStatus(VehicleStatus.IN_SERVICE);
-
-        Vehicle v5 = new Vehicle();
-        v5.setBrand("Zastava");
-        v5.setModel("Yugo");
-        v5.setLicenceID("NS-555-YU");
-        v5.setPrice(50.0);
-        v5.setRating(5.0);
-        v5.setStatus(VehicleStatus.IN_SERVICE);
-
-        Vehicle v6 = new Vehicle();
-        v6.setBrand("Zastava");
-        v6.setModel("Stojadin");
-        v6.setLicenceID("NS-123-YU");
-        v6.setPrice(50.0);
-        v6.setRating(5.0);
-        v6.setStatus(VehicleStatus.OUT_OF_SERVICE);
-
-
-        //Adding vehicles to DB
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
-        vehicles.add(v1);
-        vehicles.add(v2);
-        vehicles.add(v3);
-        vehicles.add(v4);
-        vehicles.add(v5);
-        vehicles.add(v6);
-        vehicleRepository.saveAll(vehicles);
-
-
-        //---------------- BRANCHES ----------------//
-        // x3 (2 - 2 - 2)
-
-        Branch branch1 = new Branch();
-        branch1.setId(Calendar.getInstance().getTimeInMillis()+"1");
-        Address adrs1 = new Address();
-        adrs1.setStreetName("Danila Kiša");
-        adrs1.setBuildingNumber("12");
-        adrs1.setCity("Novi Sad");
-        adrs1.setCountry("Serbia");
-        GSPcoordinate coord1 = new GSPcoordinate();
-        coord1.setLatitude(45.248);
-        coord1.setLongitude(19.837);
-        adrs1.setCoordinatePosition(coord1);
-        branch1.setAddress(adrs1);
-        branch1.setContactEmail("office1@auto.rs");
-        branch1.setName("Auto Filijala");
-        branch1.setPhoneNumber("+381 61 11 11 111");
-        ArrayList<Vehicle> vehs1 = new ArrayList<>();
-        vehs1.add(v1);
-        vehs1.add(v2);
-        branch1.setVehicles(vehs1);
-
-        Branch branch2 = new Branch();
-        branch2.setId(Calendar.getInstance().getTimeInMillis()+"2");
-        Address adrs2 = new Address();
-        adrs2.setStreetName("Temerinska");
-        adrs2.setBuildingNumber("30");
-        adrs2.setCity("Novi Sad");
-        adrs2.setCountry("Serbia");
-        GSPcoordinate coord2 = new GSPcoordinate();
-        coord2.setLatitude(45.264);
-        coord2.setLongitude(19.844);
-        adrs2.setCoordinatePosition(coord2);
-        branch2.setAddress(adrs2);
-        branch2.setContactEmail("info@rentcar.rs");
-        branch2.setName("Rent Car");
-        branch2.setPhoneNumber("+381 62 22 22 222");
-        ArrayList<Vehicle> vehs2 = new ArrayList<>();
-        vehs2.add(v3);
-        vehs2.add(v4);
-        branch2.setVehicles(vehs2);
-
-        Branch branch3 = new Branch();
-        branch3.setId(Calendar.getInstance().getTimeInMillis()+"3");
-        Address adrs3 = new Address();
-        adrs3.setStreetName("Ćirpanova");
-        adrs3.setBuildingNumber("8");
-        adrs3.setCity("Novi Sad");
-        adrs3.setCountry("Serbia");
-        GSPcoordinate coord3 = new GSPcoordinate();
-        coord3.setLatitude(45.252);
-        coord3.setLongitude(19.833);
-        adrs3.setCoordinatePosition(coord3);
-        branch3.setAddress(adrs3);
-        branch3.setContactEmail("contact@brmbrm.rs");
-        branch3.setName("Brm brm car");
-        branch3.setPhoneNumber("+381 63 33 33 333");
-        ArrayList<Vehicle> vehs3 = new ArrayList<>();
-        vehs3.add(v5);
-        vehs3.add(v6);
-        branch3.setVehicles(vehs3);
-
-        //Adding branches to DB
-        ArrayList<Branch> branches = new ArrayList<>();
-        branches.add(branch1);
-        branches.add(branch2);
-        branches.add(branch3);
-
-        branchRepository.saveAll(branches);
-
-
-        //---------------- RENT-A-CAR SERVICES ----------------//
-        // x2 (2 - 1)
-
-        RentACarService rent1 = new RentACarService();
-        rent1.setId(Calendar.getInstance().getTimeInMillis()+"1");
-        rent1.setAddress(adrs1);
-        ArrayList<Branch> branches1 = new ArrayList<>();
-        branches1.add(branch1);
-        branches1.add(branch2);
-        rent1.setBranches(branches1);
-        rent1.setDescription("Prvi osnovani Rent-a-Car servis");
-        rent1.setName("Giga rent");
-        rent1.setRating(4.0);
-
-        RentACarService rent2 = new RentACarService();
-        rent2.setId(Calendar.getInstance().getTimeInMillis()+"2");
-        rent2.setAddress(adrs3);
-        ArrayList<Branch> branches2 = new ArrayList<>();
-        branches2.add(branch3);
-        rent2.setBranches(branches2);
-        rent2.setDescription("Najjeftinija vozila za iznajmljivanje");
-        rent2.setName("Cheap rent");
-        rent2.setRating(4.4);
-
-        ArrayList<RentACarService> carRents = new ArrayList<>();
-        carRents.add(rent1);
-        carRents.add(rent2);
-
-        rentACarServiceRepository.saveAll(carRents);
+        
 
         //-------------- ADDITIONAL SERVICES --------------//
 
@@ -527,21 +360,16 @@ public class DBSeeder implements CommandLineRunner {
                 AdministatorType.HOTEL_ADMIN
         );
 
-        Administrator admin4 = new Administrator(
-                "car_admin",
-                "car_admin@isa.com",
-                "car_admin",
-                AdministatorType.RENT_A_CAR_SERVICE_ADMIN
-        );
+        
 
         admin3.setEditingObjectID(hotel1.getId());
-        admin4.setEditingObjectID(rent1.getId());
+        
 
         ArrayList<Administrator> admins = new ArrayList<Administrator>();
         admins.add(admin1);
         admins.add(admin2);
         admins.add(admin3);
-        admins.add(admin4);
+        
 
         administratorRepository.saveAll(admins);
 

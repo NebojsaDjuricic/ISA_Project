@@ -15,9 +15,11 @@ public class RentACarService {
     private String description;
     private Double rating;
     private ArrayList<Branch> branches;
+    private ArrayList<VehicleDiscount> vehiclesOnDiscount;
 
     public RentACarService() {
-
+    	this.setBranches(new ArrayList<Branch>());
+    	this.setVehiclesOnDiscount(new ArrayList<VehicleDiscount>());
     }
 
     public String getName() {
@@ -67,4 +69,12 @@ public class RentACarService {
     public void setId(String id) {
         this.id = id;
     }
+
+	public ArrayList<VehicleDiscount> getVehiclesOnDiscount() {
+		return vehiclesOnDiscount;
+	}
+
+	public void setVehiclesOnDiscount(ArrayList<VehicleDiscount> vehiclesOnDiscount) {
+		this.vehiclesOnDiscount = vehiclesOnDiscount;
+	}
 }
