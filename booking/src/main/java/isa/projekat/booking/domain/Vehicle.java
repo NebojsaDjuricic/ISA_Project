@@ -6,14 +6,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Vehicles")
 public class Vehicle {
 
-    private String brand;
-    private String model;
-
     @Id
     private String licenceID;
-    private VehicleStatus status;
-    private Double price;
+    private String name;
+    private String brand;
+    private String model;
+    private int manufacturingYear;
+    private int numberOfSeats;
+    //private VehicleType vehicleType;
     private Double rating;
+    private Double price;
+    private VehicleStatus status;
+    
 
     public Vehicle() {
 
