@@ -1,10 +1,6 @@
 package isa.projekat.booking.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
@@ -12,26 +8,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Hotel;
 import isa.projekat.booking.domain.Room;
-import isa.projekat.booking.domain.RoomStatus;
-import isa.projekat.booking.domain.RoomType;
 import isa.projekat.booking.domain.dto.RoomDTO;
 import isa.projekat.booking.domain.dto.RoomSearchQuery;
-import isa.projekat.booking.repository.RoomRepository;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IHotelService;
 import isa.projekat.booking.service.IRoomService;
-import isa.projekat.booking.service.impl.RoomServiceImpl;
 
 @RestController
 @RequestMapping("room")
@@ -44,6 +34,9 @@ public class RoomController {
 	@Autowired
 	private IHotelService hotelService;
 	
+	@Autowired
+    private IAdministratorService administratorService;
+	
 	@RequestMapping(
             value="/{id}",
             method = RequestMethod.GET,
@@ -54,21 +47,6 @@ public class RoomController {
 		Room room = roomService.findById(id);
 		
 		return new ResponseEntity<>(room, HttpStatus.OK);
-	}
-	
-	@RequestMapping( 
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE
-	)
-	@ResponseStatus(value = HttpStatus.OK)
-	public ResponseEntity<Collection<Room>> getAllRooms() {
-		ArrayList<Room> rooms = (ArrayList<Room>) roomService.findAll();
-		
-		if(rooms != null) {
-			return new ResponseEntity<Collection<Room>>(rooms, HttpStatus.OK);
-		}
-		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	@RequestMapping(
@@ -153,18 +131,6 @@ public class RoomController {
 		
 		return new ResponseEntity<>(newRoom, HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Room> deleteRoom(@PathVariable String id) {
-		
-		Room deletedRoom = roomService.deleteRoom(id);
-
-		if (deletedRoom != null) {
-			return new ResponseEntity<Room>(deletedRoom, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-	}
 	
 	@RequestMapping(
             value = "/search",
@@ -176,6 +142,5 @@ public class RoomController {
 		
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
-	
 	
 }

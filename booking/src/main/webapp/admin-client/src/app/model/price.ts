@@ -3,8 +3,6 @@ export class Price {
   price: number;
   startDate: String;
   endDate: String;
-  naPopustu: boolean;
-  popust: number;
 
   constructor() {
   }

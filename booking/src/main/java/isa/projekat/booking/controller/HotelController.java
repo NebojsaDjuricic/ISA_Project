@@ -3,8 +3,6 @@ package isa.projekat.booking.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,6 @@ import isa.projekat.booking.domain.dto.BranchDTO;
 import isa.projekat.booking.domain.dto.HotelDTO;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.domain.dto.RoomDTO;
-import isa.projekat.booking.repository.HotelRepository;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IHotelService;
 import isa.projekat.booking.service.IRoomService;
@@ -139,55 +136,11 @@ public class HotelController {
 		
 		Hotel hotel = hotelService.findById(hotelId);
 		
-		if(hotel == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		
 		ArrayList<Room> rooms = hotel.getRooms();
 		
 		return new ResponseEntity<>(rooms, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value="/delete/{hotelId}/{roomId}",
-			method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-	public ResponseEntity<Room> deleteRoom(@PathVariable("hotelId")String hotelId,
-			@PathVariable("roomId") String roomId) {
-		
-		Hotel hotel = hotelService.findById(hotelId);
-		Room room = roomService.findById(roomId);
-		
-		
-		ArrayList<Room> hotelRooms = hotel.getRooms();
-		
-		hotelRooms.remove(room);
-		boolean obrisano = hotelRooms.remove(room);
-		System.out.println("obrisano: " + obrisano);
-		hotel.setRooms(hotelRooms);
-		
-		hotelService.save(hotel);
-		Room deletedRoom = roomService.deleteRoom(roomId);
-		
-		if (deletedRoom != null) {
-			return new ResponseEntity<Room>(deletedRoom, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}
-	
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Hotel> deleteHotel(@PathVariable("id") String id) {
-		
-		Hotel deletedHotel = hotelService.deleteHotel(id);
-
-		if (deletedHotel != null) {
-			return new ResponseEntity<Hotel>(deletedHotel, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-	}
-		
 	@RequestMapping(
 			value="/{adminId}/hotels",
 			method = RequestMethod.GET,
