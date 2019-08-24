@@ -316,6 +316,10 @@ public class DBSeeder implements CommandLineRunner {
         AdditionalService addService18 = new AdditionalService();
         addService18.setId(18);
         addService18.setService("SOLARIUM");
+        
+        AdditionalService addService19 = new AdditionalService();
+        addService19.setId(19);
+        addService19.setService("EXTRA BED");
 
         // ADDING ADDITIONAL SERVICES TO DB
 
@@ -338,6 +342,7 @@ public class DBSeeder implements CommandLineRunner {
         additionalServices.add(addService16);
         additionalServices.add(addService17);
         additionalServices.add(addService18);
+        additionalServices.add(addService19);
 
         additionalServiceRepository.saveAll(additionalServices);
 

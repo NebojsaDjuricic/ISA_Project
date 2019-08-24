@@ -11,7 +11,23 @@
     {{ hotel.address.buildingNumber }},
     {{ hotel.address.city }},
     {{ hotel.address.country }}</h4>
+  <div class="row" *ngIf="hotel">
+            <span
+              *ngFor="let addS of hotel.additionalServices">
+              <b>  -  </b> {{addS.service}}
+            </span>
+  </div>
+
+  <ul class="myul">
+    <li  *ngFor="let room of hotel.rooms">
+      <p class="card-title">
+        {{ room.id }}
+      </p>
+    </li>
+  </ul>
 </div>
+
+
 
 <!-- ############################################ -->
 

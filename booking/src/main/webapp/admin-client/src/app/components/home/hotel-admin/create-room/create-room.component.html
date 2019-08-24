@@ -124,10 +124,12 @@
         <label class="col-xs-2">
           Price:
         </label>
-        <div class="col-xs-6">
-          <input type="number" class="form-control"
-                 formControlName="pricePerNight"
-                 placeholder="Enter room price">
+        <div >
+          <!--          <input type="number" class="form-control"-->
+          <!--                 formControlName="pricePerNight"-->
+          <!--                 placeholder="Enter room price">-->
+          <button type="button" class="btn btn-primary"
+                  (click)="onAddPrice()">Add Price</button>
         </div>
         <span class="help-block"
               *ngIf="!createRoomForm.controls.pricePerNight.valid &&
@@ -148,3 +150,7 @@
 
   </div>
 </div>
+
+<hr>
+
+<app-create-price *ngIf="addPriceClicked"></app-create-price>

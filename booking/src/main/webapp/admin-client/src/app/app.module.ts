@@ -10,6 +10,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { SysAdminHomeComponent } from './components/home/sys-admin-home/sys-admin-home.component';
 import { RentACarServiceAdminComponent } from './components/home/rent-a-car-service-admin/rent-a-car-service-admin.component';
+// tslint:disable-next-line:max-line-length
 import { CreateRentACarServiceComponent } from './components/home/sys-admin-home/create-rent-a-car-service/create-rent-a-car-service.component';
 import { CreateNewAdminComponent } from './components/home/sys-admin-home/create-new-admin/create-new-admin.component';
 import { CreateVehicleComponent } from './components/home/rent-a-car-service-admin/create-vehicle/create-vehicle.component';
@@ -23,7 +24,7 @@ import { EditRoomComponent } from './components/home/hotel-admin/edit-room/edit-
 import { RoomListComponent } from './components/home/hotel-admin/room-list/room-list.component';
 import { AuthComponent } from './components/auth/auth.component';
 import {PlaceholderDirective} from './components/auth/placeholder.directive';
-
+import { CreatePriceComponent } from './components/home/hotel-admin/create-room/create-price/create-price.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {PlaceholderDirective} from './components/auth/placeholder.directive';
     EditRoomComponent,
     RoomListComponent,
     AuthComponent,
-    PlaceholderDirective
+    PlaceholderDirective,
+    CreatePriceComponent,
   ],
   imports: [
     BrowserModule,

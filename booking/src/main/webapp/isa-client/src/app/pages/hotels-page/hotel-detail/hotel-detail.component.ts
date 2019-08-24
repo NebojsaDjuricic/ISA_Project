@@ -10,8 +10,8 @@ import {Observable} from 'rxjs';
   styleUrls: ['./hotel-detail.component.css']
 })
 export class HotelDetailComponent implements OnInit {
+  hotel: Hotel;
   // hotel: Observable<Hotel>;
-  hotel: Observable<Hotel>;
   id: string;
 
   constructor(private hotelService: HotelService,
@@ -23,20 +23,22 @@ export class HotelDetailComponent implements OnInit {
   }
 
   getInfo() {
-    // const id = this.route.snapshot.paramMap.get('id');
-    // this.hotelService.getHotel(id).subscribe(
-    //   retVal => {
-    //     this.hotel = retVal;
-    //   }
-    // );
+    const id = this.route.snapshot.paramMap.get('id');
+    this.hotelService.getHotel(id).subscribe(
+      retVal => {
+        this.hotel = retVal;
+      }
+    );
 
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = params.id;
-          this.hotel = this.hotelService.getHotel(this.id);
-        }
-      );
+    // this.route.params
+    //   .subscribe(
+    //     (params: Params) => {
+    //       this.id = params.id;
+    //       this.hotel = this.hotelService.getHotel(this.id);
+    //     }
+    //   );
   }
+
+
 
 }
