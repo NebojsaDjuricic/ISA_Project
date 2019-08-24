@@ -1,9 +1,9 @@
-# ISA-Project
+# ISA Project
 
-In MongoDB/Server/bin directory run  <b>mongod</b><br>
+On your machine, in MongoDB/Server/bin directory run  <b>mongod</b><br>
 
-Run as java project<br>
+In Eclipse editor run as java project<br>
 
-In isa-client directory run <b>ng serve</b><br>
+In main/webapp/isa-client directory run <b>ng serve</b><br>, app will run at localhost:4200
 
-In admin-client directory run <b>ng serve</b>
+In main/webapp/admin-client directory run <b>ng serve</b>, app will run at localhost:4201

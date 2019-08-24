@@ -17,7 +17,7 @@ public class Branch {
     private ArrayList<Vehicle> vehicles;
 
     public Branch() {
-
+    	this.setVehicles(new ArrayList<Vehicle>());
     }
 
     public String getName() {
