@@ -7,11 +7,18 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import isa.projekat.booking.domain.Hotel;
+import isa.projekat.booking.domain.Room;
 
 @Repository
 public interface HotelRepository extends MongoRepository<Hotel, String> {
 	
 	public List<Hotel> findAll();
+	
+	public Room findRoomById(String id);
+	
+	public Room deleteRoomById(String id);
+	
+	public Hotel deleteByIdAndRoomsId(String id, String roomId);
 	
 	public Optional<Hotel> findById(String id);
 	

@@ -1,0 +1,110 @@
+<!--<ng-container *ngIf="isViewable">-->
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+      <form [formGroup]="createPriceForm"
+            (ngSubmit)="onSubmit()"
+            class="form-horizontal">
+
+        <div class="form-group">
+          <label class="col-xs-2">
+           Price:
+          </label>
+          <div class="col-xs-6">
+            <input type="number" class="form-control"
+                   formControlName="price"
+                   placeholder="Enter room price">
+          </div>
+          <span class="help-block"
+                *ngIf="!createPriceForm.controls.price.valid &&
+                 createPriceForm.controls.price.touched">
+            error
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-2">
+            Start Date:
+          </label>
+          <div class="col-xs-6">
+            <input type="text" class="form-control"
+                   formControlName="startDate"
+                   placeholder="Enter start date">
+          </div>
+          <span class="help-block"
+                *ngIf="!createPriceForm.controls.startDate.valid &&
+                 createPriceForm.controls.startDate.touched">
+            error
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-2">
+            End Date:
+          </label>
+          <div class="col-xs-6">
+            <input type="text" class="form-control"
+                   formControlName="endDate"
+                   placeholder="Enter end date">
+          </div>
+          <span class="help-block"
+                *ngIf="!createPriceForm.controls.endDate.valid &&
+                 createPriceForm.controls.endDate.touched">
+            error
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-2">
+            On Discount:
+          </label>
+          <div class="col-xs-6">
+
+            <input class="custom-control-input"
+                   type="radio"
+                   value="true"
+                   formControlName="naPopustu">
+            <span>Yes</span> |
+
+            <input class="custom-control-input"
+                   type="radio"
+                   value="false"
+                   formControlName="naPopustu">
+            <span>No</span>
+          </div>
+          <span class="help-block"
+                *ngIf="!createPriceForm.controls.naPopustu.valid &&
+                 createPriceForm.controls.naPopustu.touched">
+            error
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-2">
+            Discount:
+          </label>
+          <div class="col-xs-6">
+            <input type="number" class="form-control"
+                   formControlName="popust"
+                   placeholder="Enter room price">
+          </div>
+          <span class="help-block"
+                *ngIf="!createPriceForm.controls.popust.valid &&
+                 createPriceForm.controls.popust.touched">
+            error
+          </span>
+        </div>
+
+        <div class="col-xs-10 col-xs-offset-2">
+          <button type="submit"
+                  class="btn btn-success"
+                  [disabled]="!createPriceForm.valid">Create Price</button>
+<!--          |-->
+<!--          <button type="button"-->
+<!--                  class="btn btn-danger" (click)="onCancel()">Cancel</button>-->
+        </div>
+
+      </form>
+    </div>
+  </div>
+<!--</ng-container>-->

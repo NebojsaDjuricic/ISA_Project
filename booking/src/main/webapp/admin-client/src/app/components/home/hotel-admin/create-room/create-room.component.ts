@@ -20,6 +20,8 @@ export class CreateRoomComponent implements OnInit, OnChanges {
   room: RoomDTO;
   hotels: Hotel;
   errorMessage = 'This field is required!';
+  addPriceClicked = false;
+
   mymodel: any;
   // @Input() roomType: FormControlName;
   // submitted = false;
@@ -151,6 +153,12 @@ export class CreateRoomComponent implements OnInit, OnChanges {
         this.mymodel = 0;
       }
     });
+  }
+
+  onAddPrice() {
+    this.addPriceClicked = true;
+    console.log(this.addPriceClicked);
+    // this.addPriceClicked = false;
   }
 }
 

@@ -12,6 +12,7 @@ import {AuthComponent} from './components/auth/auth.component';
 import {CreateRoomComponent} from './components/home/hotel-admin/create-room/create-room.component';
 import {CreateNewHotelComponent} from './components/home/sys-admin-home/create-new-hotel/create-new-hotel.component';
 import {EditRoomComponent} from './components/home/hotel-admin/edit-room/edit-room.component';
+import {RoomListComponent} from './components/home/hotel-admin/room-list/room-list.component';
 
 
 const routes: Routes = [

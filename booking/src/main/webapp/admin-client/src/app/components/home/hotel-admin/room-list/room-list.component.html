@@ -7,7 +7,12 @@
         <div class="pull-left">
           <h4 class="list-group-item-heading">Room No.{{room.id}}</h4>
         </div>
+
       </a>
+    <div class="col-xs-2">
+      <button class="btn btn-danger"
+              (click)="onDelete(room.id)">Delete</button>
+    </div>
   </div>
 </div>
 

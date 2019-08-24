@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import isa.projekat.booking.domain.Hotel;
+import isa.projekat.booking.domain.Room;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.repository.HotelRepository;
 import isa.projekat.booking.service.IHotelService;
@@ -24,6 +25,37 @@ public class HotelServiceImpl implements IHotelService {
 	}
 	
 	@Override
+	public Hotel deleteHotel(String id) {
+		Hotel del = findById(id);
+		hotelRepository.delete(del);
+		
+		return del;
+	}
+	
+	@Override
+	public Hotel deleteByIdAndRoomsId(String hotelId, String roomId) {
+		Hotel hotel = findById(hotelId);
+		
+		Room room = hotelRepository.findRoomById(roomId);
+		
+		return hotelRepository.deleteByIdAndRoomsId(hotel.getId(), room.getId());
+	}
+	
+//	@Override
+//    public Mono<Project> addDeveloperToProject(String id, Developer developer) {
+//
+//        Mono<Project> fallback = Mono
+//                .error(new ResourceNotFoundException("ADD DEVELOPER TO PROJECT: Project with id=" + id + " does not exists or developer with username:" +  developer.getUsername() + " is already added"));
+//
+//        return projectRepository.findByIdAndDevelopersNotIn(id, developer)
+//                .switchIfEmpty(fallback)
+//                .flatMap(existingProject-> {
+//                    existingProject.getDevelopers().add(developer);
+//                    return projectRepository.save(existingProject);
+//                });
+//    }
+//	
+	@Override
 	public ArrayList<Hotel> getAll() {
 		List<Hotel> hotels = hotelRepository.findAll();
 		
@@ -38,6 +70,7 @@ public class HotelServiceImpl implements IHotelService {
 		
 		return retVal;
 	}
+	
 	
 	public ArrayList<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto) {
 		ArrayList<Hotel> hotels = null;
@@ -101,7 +134,7 @@ public class HotelServiceImpl implements IHotelService {
 	
 	}
 
-	
+
 
 	
 

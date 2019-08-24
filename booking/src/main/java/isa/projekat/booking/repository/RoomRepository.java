@@ -10,8 +10,8 @@ import isa.projekat.booking.domain.Room;
 
 @Repository
 public interface RoomRepository extends MongoRepository<Room, String> {
-	
-	public List<Room> findAll();
-	
-	public Optional<Room> findById(String id);
+//	
+//	public List<Room> findAll();
+//	
+//	public Optional<Room> findById(String id);
 }
