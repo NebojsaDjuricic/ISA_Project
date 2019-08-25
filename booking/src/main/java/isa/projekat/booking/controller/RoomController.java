@@ -130,7 +130,7 @@ public class RoomController {
 		roomService.save(newRoom);
 		
 		String hotelId = roomDto.getHotelID();
-		String adminID = roomDto.getAdmin();
+//		String adminID = roomDto.getAdmin();
 		
 		Hotel hotel = hotelService.findById(hotelId);
 		ArrayList<Room> rooms = hotel.getRooms();

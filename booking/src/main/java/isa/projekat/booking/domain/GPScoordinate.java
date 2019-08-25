@@ -1,17 +1,17 @@
 package isa.projekat.booking.domain;
 
-public class GSPcoordinate {
+public class GPScoordinate {
 
     private Double latitude;
     private Double longitude;
 
-    public GSPcoordinate() {
+    public GPScoordinate() {
     	super();
     }
     
     
 
-    public GSPcoordinate(Double lat, Double longitude) {
+    public GPScoordinate(Double lat, Double longitude) {
     	super();
 		this.latitude = lat;
 		this.longitude = longitude;

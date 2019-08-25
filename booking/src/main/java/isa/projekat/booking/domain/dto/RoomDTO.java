@@ -21,8 +21,8 @@ public class RoomDTO {
 	private ArrayList<Price> prices;
 	private int pricePerNight;
 	private Double rating;
-    private String admin;
 	private String hotelID;
+//    private String admin;
 	
 	
 	public String getId() {
@@ -98,12 +98,12 @@ public class RoomDTO {
 		this.rating = rating;
 	}
 
-	public String getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(String admin) {
-		this.admin = admin;
-	}
+//	public String getAdmin() {
+//		return admin;
+//	}
+//
+//	public void setAdmin(String admin) {
+//		this.admin = admin;
+//	}
 	
 }

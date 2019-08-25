@@ -1,0 +1,206 @@
+<app-nav></app-nav>
+
+<h2>Edit Hotel</h2>
+
+<hr>
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+    <form [formGroup]="editHotelForm"
+          (ngSubmit)="onSubmit()"
+          class="form-horizontal">
+
+      <div class="form-group">
+        <label for="nameField" class="col-xs-2">Name: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="nameField"
+                 formControlName="name"
+                 placeholder="Enter hotel name"
+                 value="{{hotel.name}}"/>
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.name.valid &&
+               editHotelForm.controls.name.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="streetNameField" class="col-xs-2">Street: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="streetNameField"
+                 formControlName="streetName"
+                 placeholder="Enter street name"
+                 />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.streetName.valid &&
+               editHotelForm.controls.streetName.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="buildingNumberField" class="col-xs-2">Number: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="buildingNumberField"
+                 formControlName="buildingNumber"
+                 placeholder="Enter building number" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.buildingNumber.valid &&
+               editHotelForm.controls.buildingNumber.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="cityField" class="col-xs-2">City: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="cityField"
+                 formControlName="city"
+                 placeholder="Enter city" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.city.valid &&
+               editHotelForm.controls.city.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="countryField" class="col-xs-2">Country: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="countryField"
+                 formControlName="country"
+                 placeholder="Enter country" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.country.valid &&
+               editHotelForm.controls.country.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneField" class="col-xs-2">Phone number: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="phoneField"
+                 formControlName="phoneNumber"
+                 placeholder="Enter phone number" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.phoneNumber.valid &&
+               editHotelForm.controls.phoneNumber.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="emailField" class="col-xs-2">Contact email: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="emailField"
+                 formControlName="contactEmail"
+                 placeholder="Enter contact email" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.contactEmail.valid &&
+               editHotelForm.controls.contactEmail.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="descField" class="col-xs-2">Description: </label>
+        <div class="col-xs-6">
+          <textarea type="text"
+                    class="form-control"
+                    id="descField"
+                    formControlName="description"
+                    placeholder="Enter hotel description"
+                    rows="6"></textarea>
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.description.valid &&
+               editHotelForm.controls.description.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="websiteField" class="col-xs-2">Hotel website: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="websiteField"
+                 formControlName="website"
+                 placeholder="Enter hotel website" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.website.valid &&
+               editHotelForm.controls.website.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <!--      rating ??? ili bez tog polja a da u OnInit stavim da je 0-->
+
+      <div class="form-group">
+        <label for="floorsField" class="col-xs-2">Number of floors: </label>
+        <div class="col-xs-6">
+          <input type="number"
+                 class="form-control"
+                 id="floorsField"
+                 formControlName="numberOfFloors"
+                 placeholder="Enter number of floors" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.numberOfFloors.valid &&
+               editHotelForm.controls.numberOfFloors.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="starsField" class="col-xs-2">Stars: </label>
+        <div class="col-xs-6">
+          <input type="number"
+                 class="form-control"
+                 id="starsField"
+                 formControlName="stars"
+                 placeholder="Enter stars" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editHotelForm.controls.stars.valid &&
+               editHotelForm.controls.stars.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="col-xs-10 col-xs-offset-2">
+        <button type="submit"
+                class="btn btn-success"
+                [disabled]="!editHotelForm.valid">Save</button> |
+        <button type="button"
+                class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+

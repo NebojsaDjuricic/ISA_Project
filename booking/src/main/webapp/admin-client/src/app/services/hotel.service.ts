@@ -19,7 +19,7 @@ export class HotelService {
 
   constructor(private http: HttpClient) { }
 
-  getHotel(id: String): Observable<Hotel> {
+  getHotel(id: String) {
     return this.http.get<Hotel>(this.backEndUrl + '/' + id);
   }
 
@@ -27,7 +27,9 @@ export class HotelService {
     return this.http.post(this.backEndUrl + '/addHotel', hotel, this.httpOptions);
   }
 
-  editHotel() {}
+  editHotel(hotel: Hotel) {
+    return this.http.post(this.backEndUrl + '/editHotel', hotel, this.httpOptions);
+  }
 
   getRooms(hotelID: String) {
     return this.http.get<Room[]>(this.backEndUrl + '/' + hotelID + '/rooms');

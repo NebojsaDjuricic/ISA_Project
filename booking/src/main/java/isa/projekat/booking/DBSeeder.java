@@ -273,7 +273,7 @@ public class DBSeeder implements CommandLineRunner {
         //------------------ HOTELS ------------------//
 
         Hotel hotel1 = new Hotel("hotel_Felix_Krakow",
-                "Hotel Felix", new Address("Osiedle Złotej Jesieni", "15", "Kraków", "Poland", new GSPcoordinate(50.088, 20.028)),
+                "Hotel Felix", new Address("Osiedle Złotej Jesieni", "15", "Kraków", "Poland", new GPScoordinate(50.088, 20.028)),
                 "+48 12 361 96 03", "felix@hotelfelix.pl",
                 "Hotel Felix je hotel sa 2 zvezdice, smešten u četvrti Nova Huta u Krakovu. "
                         + "U ponudi su sobe s kupatilom i TV-om sa satelitskim kanalima. "
@@ -299,7 +299,7 @@ public class DBSeeder implements CommandLineRunner {
      hotelRepository.save(hotel1);
 
      Hotel hotel2 = new Hotel("hotel_Top_Prague",
-             "Top Hotel", new Address("Blažimská", "1781/4", "Prague", "Czech Republic", new GSPcoordinate(50.041, 14.495)),
+             "Top Hotel", new Address("Blažimská", "1781/4", "Prague", "Czech Republic", new GPScoordinate(50.041, 14.495)),
              "+420 267 284 111", "booking@tophotel.cz",
              "Objekat TOP HOTEL Praha smešten je na 800 metara od tržnog centra Chodov. "
                      + "Poseduje bazen u zatvorenom, hidromasažnu kadu, solarijum, teretanu, kuglanu, nekoliko teniskih terena i 2 recepcije. "
@@ -364,16 +364,23 @@ public class DBSeeder implements CommandLineRunner {
                 "hotel_admin",
                 AdministatorType.HOTEL_ADMIN
         );
-
         
+        Administrator admin4 = new Administrator(
+                "hotel_admin_2",
+                "hotel_admin_2@isa.com",
+                "hotel_admin_2",
+                AdministatorType.HOTEL_ADMIN
+        );
 
         admin3.setEditingObjectID(hotel1.getId());
+        admin4.setEditingObjectID(hotel2.getId());
         
 
         ArrayList<Administrator> admins = new ArrayList<Administrator>();
         admins.add(admin1);
         admins.add(admin2);
         admins.add(admin3);
+        admins.add(admin4);
         
 
         administratorRepository.saveAll(admins);

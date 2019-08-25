@@ -6,14 +6,14 @@ public class Address {
     private String buildingNumber;
     private String city;
     private String country;
-    private GSPcoordinate coordinatePosition;
+    private GPScoordinate coordinatePosition;
 
     public Address() {
 
     }
 
     public Address(String streetName, String buildingNumber, String city, String country,
-			GSPcoordinate coordinatePosition) {
+			GPScoordinate coordinatePosition) {
 		super();
 		this.streetName = streetName;
 		this.buildingNumber = buildingNumber;
@@ -54,11 +54,11 @@ public class Address {
         this.country = country;
     }
 
-    public GSPcoordinate getCoordinatePosition() {
+    public GPScoordinate getCoordinatePosition() {
         return coordinatePosition;
     }
 
-    public void setCoordinatePosition(GSPcoordinate coordinatePosition) {
+    public void setCoordinatePosition(GPScoordinate coordinatePosition) {
         this.coordinatePosition = coordinatePosition;
     }
 }

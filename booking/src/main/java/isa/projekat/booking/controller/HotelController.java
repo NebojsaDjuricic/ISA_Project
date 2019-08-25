@@ -25,6 +25,7 @@ import com.mongodb.internal.thread.DaemonThreadFactory;
 import isa.projekat.booking.domain.Address;
 import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Branch;
+import isa.projekat.booking.domain.GPScoordinate;
 import isa.projekat.booking.domain.Hotel;
 import isa.projekat.booking.domain.RentACarService;
 import isa.projekat.booking.domain.Room;
@@ -114,6 +115,10 @@ public class HotelController {
 		address.setBuildingNumber(hotelDto.getAddress().getBuildingNumber());
 		address.setCity(hotelDto.getAddress().getCity());
 		address.setCountry(hotelDto.getAddress().getCountry());
+//		GPScoordinate gps = new GPScoordinate();
+//		gps.setLatitude(address.getCoordinatePosition().getLatitude());
+//		gps.setLongitude(address.getCoordinatePosition().getLongitude());
+//		address.setCoordinatePosition(gps);
 		newHotel.setAddress(address);
 		newHotel.setRooms(new ArrayList<>());
 		newHotel.setAdditionalServices(new ArrayList<>());
@@ -125,6 +130,64 @@ public class HotelController {
 //		newHotel.setImageURL(null);
 		
 		hotelService.save(newHotel);
+		
+		return new ResponseEntity<>(newHotel, HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+            value = "/editHotel",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+	public ResponseEntity<Object> editHotel(@RequestBody Hotel hotel) {
+		
+		Hotel newHotel = new Hotel();
+		newHotel.setId(hotel.getId());
+		newHotel.setName(hotel.getName());
+		Address address = new Address();
+		address.setStreetName(hotel.getAddress().getStreetName());
+		address.setBuildingNumber(hotel.getAddress().getBuildingNumber());
+		address.setCity(hotel.getAddress().getCity());
+		address.setCountry(hotel.getAddress().getCountry());
+//		GPScoordinate gps = new GPScoordinate();
+//		gps.setLatitude(address.getCoordinatePosition().getLatitude());
+//		gps.setLongitude(address.getCoordinatePosition().getLongitude());
+//		address.setCoordinatePosition(gps);
+		newHotel.setAddress(hotel.getAddress());
+		newHotel.setPhoneNumber(hotel.getPhoneNumber());
+		newHotel.setContactEmail(hotel.getContactEmail());
+		newHotel.setDescription(hotel.getDescription());
+		newHotel.setWebsite(hotel.getWebsite());
+		newHotel.setStars(hotel.getStars());
+		newHotel.setNumberOfFloors(hotel.getNumberOfFloors());
+		
+		//rooms
+		// additional services
+		// images
+		
+		
+//		String hotelId = roomDto.getHotelID();
+//		String adminID = roomDto.getAdmin();
+//		
+//		Hotel hotel = hotelService.findById(hotelId);
+//		ArrayList<Room> rooms = hotel.getRooms();
+//		
+//		for(int i = 0; i < rooms.size(); i++) {
+//			if(rooms.get(i).getId().equals(newRoom.getId())) {
+//				rooms.get(i).setStatus(newRoom.getStatus());
+//				rooms.get(i).setPricePerNight(newRoom.getPricePerNight());
+//				rooms.get(i).setType(newRoom.getType());
+//				rooms.get(i).setCapacity(newRoom.getCapacity());
+//				rooms.get(i).setFloor(newRoom.getFloor());
+//				rooms.get(i).setRating(newRoom.getRating());
+//				break;
+//			}
+//		}
+//		
+//		hotel.setRooms(rooms);
+		
+		hotelService.save(hotel);
 		
 		return new ResponseEntity<>(newHotel, HttpStatus.OK);
 	}

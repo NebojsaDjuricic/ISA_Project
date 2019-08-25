@@ -12,7 +12,7 @@ import isa.projekat.booking.domain.Address;
 import isa.projekat.booking.domain.AdministatorType;
 import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Branch;
-import isa.projekat.booking.domain.GSPcoordinate;
+import isa.projekat.booking.domain.GPScoordinate;
 import isa.projekat.booking.domain.RentACarService;
 import isa.projekat.booking.domain.Vehicle;
 import isa.projekat.booking.domain.VehicleDiscount;
@@ -140,7 +140,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         adrs1.setBuildingNumber("12");
         adrs1.setCity("Novi Sad");
         adrs1.setCountry("Serbia");
-        GSPcoordinate coord1 = new GSPcoordinate();
+        GPScoordinate coord1 = new GPScoordinate();
         coord1.setLatitude(45.248);
         coord1.setLongitude(19.837);
         adrs1.setCoordinatePosition(coord1);
@@ -160,7 +160,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         adrs2.setBuildingNumber("30");
         adrs2.setCity("Novi Sad");
         adrs2.setCountry("Serbia");
-        GSPcoordinate coord2 = new GSPcoordinate();
+        GPScoordinate coord2 = new GPScoordinate();
         coord2.setLatitude(45.264);
         coord2.setLongitude(19.844);
         adrs2.setCoordinatePosition(coord2);
@@ -180,7 +180,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         adrs3.setBuildingNumber("8");
         adrs3.setCity("Novi Sad");
         adrs3.setCountry("Serbia");
-        GSPcoordinate coord3 = new GSPcoordinate();
+        GPScoordinate coord3 = new GPScoordinate();
         coord3.setLatitude(45.252);
         coord3.setLongitude(19.833);
         adrs3.setCoordinatePosition(coord3);

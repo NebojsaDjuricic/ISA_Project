@@ -1,13 +1,17 @@
 package isa.projekat.booking.domain.dto;
 
-import isa.projekat.booking.domain.Address;
-import isa.projekat.booking.domain.Hotel;
-
 public class HotelDTO {
 
 	private String name;
-    private String description;
+	private String description;
     private AddressDTO address;
+//    private String phoneNumber;
+//    private String contactEmail;
+//	private String website;
+//	// rating
+//	private int numberOfFloors;
+//	private int stars;
+//	private String imageURLs;
     
 	public String getName() {
 		return name;

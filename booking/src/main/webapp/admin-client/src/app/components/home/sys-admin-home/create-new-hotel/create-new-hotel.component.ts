@@ -29,6 +29,8 @@ export class CreateNewHotelComponent implements OnInit {
       buildingNumber: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
+      // lat: [''],
+      // lon: [''],
       phoneNumber: ['', Validators.required],
       contactEmail: ['', Validators.required],
       description: ['', Validators.required],
@@ -49,7 +51,8 @@ export class CreateNewHotelComponent implements OnInit {
     this.address.buildingNumber = this.createNewHotelForm.controls.buildingNumber.value;
     this.address.city = this.createNewHotelForm.controls.city.value;
     this.address.country = this.createNewHotelForm.controls.country.value;
-
+    // this.address.coordinatePosition.lat = 0;
+    // this.address.coordinatePosition.lon = 0;
     this.newHotel.name = this.createNewHotelForm.controls.name.value;
     this.newHotel.address = this.address;
     this.newHotel.phoneNumber = this.createNewHotelForm.controls.phoneNumber.value;
