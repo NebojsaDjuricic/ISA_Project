@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document("Hotels")
 public class Hotel {
 	
@@ -17,15 +19,19 @@ public class Hotel {
 	private String description;
 	private String website;
 	private Double rating;
+	@JsonIgnore
+	private ArrayList<HotelRating> hotelRatings;
 	private int numberOfFloors;
 	private int stars;
+	@JsonIgnore
 	private ArrayList<Room> rooms;
+	@JsonIgnore
 	private ArrayList<AdditionalService> additionalServices;
 	private String imageURLs;
-	// private admin
+//	 private admin ?
 	
 	public Hotel() {
-		super();
+		
 	}
 
 	public Hotel(String id, String name, Address address,
@@ -66,7 +72,7 @@ public class Hotel {
 		this.stars = stars;
 		this.rooms = rooms;
 		this.additionalServices = additionalServices;
-		this.setImageURL(imageURL);
+		this.imageURLs = imageURL;
 	}
 
 	public String getId() {
@@ -131,6 +137,14 @@ public class Hotel {
 
 	public void setRating(Double rating) {
 		this.rating = rating;
+	}
+
+	public ArrayList<HotelRating> getHotelRatings() {
+		return hotelRatings;
+	}
+
+	public void setHotelRatings(ArrayList<HotelRating> hotelRatings) {
+		this.hotelRatings = hotelRatings;
 	}
 
 	public int getNumberOfFloors() {

@@ -14,7 +14,8 @@ public class Administrator {
     private AdministatorType type;
     private boolean activated;
     private boolean changedPass;
-    private String editingObjectID;
+//    mozda lista objekata
+    private String editingObjectID; 
 
     public Administrator() {
 

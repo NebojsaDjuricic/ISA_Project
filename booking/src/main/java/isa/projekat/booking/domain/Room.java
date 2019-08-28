@@ -6,21 +6,30 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document("Rooms")
 public class Room {
 	
 	private String id;
+//	status mozda bool
 	private RoomStatus status;	
+//	izbaciti type
 	private RoomType type;
 	private int capacity;
 	private int floor;
+	@JsonIgnore
 	private ArrayList<Price> prices;
 	private int pricePerNight;
 	private Double rating;
+	@JsonIgnore
+	private ArrayList<RoomRating> roomRatings;
+	@JsonIgnore
+	private ArrayList<RoomReservation> reservations;
 //	private Hotel hotel;
 	
 	public Room() {
-		super();
+		
 	}
 	
 	public Room(String id, RoomStatus status, 
@@ -33,7 +42,7 @@ public class Room {
 		this.capacity = capacity;
 		this.floor = floor;
 		this.pricePerNight = pricePerNight;
-		this.setRating(rating);
+		this.rating = rating;
 	}
 	
 	public Room(String id, RoomStatus status, 
@@ -46,7 +55,7 @@ public class Room {
 		this.capacity = capacity;
 		this.floor = floor;
 		this.prices = prices;
-		this.setRating(rating);
+		this.rating = rating;
 	}
 
 // dodato kom hotelu pripada

@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AdditionalService {
 	
 	@Id
-	private int id;
+	private Long id;
 	private String service;
 	private int price;
 	
@@ -24,18 +24,18 @@ public class AdditionalService {
 		super();
 	}
 
-	public AdditionalService(int id, String service, int price) {
+	public AdditionalService(Long id, String service, int price) {
 		super();
 		this.id = id;
 		this.service = service;
 		this.price = price;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

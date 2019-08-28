@@ -79,79 +79,79 @@ public class DBSeeder implements CommandLineRunner {
         //-------------- ADDITIONAL SERVICES --------------//
 
         AdditionalService addService1 = new AdditionalService();
-        addService1.setId(1);
+        addService1.setId((long) 1);
         addService1.setService("WIFI");
 
         AdditionalService addService2 = new AdditionalService();
-        addService2.setId(2);
+        addService2.setId((long) 2);
         addService2.setService("PARKING");
 
         AdditionalService addService3 = new AdditionalService();
-        addService3.setId(3);
+        addService3.setId((long) 3);
         addService3.setService("AIRPORT TRANSFER");
 
         AdditionalService addService4 = new AdditionalService();
-        addService4.setId(4);
+        addService4.setId((long) 4);
         addService4.setService("ROOM SERVICE");
 
         AdditionalService addService5 = new AdditionalService();
-        addService5.setId(5);
+        addService5.setId((long) 5);
         addService5.setService("MINI BAR");
 
         AdditionalService addService6 = new AdditionalService();
-        addService6.setId(6);
+        addService6.setId((long) 6);
         addService6.setService("KITCHEN");
 
         AdditionalService addService7 = new AdditionalService();
-        addService7.setId(7);
+        addService7.setId((long) 7);
         addService7.setService("TV");
 
         AdditionalService addService8 = new AdditionalService();
-        addService8.setId(8);
+        addService8.setId((long) 8);
         addService8.setService("AIR CONDITION");
 
         AdditionalService addService9 = new AdditionalService();
-        addService9.setId(9);
+        addService9.setId((long) 9);
         addService9.setService("BREAKFAST");
 
         AdditionalService addService10 = new AdditionalService();
-        addService10.setId(10);
+        addService10.setId((long) 10);
         addService10.setService("HALF BOARD");
 
         AdditionalService addService11 = new AdditionalService();
-        addService11.setId(11);
+        addService11.setId((long) 11);
         addService11.setService("FULL BOARD");
 
         AdditionalService addService12 = new AdditionalService();
-        addService12.setId(12);
+        addService12.setId((long) 12);
         addService12.setService("PRIVATE BATHROOM");
 
         AdditionalService addService13 = new AdditionalService();
-        addService13.setId(13);
+        addService13.setId((long) 13);
         addService13.setService("SWIMMING POOL");
 
         AdditionalService addService14 = new AdditionalService();
-        addService14.setId(14);
+        addService14.setId((long) 14);
         addService14.setService("WELLNESS");
 
         AdditionalService addService15 = new AdditionalService();
-        addService15.setId(15);
+        addService15.setId((long) 15);
         addService15.setService("TENNIS COURTS");
 
         AdditionalService addService16 = new AdditionalService();
-        addService16.setId(16);
+        addService16.setId((long) 16);
         addService16.setService("BOWLING HALL");
 
         AdditionalService addService17 = new AdditionalService();
-        addService17.setId(17);
+        addService17.setId((long) 17);
         addService17.setService("GYM");
 
         AdditionalService addService18 = new AdditionalService();
-        addService18.setId(18);
+        addService18.setId((long) 18);
         addService18.setService("SOLARIUM");
         
         AdditionalService addService19 = new AdditionalService();
-        addService19.setId(19);
+        addService19.setId((long) 19);
         addService19.setService("EXTRA BED");
 
         // ADDING ADDITIONAL SERVICES TO DB
@@ -287,11 +287,12 @@ public class DBSeeder implements CommandLineRunner {
                 	)
                 ),
                 new ArrayList<AdditionalService>(Arrays.asList(
-                        new AdditionalService(1, "WIFI", 0),
-                        new AdditionalService(2, "PARKING", 0),
-                        new AdditionalService(7, "TV", 0),
-                        new AdditionalService(9, "BREAKFAST", 0),
-                        new AdditionalService(12, "PRIVATE BATHROOM", 0)
+                        new AdditionalService((long) 1, "WIFI", 10),
+                        new AdditionalService((long) 2, "PARKING", 0),
+                        new AdditionalService((long) 7, "TV", 0),
+                        new AdditionalService((long) 9, "BREAKFAST", 0),
+                        new AdditionalService((long) 12, "PRIVATE BATHROOM", 0),
+                        new AdditionalService((long) 19, "EXTRA BED", 20)
                 )	// asList additional services end
                 )
         );
@@ -323,20 +324,21 @@ public class DBSeeder implements CommandLineRunner {
             	)
              ),
              new ArrayList<AdditionalService>(Arrays.asList(
-                     new AdditionalService(1, "WIFI", 0),
-                     new AdditionalService(2, "PARKING", 0),
-                     new AdditionalService(7, "TV", 0),
-                     new AdditionalService(8, "AIR CONDITION", 20),
-                     new AdditionalService(9, "BREAKFAST", 0),
-                     new AdditionalService(10, "HALF BOARD", 0),
-                     new AdditionalService(11, "FULL BOARD", 0),
-                     new AdditionalService(12, "PRIVATE BATHROOM", 0),
-                     new AdditionalService(13, "SWIMMING POOL", 20),
-                     new AdditionalService(14, "WELLNESS", 40),
-                     new AdditionalService(15, "TENNIS COURTS", 30),
-                     new AdditionalService(16, "BOWLING HALL", 20),
-                     new AdditionalService(17, "GYM", 15),
-                     new AdditionalService(18, "SOLARIUM", 10)
+                     new AdditionalService((long) 1, "WIFI", 0),
+                     new AdditionalService((long) 2, "PARKING", 0),
+                     new AdditionalService((long) 7, "TV", 0),
+                     new AdditionalService((long) 8, "AIR CONDITION", 20),
+                     new AdditionalService((long) 9, "BREAKFAST", 0),
+                     new AdditionalService((long) 10, "HALF BOARD", 0),
+                     new AdditionalService((long) 11, "FULL BOARD", 0),
+                     new AdditionalService((long) 12, "PRIVATE BATHROOM", 0),
+                     new AdditionalService((long) 13, "SWIMMING POOL", 20),
+                     new AdditionalService((long) 14, "WELLNESS", 40),
+                     new AdditionalService((long) 15, "TENNIS COURTS", 30),
+                     new AdditionalService((long) 16, "BOWLING HALL", 20),
+                     new AdditionalService((long) 17, "GYM", 15),
+                     new AdditionalService((long) 18, "SOLARIUM", 10),
+                     new AdditionalService((long) 19, "EXTRA BED", 30)
             	)
              )
      );

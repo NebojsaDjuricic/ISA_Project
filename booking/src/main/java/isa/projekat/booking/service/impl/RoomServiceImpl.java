@@ -58,7 +58,7 @@ public class RoomServiceImpl implements IRoomService {
 	
 	public void deleteRoom(Room room) {
 		MongoCollection<Document> soba = baza.getCollection("Rooms");
-		soba.deleteOne(eq("naziv",room.getId()));
+		soba.deleteOne(eq("id",room.getId()));
 	}
 
 	@Override

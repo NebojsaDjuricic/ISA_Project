@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.internal.thread.DaemonThreadFactory;
 
+import isa.projekat.booking.domain.AdditionalService;
 import isa.projekat.booking.domain.Address;
 import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Branch;
@@ -34,6 +35,7 @@ import isa.projekat.booking.domain.dto.HotelDTO;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.domain.dto.RoomDTO;
 import isa.projekat.booking.repository.HotelRepository;
+import isa.projekat.booking.service.IAdditionalServiceService;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IHotelService;
 import isa.projekat.booking.service.IRoomService;
@@ -52,6 +54,9 @@ public class HotelController {
 	
 	@Autowired
 	private IRoomService roomService;
+	
+	@Autowired
+	private IAdditionalServiceService additionalServicesService;
 	
 	@RequestMapping( 
 			
@@ -266,4 +271,8 @@ public class HotelController {
 		
 		return new ResponseEntity<>(hotel, HttpStatus.OK);
 	}
+	
+	
+	
+	
 }
