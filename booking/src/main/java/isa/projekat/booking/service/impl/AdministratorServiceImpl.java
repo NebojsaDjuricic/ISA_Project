@@ -6,6 +6,8 @@ import isa.projekat.booking.service.IAdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +21,13 @@ public class AdministratorServiceImpl implements IAdministratorService {
         return administratorRepository.save(admin);
     }
 
+	@Override
+	public ArrayList<Administrator> getAll() {
+		List<Administrator> administrators = administratorRepository.findAll();
+		
+		return (ArrayList<Administrator>) administrators;
+	}
+    
     @Override
     public Administrator findById(String id) {
 
@@ -31,4 +40,13 @@ public class AdministratorServiceImpl implements IAdministratorService {
             return null;
         }
     }
+
+	@Override
+	public Administrator deleteAdmin(String id) {
+		Administrator administrator = findById(id);
+		administratorRepository.delete(administrator);
+		
+		return administrator;
+	}
+
 }

@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
@@ -47,6 +49,22 @@ public class AdministratorController {
         else {
             return  new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @RequestMapping( 
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE
+			)
+	@ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity<Collection<Administrator>> getAllAdmins() {
+    	
+    	ArrayList<Administrator> admins = administratorService.getAll();
+    	
+    	if (admins != null) {
+			return new ResponseEntity<Collection<Administrator>>(admins, HttpStatus.OK);
+		}
+    	
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(
@@ -101,6 +119,18 @@ public class AdministratorController {
         Administrator admin = administratorService.findById(adminID);
 
         return new ResponseEntity<>(admin, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Administrator> deleteAdmin(@PathVariable("id") String id) {
+    	
+    	Administrator administrator = administratorService.deleteAdmin(id);
+    	
+    	if (administrator != null) {
+			return new ResponseEntity<Administrator>(administrator, HttpStatus.OK);
+		}
+    	
+    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
