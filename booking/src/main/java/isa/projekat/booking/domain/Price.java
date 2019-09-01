@@ -1,8 +1,6 @@
 package isa.projekat.booking.domain;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,28 +9,28 @@ public class Price {
 	
 	@Id
 	private String id;
-	private int price;
-	private String startDate;
-	private String endDate;
+	private int pricePerNight;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private boolean naPopustu;
-	private int popust;
+	private Double popust;
 	
 	public Price() {
 		super();
 	}
 
-	public Price(String id, int price, String startDate, String endDate) {
+	public Price(String id, LocalDate startDate, LocalDate endDate, int price) {
 		super();
 		this.id = id;
-		this.price = price;
+		this.pricePerNight = price;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
-	public Price(String id, int price, String startDate, String endDate, boolean naPopustu, int popust) {
+	public Price(String id, LocalDate startDate, LocalDate endDate, int price, boolean naPopustu, Double popust) {
 		super();
 		this.id = id;
-		this.price = price;
+		this.pricePerNight = price;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.naPopustu = naPopustu;
@@ -47,27 +45,27 @@ public class Price {
 		this.id = id;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getPricePerNight() {
+		return pricePerNight;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPricePerNight(int price) {
+		this.pricePerNight = price;
 	}
 
-	public String getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -79,11 +77,11 @@ public class Price {
 		this.naPopustu = naPopustu;
 	}
 
-	public int getPopust() {
+	public Double getPopust() {
 		return popust;
 	}
 
-	public void setPopust(int popust) {
+	public void setPopust(Double popust) {
 		this.popust = popust;
 	}
 	

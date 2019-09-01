@@ -1,5 +1,6 @@
 package isa.projekat.booking.domain.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import isa.projekat.booking.domain.Price;
@@ -7,14 +8,14 @@ import isa.projekat.booking.domain.Price;
 public class PriceDTO {
 	
 	private int price;
-	private String startDate;
-	private String endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	
 	public PriceDTO() {
 		super();
 	}
 
-	public PriceDTO(int price, String startDate, String endDate) {
+	public PriceDTO(int price, LocalDate startDate, LocalDate endDate) {
 		super();
 		this.price = price;
 		this.startDate = startDate;
@@ -25,7 +26,7 @@ public class PriceDTO {
 		Price price = new Price();
 		price.setEndDate(source.getEndDate());
 		price.setStartDate(source.getStartDate());
-		price.setPrice(source.getPrice());
+		price.setPricePerNight(source.getPrice());
 		
 		return price;
 	}
@@ -38,19 +39,19 @@ public class PriceDTO {
 		this.price = price;
 	}
 
-	public String getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 	

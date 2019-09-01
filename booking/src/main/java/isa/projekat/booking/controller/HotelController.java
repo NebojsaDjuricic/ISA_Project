@@ -1,9 +1,14 @@
 package isa.projekat.booking.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -101,6 +106,30 @@ public class HotelController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+//	@RequestMapping(
+//			value = "/search",
+//			method = RequestMethod.GET,
+//			produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Collection<Hotel>> getHotelsSearch(
+//				String hotelName,
+//				String check_in,
+//				String check_out,
+//				int adults) throws ParseException{
+//		
+//		name_location = name_location.toLowerCase();
+//		String[] search = name_location.split(" ");
+//		
+//		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date_check_in = format.parse(check_in);
+//		Date date_check_out = format.parse(check_out);
+//		
+//		Collection<Hotel> hotels = hotelService.search("%" + search[0] + "%");
+//		Collection<Hotel> hoteli = pretraga(hotels, search, date_check_in, date_check_out, adults);
+//		
+//			
+//		return new ResponseEntity<Collection<Hotel>>(hoteli, HttpStatus.OK);
+//	}
+	
 	
 	@RequestMapping(
             value="/addHotel",
@@ -150,6 +179,8 @@ public class HotelController {
 		Hotel newHotel = new Hotel();
 		newHotel.setId(hotel.getId());
 		newHotel.setName(hotel.getName());
+		
+		
 		Address address = new Address();
 		address.setStreetName(hotel.getAddress().getStreetName());
 		address.setBuildingNumber(hotel.getAddress().getBuildingNumber());
@@ -160,6 +191,16 @@ public class HotelController {
 //		gps.setLongitude(address.getCoordinatePosition().getLongitude());
 //		address.setCoordinatePosition(gps);
 		newHotel.setAddress(hotel.getAddress());
+		
+		
+//		newHotel.getAddress().setStreetName(hotel.getAddress().getStreetName());
+//		newHotel.getAddress().setBuildingNumber(hotel.getAddress().getBuildingNumber());
+//		newHotel.getAddress().setCity(hotel.getAddress().getCity());
+//		newHotel.getAddress().setCountry(hotel.getAddress().getCountry());
+//		newHotel.getAddress().getCoordinatePosition().setLatitude(hotel.getAddress().getCoordinatePosition().getLatitude());
+//		newHotel.getAddress().getCoordinatePosition().setLongitude(hotel.getAddress().getCoordinatePosition().getLongitude());
+	
+		
 		newHotel.setPhoneNumber(hotel.getPhoneNumber());
 		newHotel.setContactEmail(hotel.getContactEmail());
 		newHotel.setDescription(hotel.getDescription());
@@ -216,33 +257,6 @@ public class HotelController {
 		return new ResponseEntity<>(rooms, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value="/delete/{hotelId}/{roomId}",
-			method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-	public ResponseEntity<Room> deleteRoom(@PathVariable("hotelId")String hotelId,
-			@PathVariable("roomId") String roomId) {
-		
-		Hotel hotel = hotelService.findById(hotelId);
-		Room room = roomService.findById(roomId);
-		
-		
-		ArrayList<Room> hotelRooms = hotel.getRooms();
-		
-		hotelRooms.remove(room);
-		boolean obrisano = hotelRooms.remove(room);
-		System.out.println("obrisano: " + obrisano);
-		hotel.setRooms(hotelRooms);
-		
-		hotelService.save(hotel);
-		Room deletedRoom = roomService.deleteRoom(roomId);
-		
-		if (deletedRoom != null) {
-			return new ResponseEntity<Room>(deletedRoom, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Hotel> deleteHotel(@PathVariable("id") String id) {
@@ -254,6 +268,44 @@ public class HotelController {
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
+	}
+	
+	@RequestMapping(
+			value="/delete/{hotelId}/{roomId}",
+			method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+	public ResponseEntity<Room> deleteRoom(@PathVariable("hotelId")String hotelId,
+			@PathVariable("roomId") String roomId) {
+		
+		Hotel hotel = hotelService.findById(hotelId);
+		
+		ArrayList<Room> hotelRooms = hotel.getRooms();
+		Iterator<Room> itrr = hotelRooms.iterator();
+		while (itrr.hasNext())
+		{
+		    Room ro = itrr.next();
+		    if (ro.getId().equals(roomId)) {
+		        itrr.remove();
+		        System.out.println("obrisao sobu ");
+		        break;
+		    }
+		}
+		
+		
+//		hotelRooms.remove(room);
+//		boolean obrisano = hotelRooms.remove(room);
+//		System.out.println("obrisano: " + obrisano);
+		
+		hotel.setRooms(hotelRooms);
+		
+		hotelService.save(hotel);
+		Room deletedRoom = roomService.deleteRoom(roomId);
+		
+		if (deletedRoom != null) {
+			return new ResponseEntity<Room>(deletedRoom, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 		
 	@RequestMapping(

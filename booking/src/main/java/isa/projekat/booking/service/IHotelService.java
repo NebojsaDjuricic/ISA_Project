@@ -1,6 +1,8 @@
 package isa.projekat.booking.service;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import isa.projekat.booking.domain.Hotel;
 import isa.projekat.booking.domain.Room;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
@@ -15,4 +17,5 @@ public interface IHotelService {
 //	Room deleteHotelRoom(String roomId);
 	Hotel deleteByIdAndRoomsId(String id, String roomId);
 //	Room findRoomById(String id);
+	List<Hotel> search(String hotelName, String city, String country);
 }

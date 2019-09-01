@@ -1,5 +1,6 @@
 package isa.projekat.booking.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +17,18 @@ public class Room {
 	private RoomStatus status;	
 //	izbaciti type
 	private RoomType type;
+	
+	private boolean onDiscount;	
 	private int capacity;
 	private int floor;
-	@JsonIgnore
 	private ArrayList<Price> prices;
 	private int pricePerNight;
 	private Double rating;
-	@JsonIgnore
 	private ArrayList<RoomRating> roomRatings;
-	@JsonIgnore
 	private ArrayList<RoomReservation> reservations;
-//	private Hotel hotel;
 	
 	public Room() {
-		
+		super();
 	}
 	
 	public Room(String id, RoomStatus status, 
@@ -57,28 +56,6 @@ public class Room {
 		this.prices = prices;
 		this.rating = rating;
 	}
-
-// dodato kom hotelu pripada
-//	public Room(String id, RoomStatus status, 
-//				RoomType type, int capacity, int floor,
-//			 	ArrayList<Price> prices, Hotel hotel) {
-//		super();
-//		this.id = id;
-//		this.status = status;
-//		this.type = type;
-//		this.capacity = capacity;
-//		this.floor = floor;
-//		this.prices = prices;
-//		this.hotel = hotel;
-//	}
-//	
-//	public Hotel getHotel() {
-//		return hotel;
-//	}
-//
-//	public void setHotel(Hotel hotel) {
-//		this.hotel = hotel;
-//	}
 
 	public String getId() {
 		return id;

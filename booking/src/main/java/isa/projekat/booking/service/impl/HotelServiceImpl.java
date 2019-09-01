@@ -38,23 +38,22 @@ public class HotelServiceImpl implements IHotelService {
 		
 		Room room = hotelRepository.findRoomById(roomId);
 		
+		
+//		ArrayList<Room> rooms = hotel.getRooms();
+//		Iterator<Room> itrr = rooms.iterator();
+//		while (itrr.hasNext())
+//		{
+//		    Room ro = itrr.next();
+//		    if (ro.getId().equals(roomId)) {
+//		        itrr.remove();
+//		        break;
+//		    }
+//		}
+		
+		
 		return hotelRepository.deleteByIdAndRoomsId(hotel.getId(), room.getId());
 	}
-	
-//	@Override
-//    public Mono<Project> addDeveloperToProject(String id, Developer developer) {
-//
-//        Mono<Project> fallback = Mono
-//                .error(new ResourceNotFoundException("ADD DEVELOPER TO PROJECT: Project with id=" + id + " does not exists or developer with username:" +  developer.getUsername() + " is already added"));
-//
-//        return projectRepository.findByIdAndDevelopersNotIn(id, developer)
-//                .switchIfEmpty(fallback)
-//                .flatMap(existingProject-> {
-//                    existingProject.getDevelopers().add(developer);
-//                    return projectRepository.save(existingProject);
-//                });
-//    }
-//	
+		
 	@Override
 	public ArrayList<Hotel> getAll() {
 		List<Hotel> hotels = hotelRepository.findAll();
@@ -70,12 +69,11 @@ public class HotelServiceImpl implements IHotelService {
 		
 		return retVal;
 	}
-	
-	
+		
 	public ArrayList<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto) {
 		ArrayList<Hotel> hotels = null;
-		//ArrayList<Hotel> hotelRating = null;
-//		ArrayList<Hotel> hotelDate = null;
+		ArrayList<Hotel> hotelNumerOfPerson = null;
+		ArrayList<Hotel> hotelDate = null;
 		
 		if (ordinarySearchDto.getCity() == null && ordinarySearchDto.getHotelName() == null
 				&& ordinarySearchDto.getCountry() == null) {
@@ -129,9 +127,66 @@ public class HotelServiceImpl implements IHotelService {
 			+ " u gradu " + ordinarySearchDto.getCity() + " u zemlji " + ordinarySearchDto.getCountry());
 		}
 		
+//		if (ordinarySearchDto.getNumberOfPerson() != null && accommodations != null) {
+//			System.out.println("numberOfPerson");
+//			hotelNumerOfPerson = new ArrayList<Hotel>();
+//			for (Hotel a : hotels) {
+//				if (a.getNumberOfPerson() >= ordinarySearchDto.getNumberOfPerson()) {
+//					accommodationNumerOfPerson.add(a);
+//				}
+//			}
+//			if (accommodationNumerOfPerson != null) {
+//				if (ordinarySearchDto.getEndDate() != null && ordinarySearchDto.getStartDate() != null) {
+//					accommodationDate = new ArrayList<Accommodation>();
+//					for (Accommodation a : accommodationNumerOfPerson) {
+//						for (Price p : a.getPrices()) {
+//							if (ordinarySearchDto.getEndDate().before(p.getEndDate())
+//									&& ordinarySearchDto.getStartDate().after(p.getStartDate())
+//									&& ordinarySearchDto.getStartDate().before(ordinarySearchDto.getEndDate())) {
+//								if (accommodationDate != null) {
+//									if (!accommodationDate.contains(a)) {
+//										accommodationDate.add(a);
+//									}
+//								}
+//							}
+//						}
+//					}
+//				} else {
+//					return accommodationNumerOfPerson;
+//				}
+//			}
+//
+//			return accommodationNumerOfPerson;
+//
+//		}
+//
+//		if (ordinarySearchDto.getEndDate() != null && ordinarySearchDto.getStartDate() != null
+//				&& accommodations != null) {
+//			accommodationDate = new ArrayList<Accommodation>();
+//			for (Accommodation a : accommodations) {
+//				for (Price p : a.getPrices()) {
+//					if (ordinarySearchDto.getEndDate().before(p.getEndDate())
+//							&& ordinarySearchDto.getStartDate().after(p.getStartDate())
+//							&& ordinarySearchDto.getStartDate().before(ordinarySearchDto.getEndDate())) {
+//						if (accommodationDate != null) {
+//							if (!accommodationDate.contains(a)) {
+//								accommodationDate.add(a);
+//							}
+//						}
+//					}
+//				}
+//			}
+//			return accommodationDate;
+//		}
+		
 		
 		return hotels;
 	
+	}
+
+	@Override
+	public List<Hotel> search(String hotelName, String city, String country) {
+		return hotelRepository.findByNameAndAddressCityAndAddressCountry(hotelName, city, country);
 	}
 
 

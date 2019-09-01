@@ -18,17 +18,18 @@ public class Hotel {
     private String contactEmail;
 	private String description;
 	private String website;
+	// prosek svih ocena
 	private Double rating;
-	@JsonIgnore
 	private ArrayList<HotelRating> hotelRatings;
 	private int numberOfFloors;
 	private int stars;
-	@JsonIgnore
 	private ArrayList<Room> rooms;
-	@JsonIgnore
 	private ArrayList<AdditionalService> additionalServices;
+	
+	// hotel ima vise rezervisanih soba
+//	private ArrayList<RoomReservation> roomReservations;
+	
 	private String imageURLs;
-//	 private admin ?
 	
 	public Hotel() {
 		
