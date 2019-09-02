@@ -1,12 +1,14 @@
 package isa.projekat.booking.domain.dto;
 
+import isa.projekat.booking.domain.VehicleType;
+
 public class VehicleSearchQuery {
     private String startDate;
     private String endDate;
     private String startPlace;
     private String endPlace;
-    private String type;
-    private String passangers;
+    private VehicleType type;
+    private Integer passengers;
 
     public VehicleSearchQuery() {
 
@@ -44,19 +46,25 @@ public class VehicleSearchQuery {
         this.endPlace = endPlace;
     }
 
-    public String getType() {
-        return type;
-    }
+	public Integer getPassengers() {
+		return passengers;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setPassengers(Integer passengers) {
+		this.passengers = passengers;
+	}
+	
+	public String toString() {
+		return ""+this.getStartDate()+" "+this.getStartPlace()+" "
+				+this.getEndDate()+" "+ this.getEndPlace()+ " "
+				+this.getType()+ " " + this.getPassengers();
+	}
 
-    public String getPassangers() {
-        return passangers;
-    }
+	public VehicleType getType() {
+		return type;
+	}
 
-    public void setPassangers(String passangers) {
-        this.passangers = passangers;
-    }
+	public void setType(VehicleType type) {
+		this.type = type;
+	}
 }

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("vehicle")
@@ -161,7 +162,13 @@ public class VehicleController {
     )
     public ResponseEntity<Object> search(@RequestBody VehicleSearchQuery query) {
 
-        System.out.println(query);
+        System.out.println(query.toString());
+        
+        List<Vehicle> queryResult = vehicleService.findByVehicleType(query.getType());
+        
+        for (Vehicle vehicle : queryResult) {
+			System.out.println(vehicle.getLicenceID());
+		}
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
