@@ -9,6 +9,8 @@ public class VehicleSearchQuery {
     private String endPlace;
     private VehicleType type;
     private Integer passengers;
+    private Double minPrice;
+    private Double maxPrice;
 
     public VehicleSearchQuery() {
 
@@ -66,5 +68,21 @@ public class VehicleSearchQuery {
 
 	public void setType(VehicleType type) {
 		this.type = type;
+	}
+
+	public Double getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Double minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Double getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Double maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 }

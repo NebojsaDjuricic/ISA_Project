@@ -41,4 +41,10 @@ public class VehicleServiceImpl implements IVehicleService{
 		// TODO Auto-generated method stub
 		return vehicleRepository.findByVehicleType(type);
 	}
+
+	@Override
+	public List<Vehicle> findByVehicleTypeAndSeats(VehicleType type, Integer seats) {
+		// TODO Auto-generated method stub
+		return vehicleRepository.findByTypeAndSeats(type, seats);		
+	}
 }

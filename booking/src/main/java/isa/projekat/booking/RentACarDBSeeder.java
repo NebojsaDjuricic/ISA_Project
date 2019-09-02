@@ -273,6 +273,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         vehRes1.setRating(4.5);
         vehRes1.setPickUpLocation("Pickup Address 1");
         vehRes1.setDropUpLocation("Dropup Address 1");
+        vehRes1.setRentACarServiceID(rent1.getId());
         
         vehicleReservationRepository.insert(vehRes1);
 		

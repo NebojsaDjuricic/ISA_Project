@@ -162,11 +162,11 @@ public class VehicleController {
     )
     public ResponseEntity<Object> search(@RequestBody VehicleSearchQuery query) {
 
-        System.out.println(query.toString());
-        
-        List<Vehicle> queryResult = vehicleService.findByVehicleType(query.getType());
-        
-        for (Vehicle vehicle : queryResult) {
+        //validate
+    	
+    	List<Vehicle> queryResult = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
+    	
+    	for (Vehicle vehicle : queryResult) {
 			System.out.println(vehicle.getLicenceID());
 		}
 

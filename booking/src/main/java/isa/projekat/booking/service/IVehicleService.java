@@ -10,4 +10,5 @@ public interface IVehicleService {
     Vehicle save(Vehicle vehicle);
     Vehicle findByID(String id);
     List<Vehicle> findByVehicleType(VehicleType type);
+    List<Vehicle> findByVehicleTypeAndSeats(VehicleType type, Integer seats);
 }

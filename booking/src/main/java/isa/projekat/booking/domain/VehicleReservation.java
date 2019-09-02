@@ -13,6 +13,7 @@ public class VehicleReservation {
     @Id
     private String id;
     private String vehicleID;
+    private String rentACarServiceID;
     private LocalDate startDate;
     private LocalDate endDate;
     private String pickUpLocation;
@@ -77,6 +78,14 @@ public class VehicleReservation {
 
 	public void setDropUpLocation(String dropUpLocation) {
 		this.dropUpLocation = dropUpLocation;
+	}
+
+	public String getRentACarServiceID() {
+		return rentACarServiceID;
+	}
+
+	public void setRentACarServiceID(String rentACarServiceID) {
+		this.rentACarServiceID = rentACarServiceID;
 	}
     
 }
