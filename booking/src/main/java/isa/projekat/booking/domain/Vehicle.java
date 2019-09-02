@@ -13,7 +13,7 @@ public class Vehicle {
     private String model;
     private int manufacturingYear;
     private int numberOfSeats;
-    //private VehicleType vehicleType;
+    private VehicleType vehicleType;
     private Double rating;
     private Double price;
     private VehicleStatus status;
@@ -93,5 +93,13 @@ public class Vehicle {
 
 	public void setNumberOfSeats(int numberOfSeats) {
 		this.numberOfSeats = numberOfSeats;
+	}
+
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
 	}
 }

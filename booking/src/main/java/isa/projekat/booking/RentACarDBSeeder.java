@@ -18,6 +18,7 @@ import isa.projekat.booking.domain.Vehicle;
 import isa.projekat.booking.domain.VehicleDiscount;
 import isa.projekat.booking.domain.VehicleReservation;
 import isa.projekat.booking.domain.VehicleStatus;
+import isa.projekat.booking.domain.VehicleType;
 import isa.projekat.booking.repository.AdministratorRepository;
 import isa.projekat.booking.repository.BranchRepository;
 import isa.projekat.booking.repository.RentACarServiceRepository;
@@ -61,6 +62,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         v1.setNumberOfSeats(4);
         v1.setPrice(100.0);
         v1.setRating(4.2);
+        v1.setVehicleType(VehicleType.SEDAN);
         v1.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v2 = new Vehicle();
@@ -72,6 +74,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         v2.setNumberOfSeats(2);
         v2.setPrice(1100.0);
         v2.setRating(4.9);
+        v2.setVehicleType(VehicleType.MPV);
         v2.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v3 = new Vehicle();
@@ -83,6 +86,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         v3.setNumberOfSeats(4);
         v3.setPrice(120.0);
         v3.setRating(4.1);
+        v3.setVehicleType(VehicleType.SEDAN);
         v3.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v4 = new Vehicle();
@@ -94,6 +98,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         v4.setNumberOfSeats(4);
         v4.setPrice(110.0);
         v4.setRating(3.2);
+        v4.setVehicleType(VehicleType.CROSSOVER);
         v4.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v5 = new Vehicle();
@@ -105,6 +110,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         v5.setNumberOfSeats(4);
         v5.setPrice(50.0);
         v5.setRating(5.0);
+        v5.setVehicleType(VehicleType.MPV);
         v5.setStatus(VehicleStatus.IN_SERVICE);
 
         Vehicle v6 = new Vehicle();
@@ -116,6 +122,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         v6.setNumberOfSeats(4);
         v6.setPrice(50.0);
         v6.setRating(5.0);
+        v6.setVehicleType(VehicleType.CROSSOVER);
         v6.setStatus(VehicleStatus.OUT_OF_SERVICE);
 
 
@@ -264,6 +271,8 @@ public class RentACarDBSeeder implements CommandLineRunner {
         vehRes1.setEndDate(LocalDate.of(2019, 5, 15));
         vehRes1.setVehicleID(v1.getLicenceID());
         vehRes1.setRating(4.5);
+        vehRes1.setPickUpLocation("Pickup Address 1");
+        vehRes1.setDropUpLocation("Dropup Address 1");
         
         vehicleReservationRepository.insert(vehRes1);
 		
