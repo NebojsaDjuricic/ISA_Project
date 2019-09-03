@@ -9,7 +9,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class VehicleReservationServiceImpl implements IVehicleReservationsService {
@@ -27,10 +29,17 @@ public class VehicleReservationServiceImpl implements IVehicleReservationsServic
 
         BasicQuery query = new BasicQuery("{ vehicleID: id}");
 
-
-
         List<VehicleReservation> reservation = vehicleReservationsRepository.findAll();
 
         return null;
     }
+
+	@Override
+	public List<VehicleReservation> findByVehicleAndRentACarServiceID(String vehicleID, String rentACarServiceID) {
+		// TODO Auto-generated method stub
+		
+		List<VehicleReservation> queryResult = vehicleReservationsRepository.findByVehicleAndRentACarServiceIDs(vehicleID, rentACarServiceID);
+		
+		return queryResult;
+	}
 }

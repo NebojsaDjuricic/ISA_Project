@@ -11,6 +11,7 @@ public class VehicleSearchQuery {
     private Integer passengers;
     private Double minPrice;
     private Double maxPrice;
+    private String rentACarServiceID;
 
     public VehicleSearchQuery() {
 
@@ -84,5 +85,13 @@ public class VehicleSearchQuery {
 
 	public void setMaxPrice(Double maxPrice) {
 		this.maxPrice = maxPrice;
+	}
+
+	public String getRentACarServiceID() {
+		return rentACarServiceID;
+	}
+
+	public void setRentACarServiceID(String rentACarServiceID) {
+		this.rentACarServiceID = rentACarServiceID;
 	}
 }

@@ -6,6 +6,7 @@ import isa.projekat.booking.domain.dto.VehicleSearchQuery;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IBranchService;
 import isa.projekat.booking.service.IRentACarService;
+import isa.projekat.booking.service.IVehicleReservationsService;
 import isa.projekat.booking.service.IVehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
@@ -14,8 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @RestController
 @RequestMapping("vehicle")
@@ -33,6 +38,9 @@ public class VehicleController {
 
     @Autowired
     private IAdministratorService administratorService;
+    
+    @Autowired
+    private IVehicleReservationsService vehicleReservationService;
 
     @RequestMapping(
             value = "/add",
@@ -164,11 +172,37 @@ public class VehicleController {
 
         //validate
     	
-    	List<Vehicle> queryResult = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
+    	List<Vehicle> vehicles = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
     	
-    	for (Vehicle vehicle : queryResult) {
-			System.out.println(vehicle.getLicenceID());
-		}
+    	Map<String, List<VehicleReservation>> reservationsByVehicleID = null;
+    	
+    	if(vehicles.isEmpty()) {
+    		
+    	}
+    	else {
+    		for (Vehicle vehicle : vehicles) {
+    			reservationsByVehicleID.put(
+    					vehicle.getLicenceID(), 
+    					vehicleReservationService.findByVehicleAndRentACarServiceID(vehicle.getLicenceID(), 
+    							query.getRentACarServiceID()));
+    		}
+    	}
+    	
+    	Iterator<Entry<String, List<VehicleReservation>>> it = reservationsByVehicleID.entrySet().iterator();
+    	while(it.hasNext()) {
+    		Map.Entry<String, List<VehicleReservation>> pair = (Map.Entry<String, List<VehicleReservation>>)it.next();
+    		
+    		List<VehicleReservation> reservations = pair.getValue();
+    		Boolean alreadyBooked = false;
+    		
+    		//compare dates
+    		
+    		
+    		it.remove();
+    	}
+    	
+    	
+    	
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
@@ -183,6 +217,23 @@ public class VehicleController {
     public ResponseEntity<Object> makeReservation() {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+    
+    public LocalDate stringToDate(String date) {
+    	
+    	String[] token = date.split("/");
+    	
+    	int year = 0;
+    	int month = 0;
+    	int dayOfMonth = 0;
+    	
+    	month = Integer.parseInt(token[0]);
+    	dayOfMonth = Integer.parseInt(token[1]);
+    	year = Integer.parseInt(token[2]);
+    	
+    	LocalDate result = LocalDate.of(year, month, dayOfMonth);
+    	
+    	return result;
     }
 
 }
