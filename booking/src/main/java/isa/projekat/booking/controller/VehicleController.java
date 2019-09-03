@@ -171,6 +171,9 @@ public class VehicleController {
     public ResponseEntity<Object> search(@RequestBody VehicleSearchQuery query) {
 
         //validate
+    	LocalDate startDate = stringToDate(query.getStartDate());
+    	LocalDate endDate = stringToDate(query.getEndDate());
+    	List<Vehicle> vehiclesToShow = new ArrayList<Vehicle>();
     	
     	List<Vehicle> vehicles = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
     	
@@ -195,16 +198,42 @@ public class VehicleController {
     		List<VehicleReservation> reservations = pair.getValue();
     		Boolean alreadyBooked = false;
     		
+    		
     		//compare dates
+    		
+    		for (VehicleReservation reservation : reservations) {
+    			alreadyBooked = false;
+				if(startDate.isAfter(reservation.getStartDate())) {
+					if(startDate.isBefore(reservation.getEndDate())) {
+						alreadyBooked = true;
+						break;
+					}
+				}
+				
+				if(endDate.isAfter(reservation.getStartDate())) {
+					if(endDate.isBefore(reservation.getEndDate())) {
+						alreadyBooked = true;
+						break;
+					}
+				}
+				
+				if(startDate.isBefore(reservation.getStartDate())) {
+					if(endDate.isAfter(reservation.getEndDate())) {
+						alreadyBooked = true;
+						break;
+					}
+				}
+			}
+    		
+    		if(!alreadyBooked) {
+				vehiclesToShow.add(vehicleService.findByID(pair.getKey()));
+			}
     		
     		
     		it.remove();
-    	}
-    	
-    	
-    	
+    	}    	
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(vehiclesToShow, HttpStatus.OK);
     }
 
 
