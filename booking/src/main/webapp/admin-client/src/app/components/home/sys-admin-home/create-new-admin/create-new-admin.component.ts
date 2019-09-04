@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Administrator } from 'src/app/model/administrator';
-import { AdminServiceService } from '../../../../services/admin-service.service';
+import {Administrator} from 'src/app/model/administrator';
+import {AdminServiceService} from '../../../../services/admin-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {RegistrationValidator} from '../../../../shared/register.validator';
 
 @Component({
   selector: 'app-create-new-admin',
@@ -13,6 +14,7 @@ export class CreateNewAdminComponent implements OnInit {
 
   createAdminForm: FormGroup;
   newAdmin: Administrator;
+  passwordFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,13 +24,21 @@ export class CreateNewAdminComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    this.passwordFormGroup = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordRepeat: ['', Validators.required]
+    }, {
+      validator: RegistrationValidator.validate.bind(this)
+    });
+
+
     this.createAdminForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordRepeat: ['', Validators.required],
+      passwordFormGroup: this.passwordFormGroup,
       email: new FormControl('', [Validators.required, Validators.email]),
       type: ['', Validators.required],
-      editingObjectID: ['', Validators.required]
+      // editingObjectID: ['', Validators.required]
     });
 
     this.newAdmin = new Administrator();
@@ -38,11 +48,10 @@ export class CreateNewAdminComponent implements OnInit {
     // Validate
 
     this.newAdmin.username = this.createAdminForm.controls.username.value;
-    this.newAdmin.password = this.createAdminForm.controls.password.value;
+    this.newAdmin.password = this.passwordFormGroup.controls.password.value;
     this.newAdmin.email = this.createAdminForm.controls.email.value;
-    const type = this.createAdminForm.controls.type.value;
-    this.newAdmin.type = type;
-    this.newAdmin.editingObjectID = this.createAdminForm.controls.editingObjectID.value;
+    this.newAdmin.type = this.createAdminForm.controls.type.value;
+    // this.newAdmin.editingObjectID = this.createAdminForm.controls.editingObjectID.value;
 
     this.adminService.add(this.newAdmin).subscribe(
       res => {
@@ -51,6 +60,7 @@ export class CreateNewAdminComponent implements OnInit {
     );
 
     this.createAdminForm.reset();
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onCancel() {

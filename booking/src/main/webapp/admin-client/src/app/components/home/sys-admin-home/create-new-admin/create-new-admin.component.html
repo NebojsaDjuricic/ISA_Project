@@ -8,7 +8,7 @@
 
     <form [formGroup]="createAdminForm"
           (ngSubmit)="onSubmit()"
-          class="form-horizontal">
+          class="form-horizontal" >
 
       <div class="form-group">
         <label class="col-xs-2">Username:</label>
@@ -25,34 +25,40 @@
         </span>
       </div>
 
-      <div class="form-group">
-        <label class="col-xs-2">Password:</label>
-        <div class="col-xs-6">
-          <input type="password"
-                 class="form-control"
-                 formControlName="password"
-                 placeholder="Enter admin password"/>
+      <div [formGroup]="passwordFormGroup">
+        <div class="form-group">
+          <label class="col-xs-2">Password:</label>
+          <div class="col-xs-6">
+            <input type="password"
+                   class="form-control"
+                   formControlName="password"
+                   placeholder="Enter admin password" autocomplete="new-password"/>
+          </div>
+          <span class="help-block"
+                *ngIf="!passwordFormGroup.controls.password.valid &&
+                passwordFormGroup.controls.password.touched">
+            Password is required
+          </span>
+          <span *ngIf="passwordFormGroup.controls.password.errors?.minlength">
+            Password must be at least 6 characters
+          </span>
         </div>
-        <span class="help-block"
-              *ngIf="!createAdminForm.controls.password.valid &&
-              createAdminForm.controls.password.touched">
-          Password is required
-        </span>
-      </div>
 
-      <div class="form-group">
-        <label class="col-xs-2">Repeat password:</label>
-        <div class="col-xs-6">
-          <input type="password"
-                 class="form-control"
-                 formControlName="passwordRepeat"
-                 placeholder="Repeat password"/>
+        <div class="form-group">
+          <label class="col-xs-2">Repeat password:</label>
+          <div class="col-xs-6">
+            <input type="password"
+                   class="form-control"
+                   formControlName="passwordRepeat"
+                   placeholder="Repeat password"/>
+          </div>
+          <span class="help-block"
+                *ngIf="!passwordFormGroup.controls.passwordRepeat.valid &&
+                passwordFormGroup.controls.passwordRepeat.touched">
+            Repeat password required
+          </span>
+          <p class="bg-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
         </div>
-        <span class="help-block"
-              *ngIf="!createAdminForm.controls.passwordRepeat.valid &&
-              createAdminForm.controls.passwordRepeat.touched">
-          Repeat password
-        </span>
       </div>
 
       <div class="form-group">
@@ -74,7 +80,7 @@
         <label class="col-xs-2">Role:</label>
         <div class="col-xs-6">
           <select formControlName="type"
-                  class="mdb-select md-form"
+                  class="form-control"
                   style="height: 33px;">
             <option value="" disabled selected>Choose admin type</option>
             <option value="SYSTEM_ADMIN">System admin</option>
@@ -93,20 +99,20 @@
 
 <!--   OVDE MOZDA NAPRAVITI DA SE PRVO PROVERI VREDNOST POLJA ROLE I ONDA
    U ZAVISNOSTI OD TOGA DA MU SE PONUDE ODGOVARAJUCI OBJEKTI KOJIMA MOZE DA UPRAVLJA-->
-      <div class="form-group">
-        <label class="col-xs-2">Editing object ID:</label>
-        <div class="col-xs-6">
-          <input type="text"
-                 class="form-control"
-                 formControlName="editingObjectID"
-                 placeholder="Enter editing object's ID"/>
-        </div>
-        <span class="help-block"
-              *ngIf="!createAdminForm.controls.editingObjectID.valid &&
-              createAdminForm.controls.editingObjectID.touched">
-          Editing object's ID is required
-        </span>
-      </div>
+<!--      <div class="form-group">-->
+<!--        <label class="col-xs-2">Editing object ID:</label>-->
+<!--        <div class="col-xs-6">-->
+<!--          <input type="text"-->
+<!--                 class="form-control"-->
+<!--                 formControlName="editingObjectID"-->
+<!--                 placeholder="Enter editing object's ID"/>-->
+<!--        </div>-->
+<!--        <span class="help-block"-->
+<!--              *ngIf="!createAdminForm.controls.editingObjectID.valid &&-->
+<!--              createAdminForm.controls.editingObjectID.touched">-->
+<!--          Editing object's ID is required-->
+<!--        </span>-->
+<!--      </div>-->
 
       <div class="col-xs-10 col-xs-offset-2">
         <button type="submit"
