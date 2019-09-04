@@ -9,17 +9,17 @@ public class Price {
 	
 	@Id
 	private String id;
-	private int pricePerNight;
+	private Integer pricePerNight;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	private boolean naPopustu;
+	private Boolean naPopustu;
 	private Double popust;
 	
 	public Price() {
 		super();
 	}
 
-	public Price(String id, LocalDate startDate, LocalDate endDate, int price) {
+	public Price(String id, LocalDate startDate, LocalDate endDate, Integer price) {
 		super();
 		this.id = id;
 		this.pricePerNight = price;
@@ -27,7 +27,7 @@ public class Price {
 		this.endDate = endDate;
 	}
 
-	public Price(String id, LocalDate startDate, LocalDate endDate, int price, boolean naPopustu, Double popust) {
+	public Price(String id, LocalDate startDate, LocalDate endDate, Integer price, Boolean naPopustu, Double popust) {
 		super();
 		this.id = id;
 		this.pricePerNight = price;
@@ -45,11 +45,11 @@ public class Price {
 		this.id = id;
 	}
 
-	public int getPricePerNight() {
+	public Integer getPricePerNight() {
 		return pricePerNight;
 	}
 
-	public void setPricePerNight(int price) {
+	public void setPricePerNight(Integer price) {
 		this.pricePerNight = price;
 	}
 
@@ -69,11 +69,11 @@ public class Price {
 		this.endDate = endDate;
 	}
 
-	public boolean isNaPopustu() {
+	public Boolean isNaPopustu() {
 		return naPopustu;
 	}
 
-	public void setNaPopustu(boolean naPopustu) {
+	public void setNaPopustu(Boolean naPopustu) {
 		this.naPopustu = naPopustu;
 	}
 

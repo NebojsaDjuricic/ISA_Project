@@ -21,13 +21,13 @@
     </div>
     <div class="navbar-collapse">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active" *ngIf="userIsLoggedIn && (whichUserType === 'AIRLINE ADMIN' || whichUserType === 'SYSTEM ADMIN')">
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn && whichUserType === 'SYSTEM ADMIN'">
           <a routerLink="/flights">Flights</a>
         </li>
-        <li routerLinkActive="active" *ngIf="userIsLoggedIn && (whichUserType === 'HOTEL ADMIN' || whichUserType === 'SYSTEM ADMIN')">
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn && whichUserType === 'SYSTEM ADMIN'">
           <a routerLink="/hotels">Hotels</a>
         </li>
-        <li routerLinkActive="active" *ngIf="userIsLoggedIn && (whichUserType === 'RENT A CAR ADMIN' || whichUserType === 'SYSTEM ADMIN')">
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn && whichUserType === 'SYSTEM ADMIN'">
           <a routerLink="/rent-a-cars">Rent A Car Services</a>
         </li>
         <li routerLinkActive="active" *ngIf="userIsLoggedIn && whichUserType === 'SYSTEM ADMIN'">
@@ -40,6 +40,9 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li routerLinkActive="active" *ngIf="userIsLoggedIn">
+          <a routerLink="/myProfile/{{admin_username}}">My Profile</a>
+        </li>
         <li *ngIf="userIsLoggedIn">
           <a style="cursor: pointer;"
              (click)="logout()">Logout</a>

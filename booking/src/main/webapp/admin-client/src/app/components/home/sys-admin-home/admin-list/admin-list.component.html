@@ -1,0 +1,18 @@
+<app-nav></app-nav>
+<div class="row">
+  <div class="col-xs-12" *ngFor="let admin of admins">
+    <a class="list-group-item clearfix"
+       routerLinkActive="active"
+       [routerLink]="['edit-admin', admin.username]"
+       style="cursor: pointer">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">Admin: {{admin.username}}</h4>
+      </div>
+
+    </a>
+    <!--    <div class="col-xs-2">-->
+    <!--      <button class="btn btn-danger"-->
+    <!--              (click)="onDelete(room.id)">Delete</button>-->
+    <!--    </div>-->
+  </div>
+</div>

@@ -104,39 +104,40 @@
         </span>
       </div>
 
-      <div class="form-group">
-        <label class="col-xs-2">
-          Room ID:
-        </label>
-        <div class="col-xs-6">
-          <input type="text" class="form-control"
-                 formControlName="roomID"
-                 placeholder="Enter room ID">
-        </div>
-        <span class="help-block"
-              *ngIf="!createRoomForm.controls.roomID.valid &&
-               createRoomForm.controls.roomID.touched">
-          {{ errorMessage }}
-        </span>
-      </div>
+<!--      <div class="form-group">-->
+<!--        <label class="col-xs-2">-->
+<!--          Price:-->
+<!--        </label>-->
+<!--        <div *ngIf="room.prices" class="row">-->
+<!--          <div class="col-xs-4" *ngFor="let price of room.prices">-->
+<!--            <a class="list-group-item clearfix"-->
+<!--               routerLinkActive="active"-->
+<!--               [routerLink]="['edit-price', price.id]"-->
+<!--               style="cursor: pointer">-->
+<!--              <div class="pull-left">-->
+<!--                <h4 class="list-group-item-heading">Price from {{price.startDate}} to {{price.endDate}}</h4>-->
+<!--              </div>-->
 
-      <div class="form-group">
-        <label class="col-xs-2">
-          Price:
-        </label>
-        <div >
-          <!--          <input type="number" class="form-control"-->
-          <!--                 formControlName="pricePerNight"-->
-          <!--                 placeholder="Enter room price">-->
-          <button type="button" class="btn btn-primary"
-                  (click)="onAddPrice()">Add Price</button>
-        </div>
-        <span class="help-block"
-              *ngIf="!createRoomForm.controls.pricePerNight.valid &&
-               createRoomForm.controls.pricePerNight.touched">
-          {{ errorMessage }}
-        </span>
-      </div>
+<!--            </a>-->
+<!--            <div class="col-xs-2">-->
+<!--              <button class="btn btn-danger"-->
+<!--                      (click)="onDelete(price.id)">Delete</button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-xs-6">-->
+<!--          &lt;!&ndash;          <input type="number" class="form-control"&ndash;&gt;-->
+<!--          &lt;!&ndash;                 formControlName="pricePerNight"&ndash;&gt;-->
+<!--          &lt;!&ndash;                 placeholder="Enter room price">&ndash;&gt;-->
+<!--          <button type="button" class="btn btn-primary"-->
+<!--                  (click)="onAddPrice()">Add Price</button>-->
+<!--        </div>-->
+<!--        <span class="help-block"-->
+<!--              *ngIf="!createRoomForm.controls.pricePerNight.valid &&-->
+<!--               createRoomForm.controls.pricePerNight.touched">-->
+<!--          {{ errorMessage }}-->
+<!--        </span>-->
+<!--      </div>-->
 
       <div class="col-xs-10 col-xs-offset-2">
         <button type="submit"
@@ -153,4 +154,4 @@
 
 <hr>
 
-<app-create-price *ngIf="addPriceClicked"></app-create-price>
+<!--<app-create-price *ngIf="addPriceClicked"></app-create-price>-->

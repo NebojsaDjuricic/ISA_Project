@@ -7,8 +7,7 @@ export class Room {
   type: RoomType.Value;
   capacity: number;
   floor: number;
-  // prices: Price[];
-  pricePerNight: number;
+  prices: Price[];
   rating: number;
 
   constructor() {

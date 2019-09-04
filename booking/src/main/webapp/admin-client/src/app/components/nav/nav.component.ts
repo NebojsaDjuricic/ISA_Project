@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
 
   userIsLoggedIn = false;
   whichUserType: any;
+  admin_username: any;
 
   // added
   private userSub: Subscription;
@@ -29,11 +30,19 @@ export class NavComponent implements OnInit {
     const userType = this.auth.getUser();
     let split = null;
     let userTIP = null;
+    let adminUsername = null;
     if (userType) {
       split = userType.split('.', 3);
       userTIP = split[1];
     }
     console.log('User type: ' + userTIP);
+
+    if (userType) {
+      split = userType.split('.', 3);
+      adminUsername = split[0];
+    }
+    console.log('Admin username: ' + adminUsername);
+    this.admin_username = adminUsername;
 
     if (userTIP === 'SYSTEM_ADMIN') {
       this.whichUserType = 'SYSTEM ADMIN';

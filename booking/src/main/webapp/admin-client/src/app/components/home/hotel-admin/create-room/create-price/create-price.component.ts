@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Price} from '../../../../../model/price';
+import {RoomService} from '../../../../../services/room.service';
 
 @Component({
   selector: 'app-create-price',
@@ -9,8 +12,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class CreatePriceComponent implements OnInit {
   createPriceForm: FormGroup;
   isViewable: boolean;
+  price: Price;
+  errorMessage = 'This field is required!';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private roomService: RoomService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.isViewable = true;
@@ -23,13 +31,28 @@ export class CreatePriceComponent implements OnInit {
         popust: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
       }
     );
+
+    this.price = new Price();
   }
 
   onSubmit() {
+    this.price.price = this.createPriceForm.controls.price.value;
+    this.price.startDate = this.createPriceForm.controls.startDate.value;
+    this.price.endDate = this.createPriceForm.controls.endDate.value;
+    this.price.naPopustu = this.createPriceForm.controls.naPopustu.value;
+    this.price.popust = this.createPriceForm.controls.popust.value;
 
+    this.roomService.addPrice(this.price)
+      .subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onCancel() {
-    this.isViewable = !this.isViewable;
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

@@ -28,7 +28,7 @@
       <div class="form-group">
         <label class="col-xs-2">Password:</label>
         <div class="col-xs-6">
-          <input type="text"
+          <input type="password"
                  class="form-control"
                  formControlName="password"
                  placeholder="Enter admin password"/>
@@ -43,7 +43,7 @@
       <div class="form-group">
         <label class="col-xs-2">Repeat password:</label>
         <div class="col-xs-6">
-          <input type="text"
+          <input type="password"
                  class="form-control"
                  formControlName="passwordRepeat"
                  placeholder="Repeat password"/>
@@ -58,7 +58,7 @@
       <div class="form-group">
         <label class="col-xs-2">Email:</label>
         <div class="col-xs-6">
-          <input type="text"
+          <input type="email"
                  class="form-control"
                  formControlName="email"
                  placeholder="Enter admin email"/>
@@ -73,10 +73,10 @@
       <div class="form-group">
         <label class="col-xs-2">Role:</label>
         <div class="col-xs-6">
-          <select formControlName="role"
+          <select formControlName="type"
                   class="mdb-select md-form"
                   style="height: 33px;">
-            <option value="" disabled selected>Choose admin role</option>
+            <option value="" disabled selected>Choose admin type</option>
             <option value="SYSTEM_ADMIN">System admin</option>
             <option value="AIRLINE_ADMIN">Airline admin</option>
             <option value="HOTEL_ADMIN">Hotel admin</option>
@@ -84,9 +84,9 @@
           </select>
         </div>
         <span class="help-block"
-              *ngIf="!createAdminForm.controls.role.valid &&
-              createAdminForm.controls.role.touched">
-          Admin role is required
+              *ngIf="!createAdminForm.controls.type.valid &&
+              createAdminForm.controls.type.touched">
+          Admin type is required
         </span>
       </div>
 
@@ -121,9 +121,9 @@
   </div>
 </div>
 
-{{createAdminForm.controls.username.value}}
-{{createAdminForm.controls.password.value}}
-{{createAdminForm.controls.passwordRepeat.value}}
-{{createAdminForm.controls.email.value}}
-{{createAdminForm.controls.role.value}}
-{{createAdminForm.controls.editingObjectID.value}}
+<!--{{createAdminForm.controls.username.value}}-->
+<!--{{createAdminForm.controls.password.value}}-->
+<!--{{createAdminForm.controls.passwordRepeat.value}}-->
+<!--{{createAdminForm.controls.email.value}}-->
+<!--{{createAdminForm.controls.type.value}}-->
+<!--{{createAdminForm.controls.editingObjectID.value}}-->

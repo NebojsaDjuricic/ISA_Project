@@ -36,7 +36,6 @@ export class EditRoomComponent implements OnInit {
         roomStatus: new FormControl('', [Validators.required]),
         capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
         floor: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
-        pricePerNight: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
 
       }
     );
@@ -69,7 +68,6 @@ export class EditRoomComponent implements OnInit {
         roomStatus: data.status,
         capacity: data.capacity,
         floor: data.floor,
-        pricePerNight: data.pricePerNight,
         // rating: data.rating
       });
     });
@@ -82,7 +80,6 @@ export class EditRoomComponent implements OnInit {
     this.editedRoom.hotelID = this.hotelID;
     this.editedRoom.type = this.editRoomForm.controls.roomType.value;
     this.editedRoom.status = this.editRoomForm.controls.roomStatus.value;
-    this.editedRoom.pricePerNight = this.editRoomForm.controls.pricePerNight.value;
     this.editedRoom.floor = this.editRoomForm.controls.floor.value;
     this.editedRoom.capacity = this.editRoomForm.controls.capacity.value;
     // this.editedRoom.admin = this.auth.getAdminUsername();

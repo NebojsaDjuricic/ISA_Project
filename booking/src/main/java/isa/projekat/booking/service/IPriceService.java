@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import isa.projekat.booking.domain.Price;
 import isa.projekat.booking.domain.dto.PriceDTO;
 
-@Service
 public interface IPriceService {
 	
 	List<Price> findAll();
 	Price findById(String id);
+	Price save(Price price);
 	List<Price> findPriceForRoom(String id);
 //	Price deletePrice(String id);
-//	Price createPrice(PriceDTO priceDto, String id);
+//	Price createPriceForRoom(Price price, String id);
 }

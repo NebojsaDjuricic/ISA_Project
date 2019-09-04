@@ -15,12 +15,10 @@ export class HomeComponent implements OnInit {
   carAdminIsLogged: boolean;
 
   constructor(private auth: AuthServiceService) {
-    console.log('Home constructore');
 
     const user = this.auth.getUser();
     const username = localStorage.getItem('username');
 
-    console.log('line 22 ' + user);
     let type;
 
     if (user == null) {
@@ -65,7 +63,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const user = this.auth.getUser();
-
 
     let type;
     if (user == null) {

@@ -140,7 +140,7 @@ public class HotelController {
 	public ResponseEntity<Object> addHotel(@RequestBody Hotel hotelDto) {
 		
 		Hotel newHotel = new Hotel();
-		newHotel.setId(UUID.randomUUID().toString().substring(0, 5));
+		newHotel.setId("hotel_" + hotelDto.getName());
 		newHotel.setName(hotelDto.getName());
 		newHotel.setRating(0.0);
 		newHotel.setDescription(hotelDto.getDescription());

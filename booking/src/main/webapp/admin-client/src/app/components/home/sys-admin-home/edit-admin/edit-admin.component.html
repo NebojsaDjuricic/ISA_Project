@@ -1,0 +1,92 @@
+<app-nav></app-nav>
+
+<h2>Edit Admin</h2>
+
+<hr>
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+    <form [formGroup]="editAdminForm"
+          (ngSubmit)="onSubmit()"
+          class="form-horizontal">
+
+      <div class="form-group">
+        <label for="usernameField" class="col-xs-2">Username: </label>
+        <div class="col-xs-6">
+          <input type="text"
+                 class="form-control"
+                 id="usernameField"
+                 formControlName="username"
+                 readonly
+                 value="{{admin.username}}"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="emailField" class="col-xs-2">Email: </label>
+        <div class="col-xs-6">
+          <input type="email"
+                 class="form-control"
+                 id="emailField"
+                 formControlName="email"
+                 placeholder="Enter email"
+                 value="{{admin.email}}"
+          />
+        </div>
+        <span class="help-block"
+              *ngIf="!editAdminForm.controls.email.valid &&
+               editAdminForm.controls.email.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordField" class="col-xs-2">Password: </label>
+        <div class="col-xs-6">
+          <input type="password"
+                 class="form-control"
+                 id="passwordField"
+                 formControlName="password"
+                 placeholder="Enter password" />
+        </div>
+        <span class="help-block"
+              *ngIf="!editAdminForm.controls.password.valid &&
+               editAdminForm.controls.password.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-2">
+          Admin Role:
+        </label>
+        <div class="col-xs-6">
+          <select class="form-control"
+                  formControlName="type" [value]="admin.type">
+            <option value="SYSTEM_ADMIN" selected>System Admin</option>
+            <option value="AIRLINE_ADMIN" selected>Airline Admin</option>
+            <option value="HOTEL_ADMIN" selected>Hotel Admin</option>
+            <option value="RENT_A_CAR_SERVICE_ADMIN" selected>Rent a Car Admin</option>
+          </select>
+        </div>
+        <span class="help-block"
+              *ngIf="!editAdminForm.controls.type.valid &&
+               editAdminForm.controls.type.touched">
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <div class="col-xs-10 col-xs-offset-2">
+        <button type="submit"
+                class="btn btn-success"
+                [disabled]="!editAdminForm.valid">Save</button> |
+        <button type="button"
+                class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+

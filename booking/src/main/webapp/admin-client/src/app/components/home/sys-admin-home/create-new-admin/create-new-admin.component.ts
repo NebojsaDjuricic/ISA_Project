@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Administrator } from 'src/app/model/administrator';
 import { AdminServiceService } from '../../../../services/admin-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -26,8 +26,8 @@ export class CreateNewAdminComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       passwordRepeat: ['', Validators.required],
-      email: ['', Validators.required],
-      role: ['', Validators.required],
+      email: new FormControl('', [Validators.required, Validators.email]),
+      type: ['', Validators.required],
       editingObjectID: ['', Validators.required]
     });
 
@@ -40,19 +40,17 @@ export class CreateNewAdminComponent implements OnInit {
     this.newAdmin.username = this.createAdminForm.controls.username.value;
     this.newAdmin.password = this.createAdminForm.controls.password.value;
     this.newAdmin.email = this.createAdminForm.controls.email.value;
-    const role = this.createAdminForm.controls.role.value;
-    this.newAdmin.role = role;
+    const type = this.createAdminForm.controls.type.value;
+    this.newAdmin.type = type;
     this.newAdmin.editingObjectID = this.createAdminForm.controls.editingObjectID.value;
-
-    console.log('Samo role: ' + role);
-    console.log('Role in object: ' + this.newAdmin.role);
-    console.log(this.newAdmin);
 
     this.adminService.add(this.newAdmin).subscribe(
       res => {
         console.log(res);
       }
     );
+
+    this.createAdminForm.reset();
   }
 
   onCancel() {

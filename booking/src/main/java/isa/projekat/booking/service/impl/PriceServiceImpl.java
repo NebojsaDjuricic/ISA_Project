@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import isa.projekat.booking.domain.Price;
 import isa.projekat.booking.domain.Room;
@@ -12,6 +13,7 @@ import isa.projekat.booking.repository.PriceRepository;
 import isa.projekat.booking.repository.RoomRepository;
 import isa.projekat.booking.service.IPriceService;
 
+@Service
 public class PriceServiceImpl implements IPriceService{
 	
 	@Autowired
@@ -23,6 +25,11 @@ public class PriceServiceImpl implements IPriceService{
 	@Override
 	public List<Price> findAll() {
 		return priceRepository.findAll();
+	}
+	
+	@Override
+	public Price save(Price price) {
+		return priceRepository.save(price);
 	}
 
 	@Override
@@ -50,12 +57,12 @@ public class PriceServiceImpl implements IPriceService{
 //	}
 //
 //	@Override
-//	public Price createPrice(PriceDTO priceDto, String id) {
+//	public Price createPriceForRoom(Price priceDto, String id) {
 //		boolean exists = false;
 //
 //		for (Price price : roomRepository.findById(id).get()) {
-//			if (priceDto.getStartDate().after(price.getStartDate())
-//					|| priceDto.getEndDate().before(price.getEndDate())) {
+//			if (priceDto.getStartDate().isAfter(price.getStartDate())
+//					|| priceDto.getEndDate().isBefore(price.getEndDate())) {
 //				exists = true;
 //			}
 //		}

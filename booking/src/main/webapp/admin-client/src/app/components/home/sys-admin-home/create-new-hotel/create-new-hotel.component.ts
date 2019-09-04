@@ -32,7 +32,7 @@ export class CreateNewHotelComponent implements OnInit {
       // lat: [''],
       // lon: [''],
       phoneNumber: ['', Validators.required],
-      contactEmail: ['', Validators.required],
+      contactEmail: new FormControl('', [Validators.required, Validators.email]),
       description: ['', Validators.required],
       website: ['', Validators.required],
       rating: [0.0, Validators.required],

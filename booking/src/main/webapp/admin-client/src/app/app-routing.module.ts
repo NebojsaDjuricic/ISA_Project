@@ -15,12 +15,16 @@ import {EditRoomComponent} from './components/home/hotel-admin/edit-room/edit-ro
 import {RoomListComponent} from './components/home/hotel-admin/room-list/room-list.component';
 import {EditHotelComponent} from './components/home/hotel-admin/edit-hotel/edit-hotel.component';
 import {HotelsListComponent} from './components/home/sys-admin-home/hotels-list/hotels-list.component';
+import {EditAdminComponent} from './components/home/sys-admin-home/edit-admin/edit-admin.component';
+import {AdminListComponent} from './components/home/sys-admin-home/admin-list/admin-list.component';
+import {CreatePriceComponent} from './components/home/hotel-admin/create-room/create-price/create-price.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent },
   { path: 'addRoom', component: CreateRoomComponent },
+  { path: 'addRoom/addPrice', component: CreatePriceComponent },
   { path: 'add-hotel', component: CreateNewHotelComponent },
   { path: 'add-rent-a-car-service', component: CreateRentACarServiceComponent },
   { path: 'add-new-admin', component: CreateNewAdminComponent },
@@ -30,6 +34,9 @@ const routes: Routes = [
   { path: 'edit-vehicle/:branchID/:vehicleID', component: EditVehicleComponent},
   { path: 'edit-room/:hotelID/:roomID', component: EditRoomComponent},
   { path: 'hotels/edit-hotel/:hotelID', component: EditHotelComponent},
+  { path: 'admins', component: AdminListComponent},
+  { path: 'admins/edit-admin/:adminUsername', component: EditAdminComponent},
+  { path: 'myProfile/:adminUsername', component: EditAdminComponent},
 ];
 
 @NgModule({

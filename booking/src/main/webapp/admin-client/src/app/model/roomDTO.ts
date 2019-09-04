@@ -6,10 +6,8 @@ export class RoomDTO {
   type: RoomType.Value;
   capacity: number;
   floor: number;
-  // prices: Price[];
-  pricePerNight: number;
+  prices: Price[];
   hotelID: String;
-  admin: String;
   rating: number;
 
   constructor() {

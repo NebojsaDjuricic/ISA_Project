@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 // @ts-ignore
-import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators} from '@angular/forms';
 import {RoomDTO} from '../../../../model/roomDTO';
 import {Hotel} from '../../../../model/hotel';
 import {RoomService} from '../../../../services/room.service';
@@ -46,8 +46,6 @@ export class CreateRoomComponent implements OnInit, OnChanges {
         roomStatus: new FormControl('', [Validators.required]),
         capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
         floor: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
-        pricePerNight: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
-        roomID: new FormControl(null, [Validators.required]),
 
         // Price[] dodati
 
@@ -73,14 +71,24 @@ export class CreateRoomComponent implements OnInit, OnChanges {
     this.room = new RoomDTO();
   }
 
+  private initForm() {
+
+  }
+
+  generateRandomInteger(min, max) {
+    return Math.floor(min + Math.random() * (max + 1 - min));
+  }
+
   onSubmit() {
     this.room.status = this.createRoomForm.controls.roomStatus.value;
     this.room.type = this.createRoomForm.controls.roomType.value;
     this.room.hotelID = this.createRoomForm.controls.hotel.value;
     this.room.floor = this.createRoomForm.controls.floor.value;
-    this.room.pricePerNight = this.createRoomForm.controls.pricePerNight.value;
     this.room.capacity = this.createRoomForm.controls.capacity.value;
-    this.room.id = this.createRoomForm.controls.roomID.value;
+    this.room.id = this.createRoomForm.controls.hotel.value + '.' +
+                    this.createRoomForm.controls.floor.value +
+                    this.createRoomForm.controls.capacity.value +
+                    this.generateRandomInteger(10000, 99999);
 
     // let tipSobe;
     //
@@ -112,6 +120,9 @@ export class CreateRoomComponent implements OnInit, OnChanges {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
+  getControls() {
+    return (this.createRoomForm.get('prices') as FormArray).controls;
+  }
 
   onChange(newValue) {
 
@@ -156,9 +167,14 @@ export class CreateRoomComponent implements OnInit, OnChanges {
   }
 
   onAddPrice() {
-    this.addPriceClicked = true;
-    console.log(this.addPriceClicked);
+    // this.addPriceClicked = true;
+    // console.log(this.addPriceClicked);
     // this.addPriceClicked = false;
+    this.router.navigate(['/addRoom/addPrice']);
+  }
+
+  onDelete(id: String) {
+
   }
 }
 

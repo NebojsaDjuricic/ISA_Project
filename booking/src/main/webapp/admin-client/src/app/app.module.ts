@@ -27,6 +27,8 @@ import {PlaceholderDirective} from './components/auth/placeholder.directive';
 import { CreatePriceComponent } from './components/home/hotel-admin/create-room/create-price/create-price.component';
 import { EditHotelComponent } from './components/home/hotel-admin/edit-hotel/edit-hotel.component';
 import { HotelsListComponent } from './components/home/sys-admin-home/hotels-list/hotels-list.component';
+import { EditAdminComponent } from './components/home/sys-admin-home/edit-admin/edit-admin.component';
+import { AdminListComponent } from './components/home/sys-admin-home/admin-list/admin-list.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { HotelsListComponent } from './components/home/sys-admin-home/hotels-lis
     CreatePriceComponent,
     EditHotelComponent,
     HotelsListComponent,
+    EditAdminComponent,
+    AdminListComponent,
   ],
   imports: [
     BrowserModule,

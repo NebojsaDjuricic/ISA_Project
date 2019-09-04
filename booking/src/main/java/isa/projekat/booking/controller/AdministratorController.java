@@ -73,7 +73,7 @@ public class AdministratorController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> addNewAdmin(@RequestBody AdministratorFullDTO admin) {
+    public ResponseEntity<Object> addNewAdmin(@RequestBody Administrator admin) {
 
         Administrator fromDB = administratorService.findById(admin.getUsername());
 
@@ -84,17 +84,17 @@ public class AdministratorController {
             newAdmin.setEmail(admin.getEmail());
             newAdmin.setEditingObjectID(admin.getEditingObjectID());
 
-            switch(admin.getRole()) {
-                case "SYSTEM_ADMIN":
+            switch(admin.getType()) {
+                case SYSTEM_ADMIN:
                     newAdmin.setType(AdministatorType.SYSTEM_ADMIN);
                     break;
-                case "AIRLINE_ADMIN" :
+                case AIRLINE_ADMIN :
                     newAdmin.setType(AdministatorType.AIRLINE_ADMIN);
                     break;
-                case "HOTEL_ADMIN":
+                case HOTEL_ADMIN:
                     newAdmin.setType(AdministatorType.HOTEL_ADMIN);
                     break;
-                case "RENT_A_CAR_SERVICE_ADMIN":
+                case RENT_A_CAR_SERVICE_ADMIN:
                     newAdmin.setType(AdministatorType.RENT_A_CAR_SERVICE_ADMIN);
                     break;
             }
@@ -132,5 +132,29 @@ public class AdministratorController {
     	
     	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+    
+    @RequestMapping(
+            value = "/editAdmin",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> editAdmin(@RequestBody Administrator administratorDTO) {
+    	
+    	Administrator newAdministrator = new Administrator();
+    	newAdministrator.setUsername(administratorDTO.getUsername());
+    	newAdministrator.setPassword(administratorDTO.getPassword());
+    	newAdministrator.setEmail(administratorDTO.getEmail());
+    	newAdministrator.setType(administratorDTO.getType());
+    	newAdministrator.setEditingObjectID(administratorDTO.getEditingObjectID());
+    	
+    	administratorService.save(newAdministrator);
+    	
+    	return new ResponseEntity<>(newAdministrator, HttpStatus.OK);
+    }
+
+    
+    
+    
 
 }

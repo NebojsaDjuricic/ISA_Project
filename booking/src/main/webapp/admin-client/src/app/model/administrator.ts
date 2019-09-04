@@ -11,15 +11,17 @@ module AdminRole {
 export class Administrator {
   username: String;
   password: String;
+  // passwordRepeat: String;
   email: String;
-  role: AdminRole.Value;
+  type: AdminRole.Value;
   editingObjectID: String;
 
   constructor() {
     this.username = '';
     this.password = '';
+    // this.passwordRepeat = '';
     this.email = '';
-    this.role = null;
+    this.type = null;
     this.editingObjectID = '';
   }
 

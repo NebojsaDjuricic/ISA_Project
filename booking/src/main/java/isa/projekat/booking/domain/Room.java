@@ -1,29 +1,26 @@
 package isa.projekat.booking.domain;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document("Rooms")
 public class Room {
 	
+	@Id
 	private String id;
 //	status mozda bool
 	private RoomStatus status;	
-//	izbaciti type
+//	izbaciti type ?
 	private RoomType type;
-	
-	private boolean onDiscount;	
-	private int capacity;
-	private int floor;
+	private Integer capacity;
+	private Integer floor;
 	private ArrayList<Price> prices;
-	private int pricePerNight;
 	private Double rating;
+	
+	private Boolean onDiscount;	
+//	ako je onDiscount == true ?
+//	private ArrayList<AdditionalService> additionalServices;
 	private ArrayList<RoomRating> roomRatings;
 	private ArrayList<RoomReservation> reservations;
 	
@@ -32,20 +29,18 @@ public class Room {
 	}
 	
 	public Room(String id, RoomStatus status, 
-			RoomType type, int capacity, int floor,
-			int pricePerNight, Double rating) {
+			RoomType type, Integer capacity, Integer floor, Double rating) {
 		super();
 		this.id = id;
 		this.status = status;
 		this.type = type;
 		this.capacity = capacity;
 		this.floor = floor;
-		this.pricePerNight = pricePerNight;
 		this.rating = rating;
 	}
 	
 	public Room(String id, RoomStatus status, 
-				RoomType type, int capacity, int floor,
+				RoomType type, Integer capacity, Integer floor,
 				ArrayList<Price> prices, Double rating) {
 		super();
 		this.id = id;
@@ -55,6 +50,22 @@ public class Room {
 		this.floor = floor;
 		this.prices = prices;
 		this.rating = rating;
+	}
+
+	public Room(String id, RoomStatus status, RoomType type, Integer capacity, Integer floor, ArrayList<Price> prices,
+			Double rating, Boolean onDiscount, ArrayList<RoomRating> roomRatings,
+			ArrayList<RoomReservation> reservations) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.type = type;
+		this.capacity = capacity;
+		this.floor = floor;
+		this.prices = prices;
+		this.rating = rating;
+		this.onDiscount = onDiscount;
+		this.roomRatings = roomRatings;
+		this.reservations = reservations;
 	}
 
 	public String getId() {
@@ -81,27 +92,19 @@ public class Room {
 		this.type = type;
 	}
 
-	public int getCapacity() {
+	public Integer getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(int capacity) {
+	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
 	}
 
-//	public int getPricePerNight() {
-//		return pricePerNight;
-//	}
-//
-//	public void setPricePerNight(int pricePerNight) {
-//		this.pricePerNight = pricePerNight;
-//	}
-
-	public int getFloor() {
+	public Integer getFloor() {
 		return floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(Integer floor) {
 		this.floor = floor;
 	}
 
@@ -113,14 +116,6 @@ public class Room {
 		this.prices = prices;
 	}
 
-	public int getPricePerNight() {
-		return pricePerNight;
-	}
-
-	public void setPricePerNight(int pricePerNight) {
-		this.pricePerNight = pricePerNight;
-	}
-
 	public Double getRating() {
 		return rating;
 	}
@@ -129,7 +124,29 @@ public class Room {
 		this.rating = rating;
 	}
 
+	public Boolean isOnDiscount() {
+		return onDiscount;
+	}
 
-	
+	public void setOnDiscount(Boolean onDiscount) {
+		this.onDiscount = onDiscount;
+	}
+
+	public ArrayList<RoomRating> getRoomRatings() {
+		return roomRatings;
+	}
+
+	public void setRoomRatings(ArrayList<RoomRating> roomRatings) {
+		this.roomRatings = roomRatings;
+	}
+
+	public ArrayList<RoomReservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(ArrayList<RoomReservation> reservations) {
+		this.reservations = reservations;
+	}
+
 	
 }

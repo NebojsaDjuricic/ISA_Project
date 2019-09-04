@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Document("Hotels")
 public class Hotel {
 	
@@ -18,11 +16,11 @@ public class Hotel {
     private String contactEmail;
 	private String description;
 	private String website;
+	private Integer numberOfFloors;
+	private Integer stars;
 	// prosek svih ocena
 	private Double rating;
 	private ArrayList<HotelRating> hotelRatings;
-	private int numberOfFloors;
-	private int stars;
 	private ArrayList<Room> rooms;
 	private ArrayList<AdditionalService> additionalServices;
 	
@@ -38,8 +36,8 @@ public class Hotel {
 	public Hotel(String id, String name, Address address,
 				String phoneNumber, String contactEmail, 
 				String description, String website,
-				Double rating, int numberOfFloors,
-				int stars, ArrayList<Room> rooms,
+				Double rating, Integer numberOfFloors,
+				Integer stars, ArrayList<Room> rooms,
 				ArrayList<AdditionalService> additionalServices) {
 		super();
 		this.id = id;
@@ -58,7 +56,7 @@ public class Hotel {
 
 // dodato polje za slike
 	public Hotel(String id, String name, Address address, String phoneNumber, String contactEmail, String description,
-			String website, Double rating, int numberOfFloors, int stars, ArrayList<Room> rooms,
+			String website, Double rating, Integer numberOfFloors, Integer stars, ArrayList<Room> rooms,
 			ArrayList<AdditionalService> additionalServices, String imageURL) {
 		super();
 		this.id = id;
@@ -148,19 +146,19 @@ public class Hotel {
 		this.hotelRatings = hotelRatings;
 	}
 
-	public int getNumberOfFloors() {
+	public Integer getNumberOfFloors() {
 		return numberOfFloors;
 	}
 
-	public void setNumberOfFloors(int numberOfFloors) {
+	public void setNumberOfFloors(Integer numberOfFloors) {
 		this.numberOfFloors = numberOfFloors;
 	}
 
-	public int getStars() {
+	public Integer getStars() {
 		return stars;
 	}
 
-	public void setStars(int stars) {
+	public void setStars(Integer stars) {
 		this.stars = stars;
 	}
 

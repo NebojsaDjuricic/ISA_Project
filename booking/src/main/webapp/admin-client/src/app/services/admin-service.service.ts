@@ -22,7 +22,15 @@ export class AdminServiceService {
   }
 
   getAdmin(id: String) {
-    return this.http.post<Administrator>(this.backEndURL + '/get/' + id, this.httpOptions);
+    return this.http.get<Administrator>(this.backEndURL + '/get/' + id, this.httpOptions);
+  }
+
+  getAdmins() {
+    return this.http.get<Administrator[]>(this.backEndURL);
+  }
+
+  editAdmin(admin: Administrator) {
+    return this.http.post(this.backEndURL + '/editAdmin', admin, this.httpOptions);
   }
 
 }

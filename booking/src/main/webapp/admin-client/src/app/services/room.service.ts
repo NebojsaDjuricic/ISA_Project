@@ -4,6 +4,7 @@ import {Room} from '../model/room';
 import {RoomDTO} from '../model/roomDTO';
 import {Observable, Subject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {Price} from '../model/price';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,18 @@ export class RoomService {
   // deleteRoom(room: Room) {
   //   return this.http.delete<Room>(this.backEndUrl + '/' + room.id, this.httpOptions);
   // }
+
+  addPrice(price: Price) {
+    return this.http.post(this.backEndUrl + '/prices/addPrice', price, this.httpOptions);
+  }
+
+  getPrice(id: String) {
+    return this.http.get<Price>(this.backEndUrl + '/prices/' + id);
+  }
+
+  editPrice(price: Price) {
+    return this.http.post(this.backEndUrl + '/prices/editPrice', price, this.httpOptions);
+  }
 
 
 }

@@ -1,4 +1,10 @@
+<app-nav></app-nav>
 <!--<ng-container *ngIf="isViewable">-->
+
+<h2>Create new Price</h2>
+
+<hr>
+
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
 
@@ -27,9 +33,11 @@
           Start Date:
         </label>
         <div class="col-xs-6">
-          <input type="text" class="form-control"
-                 formControlName="startDate"
-                 placeholder="Enter start date">
+          <i class="icon icon-calendar2"></i>
+          <input type="date"
+                 class="form-control date"
+                 placeholder="Enter start date"
+                 formControlName="startDate">
         </div>
         <span class="help-block"
               *ngIf="!createPriceForm.controls.startDate.valid &&
@@ -43,9 +51,11 @@
           End Date:
         </label>
         <div class="col-xs-6">
-          <input type="text" class="form-control"
-                 formControlName="endDate"
-                 placeholder="Enter end date">
+          <i class="icon icon-calendar2"></i>
+          <input type="date"
+                 class="form-control date"
+                 placeholder="Enter end date"
+                 formControlName="endDate">
         </div>
         <span class="help-block"
               *ngIf="!createPriceForm.controls.endDate.valid &&
@@ -99,9 +109,9 @@
         <button type="submit"
                 class="btn btn-success"
                 [disabled]="!createPriceForm.valid">Create Price</button>
-        <!--          |-->
-        <!--          <button type="button"-->
-        <!--                  class="btn btn-danger" (click)="onCancel()">Cancel</button>-->
+                  |
+                  <button type="button"
+                          class="btn btn-danger" (click)="onCancel()">Cancel</button>
       </div>
 
     </form>

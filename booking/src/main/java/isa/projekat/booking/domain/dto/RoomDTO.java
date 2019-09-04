@@ -12,18 +12,14 @@ import isa.projekat.booking.domain.RoomType;
 
 public class RoomDTO {
 
-	@Id
 	private String id;
 	private RoomStatus status;
 	private RoomType type;
-	private int capacity;
-	private int floor;
+	private Integer capacity;
+	private Integer floor;
 	private ArrayList<Price> prices;
-	private int pricePerNight;
 	private Double rating;
 	private String hotelID;
-//    private String admin;
-	
 	
 	public String getId() {
 		return id;
@@ -49,19 +45,19 @@ public class RoomDTO {
 		this.type = type;
 	}
 
-	public int getCapacity() {
+	public Integer getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(int capacity) {
+	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
 	}
 
-	public int getFloor() {
+	public Integer getFloor() {
 		return floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(Integer floor) {
 		this.floor = floor;
 	}
 
@@ -73,21 +69,12 @@ public class RoomDTO {
 		this.prices = prices;
 	}
 
-
 	public String getHotelID() {
 		return hotelID;
 	}
 
 	public void setHotelID(String hotelID) {
 		this.hotelID = hotelID;
-	}
-
-	public int getPricePerNight() {
-		return pricePerNight;
-	}
-
-	public void setPricePerNight(int pricePerNight) {
-		this.pricePerNight = pricePerNight;
 	}
 
 	public Double getRating() {
@@ -98,12 +85,4 @@ public class RoomDTO {
 		this.rating = rating;
 	}
 
-//	public String getAdmin() {
-//		return admin;
-//	}
-//
-//	public void setAdmin(String admin) {
-//		this.admin = admin;
-//	}
-	
 }
