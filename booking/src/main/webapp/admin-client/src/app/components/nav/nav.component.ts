@@ -14,6 +14,7 @@ export class NavComponent implements OnInit {
   userIsLoggedIn = false;
   whichUserType: any;
   admin_username: any;
+  admin_hotel: any;
 
   // added
   private userSub: Subscription;
@@ -31,6 +32,7 @@ export class NavComponent implements OnInit {
     let split = null;
     let userTIP = null;
     let adminUsername = null;
+    let adminHotel = null;
     if (userType) {
       split = userType.split('.', 3);
       userTIP = split[1];
@@ -43,6 +45,14 @@ export class NavComponent implements OnInit {
     }
     console.log('Admin username: ' + adminUsername);
     this.admin_username = adminUsername;
+
+    if (userType) {
+      split = userType.split('.', 3);
+      adminHotel = split[2];
+    }
+
+    console.log('Admins hotel: ' + adminHotel);
+    this.admin_hotel = adminHotel;
 
     if (userTIP === 'SYSTEM_ADMIN') {
       this.whichUserType = 'SYSTEM ADMIN';

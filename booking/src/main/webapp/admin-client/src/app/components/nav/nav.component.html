@@ -43,6 +43,9 @@
         <li routerLinkActive="active" *ngIf="userIsLoggedIn">
           <a routerLink="/myProfile/{{admin_username}}">My Profile</a>
         </li>
+<!--        <li routerLinkActive="active" *ngIf="userIsLoggedIn && whichUserType === 'HOTEL ADMIN'">-->
+<!--          <a routerLink="/myHotel/{{admin_hotel}}">My Hotels</a>-->
+<!--        </li>-->
         <li *ngIf="userIsLoggedIn">
           <a style="cursor: pointer;"
              (click)="logout()">Logout</a>

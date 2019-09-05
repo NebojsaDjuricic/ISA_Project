@@ -34,9 +34,11 @@ const routes: Routes = [
   { path: 'edit-vehicle/:branchID/:vehicleID', component: EditVehicleComponent},
   { path: 'edit-room/:hotelID/:roomID', component: EditRoomComponent},
   { path: 'hotels/edit-hotel/:hotelID', component: EditHotelComponent},
+  { path: 'editHotel/:hotelID', component: EditHotelComponent},
   { path: 'admins', component: AdminListComponent},
   { path: 'admins/edit-admin/:adminUsername', component: EditAdminComponent},
   { path: 'myProfile/:adminUsername', component: EditAdminComponent},
+  // { path: 'myHotel/:adminHotel', component: EditHotelComponent},
 ];
 
 @NgModule({

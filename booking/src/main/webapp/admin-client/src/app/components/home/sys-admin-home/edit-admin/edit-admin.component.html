@@ -17,7 +17,6 @@
                  class="form-control"
                  id="usernameField"
                  formControlName="username"
-                 readonly
                  value="{{admin.username}}"/>
         </div>
       </div>
@@ -47,7 +46,7 @@
                  class="form-control"
                  id="passwordField"
                  formControlName="password"
-                 placeholder="Enter password" />
+                 placeholder="Enter password" autocomplete="new-password"/>
         </div>
         <span class="help-block"
               *ngIf="!editAdminForm.controls.password.valid &&
@@ -62,12 +61,21 @@
         </label>
         <div class="col-xs-6">
           <select class="form-control"
-                  formControlName="type" [value]="admin.type">
+                  formControlName="type"
+                  [disabled]="isNotSysAdmin"
+                  [value]="admin.type"
+                  >
             <option value="SYSTEM_ADMIN" selected>System Admin</option>
             <option value="AIRLINE_ADMIN" selected>Airline Admin</option>
             <option value="HOTEL_ADMIN" selected>Hotel Admin</option>
             <option value="RENT_A_CAR_SERVICE_ADMIN" selected>Rent a Car Admin</option>
           </select>
+
+<!--          <ng-select [items]="admin.type"-->
+<!--                     [disableControl]="isNotSysAdmin"-->
+<!--                     formControlName="type">-->
+<!--          </ng-select>-->
+
         </div>
         <span class="help-block"
               *ngIf="!editAdminForm.controls.type.valid &&

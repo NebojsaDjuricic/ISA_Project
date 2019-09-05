@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, Directive, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, NgControl, Validators} from '@angular/forms';
 import {Administrator} from '../../../../model/administrator';
 import {AdminServiceService} from '../../../../services/admin-service.service';
 import {AuthServiceService} from '../../../../services/auth-service.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-edit-admin',
@@ -18,7 +19,9 @@ export class EditAdminComponent implements OnInit {
   adminUsername: String;
   admin_username: String;
   errorMessage = 'Invalid value!';
-  isSysAdmin: false;
+  isSysAdmin: boolean;
+  isNotSysAdmin: boolean;
+  admintip: any;
 
   constructor(private formBuilder: FormBuilder,
               private adminService: AdminServiceService,
@@ -34,6 +37,7 @@ export class EditAdminComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
         type: new FormControl('', [Validators.required]),
+        // type: new FormControl({value: '', disabled: this.isNotSysAdmin}, Validators.required),
       }
     );
 
@@ -50,8 +54,28 @@ export class EditAdminComponent implements OnInit {
       .subscribe(
         res => {
           this.admin = res;
-        }
+          }
       );
+
+    const userType = this.auth.getUser();
+    let split = null;
+    let userTIP = null;
+    if (userType) {
+      split = userType.split('.', 3);
+      userTIP = split[1];
+    }
+
+    if (userTIP === 'SYSTEM_ADMIN') {
+      this.isSysAdmin = true;
+      this.isNotSysAdmin = false;
+    } else {
+      this.isSysAdmin = false;
+      this.isNotSysAdmin = true;
+    }
+
+    console.log('sys:' + this.isSysAdmin);
+    console.log('not sys:' + this.isNotSysAdmin);
+
   }
 
   getAdmin(username) {
@@ -94,4 +118,19 @@ export class EditAdminComponent implements OnInit {
   }
 
 
+}
+
+@Directive({
+  selector : '[disableControl]'
+})
+export class DisableControlDirective {
+
+  @Input() set disableControl(condition: boolean) {
+    const action = condition ? 'disable' : 'enable';
+    console.log(action, condition);
+    setTimeout(() => this.ngControl.control[action](), 10);
+  }
+
+  constructor(private ngControl: NgControl) {
+  }
 }

@@ -1,9 +1,9 @@
-<div class="row">
+<div class="row" >
   <div class="col-xs-8" *ngFor="let room of rooms">
     <a class="list-group-item clearfix"
        routerLinkActive="active"
        [routerLink]="['edit-room', hotel.id, room.id]"
-       style="cursor: pointer">
+       style="cursor: pointer" >
       <div class="pull-left">
         <h4 class="list-group-item-heading">Room No.{{room.id}}</h4>
       </div>
