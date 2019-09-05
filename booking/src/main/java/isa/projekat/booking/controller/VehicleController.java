@@ -6,6 +6,7 @@ import isa.projekat.booking.domain.dto.VehicleSearchQuery;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IBranchService;
 import isa.projekat.booking.service.IRentACarService;
+import isa.projekat.booking.service.IVehicleReservationsService;
 import isa.projekat.booking.service.IVehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
@@ -14,7 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @RestController
 @RequestMapping("vehicle")
@@ -32,6 +39,9 @@ public class VehicleController {
 
     @Autowired
     private IAdministratorService administratorService;
+    
+    @Autowired
+    private IVehicleReservationsService vehicleReservationService;
 
     @RequestMapping(
             value = "/add",
@@ -161,9 +171,90 @@ public class VehicleController {
     )
     public ResponseEntity<Object> search(@RequestBody VehicleSearchQuery query) {
 
-        System.out.println(query);
+        //validate
+    	LocalDate startDate = stringToDate(query.getStartDate());
+    	LocalDate endDate = stringToDate(query.getEndDate());
+    	List<Vehicle> vehiclesToShow = new ArrayList<Vehicle>();
+    	Map<String, Vehicle> mapOfVehiclesToShow = new HashMap<String, Vehicle>();
+    	List<Vehicle> returnValue = new ArrayList<Vehicle>();
+    	
+    	List<Vehicle> vehicles = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
+    	
+    	Map<String, List<VehicleReservation>> reservationsByVehicleID = new HashMap<String, List<VehicleReservation>>();
+    	
+    	if(vehicles.isEmpty()) {
+    		
+    	}
+    	else {
+    		for (Vehicle vehicle : vehicles) {
+    			reservationsByVehicleID.put(
+    					vehicle.getLicenceID(), 
+    					vehicleReservationService.findByVehicleAndRentACarServiceID(vehicle.getLicenceID(), 
+    							query.getRentACarServiceID()));
+    		}
+    	}
+    	
+    	Iterator<Entry<String, List<VehicleReservation>>> it = reservationsByVehicleID.entrySet().iterator();
+    	while(it.hasNext()) {
+    		Map.Entry<String, List<VehicleReservation>> pair = (Map.Entry<String, List<VehicleReservation>>)it.next();
+    		
+    		List<VehicleReservation> reservations = pair.getValue();
+    		Boolean alreadyBooked = false;
+    		
+    		
+    		//compare dates
+    		
+    		if(reservations.isEmpty()) {
+    			
+    		}
+    		else {
+    			for (VehicleReservation reservation : reservations) {
+        			alreadyBooked = false;
+    				if(startDate.isAfter(reservation.getStartDate())) {
+    					if(startDate.isBefore(reservation.getEndDate())) {
+    						alreadyBooked = true;
+    						break;
+    					}
+    				}
+    				
+    				if(endDate.isAfter(reservation.getStartDate())) {
+    					if(endDate.isBefore(reservation.getEndDate())) {
+    						alreadyBooked = true;
+    						break;
+    					}
+    				}
+    				
+    				if(startDate.isBefore(reservation.getStartDate())) {
+    					if(endDate.isAfter(reservation.getEndDate())) {
+    						alreadyBooked = true;
+    						break;
+    					}
+    				}
+    			}
+    		}
+    		
+    		
+    		
+    		if(!alreadyBooked) {
+				//vehiclesToShow.add(vehicleService.findByID(pair.getKey()));
+				mapOfVehiclesToShow.put(pair.getKey(), vehicleService.findByID(pair.getKey()));
+			}
+    		
+    		
+    		it.remove();
+    	}    	
+    	
+    	// Filter out vehicles on discount
+    	RentACarService racs = rentACarService.findByID(query.getRentACarServiceID());
+    	ArrayList<VehicleDiscount> vehiclesOnDiscount = racs.getVehiclesOnDiscount();
+    	
+    	for (VehicleDiscount discount : vehiclesOnDiscount) {
+			if(!mapOfVehiclesToShow.containsKey(discount.getVehicleID())) {
+				returnValue.add(vehicleService.findByID(discount.getVehicleID()));
+			}
+		}
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
 
 
@@ -176,6 +267,23 @@ public class VehicleController {
     public ResponseEntity<Object> makeReservation() {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+    
+    public LocalDate stringToDate(String date) {
+    	
+    	String[] token = date.split("/");
+    	
+    	int year = 0;
+    	int month = 0;
+    	int dayOfMonth = 0;
+    	
+    	month = Integer.parseInt(token[0]);
+    	dayOfMonth = Integer.parseInt(token[1]);
+    	year = Integer.parseInt(token[2]);
+    	
+    	LocalDate result = LocalDate.of(year, month, dayOfMonth);
+    	
+    	return result;
     }
 
 }
