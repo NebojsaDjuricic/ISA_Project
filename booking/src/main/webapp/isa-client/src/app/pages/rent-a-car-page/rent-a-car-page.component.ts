@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class RentACarPageComponent implements OnInit {
 
   company: RentACar;
+  queryResult: Object;
 
   constructor(
     private rentACarService: RentACarService,
@@ -31,6 +32,10 @@ export class RentACarPageComponent implements OnInit {
         this.company = retVal;
       }
     );
+  }
+
+  fetchQueryResults($event) {
+    this.queryResult = $event
   }
 
 }

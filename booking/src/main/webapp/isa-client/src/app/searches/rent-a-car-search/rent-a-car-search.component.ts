@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleSearchDTO } from 'src/app/model/vehicleSearchDTO';
 import { VehicleService } from '../../services/vehicle.service';
 import { VehicleType } from '../../model/vehicleType';
+import { Observable } from 'rxjs';
+import { Vehicle } from 'src/app/model/vehicle';
 
 @Component({
   selector: 'app-rent-a-car-search',
@@ -13,7 +15,12 @@ export class RentACarSearchComponent implements OnInit {
 
   searchForm: FormGroup;
   vehicleSearch: VehicleSearchDTO;
+
   @Input() rentACarServiceID: String;
+
+  searchResult: Vehicle[];
+
+  @Output() queryResultEvent = new EventEmitter<Object>();
 
   vehicleTypes: VehicleType[] = [
     { value: 'HATCHBACK', name: 'Hatchback'},
@@ -41,6 +48,7 @@ export class RentACarSearchComponent implements OnInit {
     });
 
     this.vehicleSearch = new VehicleSearchDTO();
+    
 
   }
 
@@ -57,11 +65,10 @@ export class RentACarSearchComponent implements OnInit {
     this.vehicleSearch.maxPrice = this.searchForm.controls.maxPrice.value;
     this.vehicleSearch.rentACarServiceID = this.searchForm.controls.rentACarServiceID.value;
 
-    console.log(this.vehicleSearch);
-
     this.vehicleService.makeQuery(this.vehicleSearch).subscribe(
       res => {
-        console.log(res);
+        console.log("Search result: " + res);
+        this.queryResultEvent.emit(this.searchResult);
       }
     );
   }

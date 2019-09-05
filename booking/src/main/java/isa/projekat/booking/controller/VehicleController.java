@@ -170,8 +170,6 @@ public class VehicleController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Object> search(@RequestBody VehicleSearchQuery query) {
-    	
-    	System.out.println(query.toString());
 
         //validate
     	LocalDate startDate = stringToDate(query.getStartDate());
@@ -255,8 +253,13 @@ public class VehicleController {
 				mapOfVehiclesToShow.remove(discount.getVehicleID());
 			}
 		}
+    	
+    	for (Map.Entry<String, Vehicle> vehicle : mapOfVehiclesToShow.entrySet()) {
+			returnValue.add(vehicle.getValue());
+		}
+    	
 
-        return new ResponseEntity<>(mapOfVehiclesToShow, HttpStatus.OK);
+        return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
 
 
