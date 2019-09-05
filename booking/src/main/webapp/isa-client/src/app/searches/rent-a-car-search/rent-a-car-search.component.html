@@ -1,34 +1,34 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
   
-    <div class="col-md-3">
-        <div class="form-group">
-            Start date:
+  <div class="col-md-3">
+    <div class="form-group">
+      Start date:
   
-            <div class="form-field">
-                <i class="icon icon-calendar2"></i>
-                <input type="date" class="form-control date" formControlName="startDate">
-            </div>
-        </div>
+      <div class="form-field">
+        <i class="icon icon-calendar2"></i>
+        <input type="date" class="form-control date" formControlName="startDate">
       </div>
+    </div>
+  </div>
   
   <div class="col-md-3">
     <div class="form-group">
         Start place:
-  <input type="text" class="form-control date" formControlName="startPlace">
+      <input type="text" class="form-control date" formControlName="startPlace">
     </div>
   </div>
   
 
   <div class="col-md-3">
-      <div class="form-group">
-          End date:
+    <div class="form-group">
+      End date:
 
-          <div class="form-field">
-              <i class="icon icon-calendar2"></i>
-              <input type="date" class="form-control date" formControlName="endDate">
-          </div>
+      <div class="form-field">
+        <i class="icon icon-calendar2"></i>
+        <input type="date" class="form-control date" formControlName="endDate">
       </div>
     </div>
+  </div>
 
     <div class="col-md-3">
       <div class="form-group">
@@ -42,12 +42,25 @@
   <input type="text" formControlName="type">
   -->
   <div class="col-md-3">
-      <div class="form-group">
-          Number of passagers:
-          <input type="number" class="form-control date" formControlName="passangers">
-        </div>
-        </div>
+    <div class="form-group">
+      Number of passegers:
+      <input type="number" class="form-control date" formControlName="passengers">
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      Minimum price:
+      <input type="number" class="form-control number" formControlName="minPrice">
+    </div>
+  </div>
  
+  <div class="col-md-3">
+    <div class="form-group">
+      Maximum price:
+      <input type="number" class="form-control number" formControlName="maxPrice">
+    </div>
+  </div>
 
   <input type="submit" class="btn btn-primary btn-block" value="Search">
 </form>

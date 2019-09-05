@@ -4,7 +4,10 @@ export class VehicleSearchDTO {
     endDate: String;
     endPlace: String;
     type: String;
-    passangers: number;
+    passengers: number;
+    minPrice: number;
+    maxPrice: number;
+    rentACarServiceID: String
 
     constructor() {
 

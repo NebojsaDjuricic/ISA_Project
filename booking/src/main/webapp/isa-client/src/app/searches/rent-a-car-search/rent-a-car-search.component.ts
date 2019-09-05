@@ -21,8 +21,8 @@ export class RentACarSearchComponent implements OnInit {
       endDate: ['', Validators.required],
       startPlace: ['', Validators.required],
       endPlace: ['', Validators.required],
-      // type: ['', Validators.required],
-      passangers: ['', Validators.required]
+      type: ['', Validators.required],
+      passengers: ['', Validators.required]
     });
 
     this.vehicleSearch = new VehicleSearchDTO();
@@ -36,8 +36,9 @@ export class RentACarSearchComponent implements OnInit {
     this.vehicleSearch.endPlace = this.searchForm.controls.endPlace.value;
     this.vehicleSearch.startDate = this.searchForm.controls.startDate.value;
     this.vehicleSearch.startPlace = this.searchForm.controls.startPlace.value;
-    // his.vehicleSearch.type = this.searchForm.controls.type.value;
-    this.vehicleSearch.passangers = this.searchForm.controls.passangers.value;
+    this.vehicleSearch.type = this.searchForm.controls.type.value;
+    this.vehicleSearch.passengers = this.searchForm.controls.passangers.value;
+    this.vehicleSearch.minPrice 
 
     console.log(this.vehicleSearch);
 
