@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -174,10 +175,12 @@ public class VehicleController {
     	LocalDate startDate = stringToDate(query.getStartDate());
     	LocalDate endDate = stringToDate(query.getEndDate());
     	List<Vehicle> vehiclesToShow = new ArrayList<Vehicle>();
+    	Map<String, Vehicle> mapOfVehiclesToShow = new HashMap<String, Vehicle>();
+    	List<Vehicle> returnValue = new ArrayList<Vehicle>();
     	
     	List<Vehicle> vehicles = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
     	
-    	Map<String, List<VehicleReservation>> reservationsByVehicleID = null;
+    	Map<String, List<VehicleReservation>> reservationsByVehicleID = new HashMap<String, List<VehicleReservation>>();
     	
     	if(vehicles.isEmpty()) {
     		
@@ -201,39 +204,57 @@ public class VehicleController {
     		
     		//compare dates
     		
-    		for (VehicleReservation reservation : reservations) {
-    			alreadyBooked = false;
-				if(startDate.isAfter(reservation.getStartDate())) {
-					if(startDate.isBefore(reservation.getEndDate())) {
-						alreadyBooked = true;
-						break;
-					}
-				}
-				
-				if(endDate.isAfter(reservation.getStartDate())) {
-					if(endDate.isBefore(reservation.getEndDate())) {
-						alreadyBooked = true;
-						break;
-					}
-				}
-				
-				if(startDate.isBefore(reservation.getStartDate())) {
-					if(endDate.isAfter(reservation.getEndDate())) {
-						alreadyBooked = true;
-						break;
-					}
-				}
-			}
+    		if(reservations.isEmpty()) {
+    			
+    		}
+    		else {
+    			for (VehicleReservation reservation : reservations) {
+        			alreadyBooked = false;
+    				if(startDate.isAfter(reservation.getStartDate())) {
+    					if(startDate.isBefore(reservation.getEndDate())) {
+    						alreadyBooked = true;
+    						break;
+    					}
+    				}
+    				
+    				if(endDate.isAfter(reservation.getStartDate())) {
+    					if(endDate.isBefore(reservation.getEndDate())) {
+    						alreadyBooked = true;
+    						break;
+    					}
+    				}
+    				
+    				if(startDate.isBefore(reservation.getStartDate())) {
+    					if(endDate.isAfter(reservation.getEndDate())) {
+    						alreadyBooked = true;
+    						break;
+    					}
+    				}
+    			}
+    		}
+    		
+    		
     		
     		if(!alreadyBooked) {
-				vehiclesToShow.add(vehicleService.findByID(pair.getKey()));
+				//vehiclesToShow.add(vehicleService.findByID(pair.getKey()));
+				mapOfVehiclesToShow.put(pair.getKey(), vehicleService.findByID(pair.getKey()));
 			}
     		
     		
     		it.remove();
     	}    	
+    	
+    	// Filter out vehicles on discount
+    	RentACarService racs = rentACarService.findByID(query.getRentACarServiceID());
+    	ArrayList<VehicleDiscount> vehiclesOnDiscount = racs.getVehiclesOnDiscount();
+    	
+    	for (VehicleDiscount discount : vehiclesOnDiscount) {
+			if(!mapOfVehiclesToShow.containsKey(discount.getVehicleID())) {
+				returnValue.add(vehicleService.findByID(discount.getVehicleID()));
+			}
+		}
 
-        return new ResponseEntity<>(vehiclesToShow, HttpStatus.OK);
+        return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
 
 
