@@ -60,7 +60,8 @@ public class VehicleSearchQuery {
 	public String toString() {
 		return ""+this.getStartDate()+" "+this.getStartPlace()+" "
 				+this.getEndDate()+" "+ this.getEndPlace()+ " "
-				+this.getType()+ " " + this.getPassengers();
+				+this.getType()+ " " + this.getPassengers()+ " "
+				+this.getRentACarServiceID();
 	}
 
 	public VehicleType getType() {
