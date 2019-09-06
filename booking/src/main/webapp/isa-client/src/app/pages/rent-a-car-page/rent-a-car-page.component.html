@@ -4,7 +4,11 @@
   
 </app-rent-a-car-search>
 
-{{this.queryResult}}
+<ul>
+  <li *ngFor="let vehicle of queryResult">
+    {{vehicle.licenceID}}
+  </li>
+</ul>
 
 <div class="jumbotron" *ngIf="company">
   <h1 class="display-3"> {{ company.name }} </h1>

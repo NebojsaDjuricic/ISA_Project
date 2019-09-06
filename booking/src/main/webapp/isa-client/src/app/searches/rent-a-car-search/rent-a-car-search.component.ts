@@ -67,10 +67,12 @@ export class RentACarSearchComponent implements OnInit {
 
     this.vehicleService.makeQuery(this.vehicleSearch).subscribe(
       res => {
-        console.log("Search result: " + res);
+        this.searchResult = res;
         this.queryResultEvent.emit(this.searchResult);
       }
     );
+
+    
   }
 
 }

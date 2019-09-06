@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { RentACarService } from '../../services/rent-a-car.service';
 import { Observable } from 'rxjs';
+import { Vehicle } from 'src/app/model/vehicle';
 
 @Component({
   selector: 'app-rent-a-car-page',
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
 export class RentACarPageComponent implements OnInit {
 
   company: RentACar;
-  queryResult: Object;
+  queryResult: Vehicle[];
 
   constructor(
     private rentACarService: RentACarService,
