@@ -1,10 +1,23 @@
 <app-nav></app-nav>
 
-<app-rent-a-car-search>
+<app-rent-a-car-search [rentACarServiceID]="company.id" (queryResultEvent)="fetchQueryResults($event)">
   
 </app-rent-a-car-search>
 
-<div class="jumbotron" *ngIf="company">
+<ul *ngIf="queryResult">
+  This is search result:
+  <li *ngFor="let vehicle of queryResult">
+    Name: {{vehicle.name}}; 
+    Brand: {{vehicle.brand}}; 
+    Model: {{vehicle.model}}; 
+    Manufacturing year: {{vehicle.manufacturingYear}}; 
+    Vehicle type: {{vehicle.vehicleType}}; 
+    Number of seats: {{vehicle.numberOfSeats}}; 
+    <a>Book</a>
+  </li>
+</ul>
+
+<div class="jumbotron" *ngIf="company && !queryResult">
   <h1 class="display-3"> {{ company.name }} </h1>
   <h5 class="lead"> 
     <p class="text-muted">

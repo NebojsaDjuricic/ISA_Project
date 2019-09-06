@@ -37,10 +37,17 @@
       </div>
     </div>
   
-  <!--
-  Vehicle type:
-  <input type="text" formControlName="type">
-  -->
+  
+  <div class="col-md-3">
+    <div class="form-group">
+      <select formControlName="type">
+        <option [ngValue]="type.value" *ngFor="let type of vehicleTypes">
+          {{ type.name }}
+        </option>
+      </select>
+    </div>
+  </div>  
+
   <div class="col-md-3">
     <div class="form-group">
       Number of passegers:

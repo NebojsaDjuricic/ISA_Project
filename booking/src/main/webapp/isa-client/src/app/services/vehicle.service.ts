@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { VehicleSearchDTO } from '../model/vehicleSearchDTO';
+import { Observable } from 'rxjs';
+import { Vehicle } from '../model/vehicle';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,7 @@ import { VehicleSearchDTO } from '../model/vehicleSearchDTO';
 export class VehicleService {
 
   private backEndUrl = 'http://localhost:8080/vehicle';
+  vehicleSearchQueryResult: Observable<Vehicle[]>;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +18,8 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  makeQuery(query: VehicleSearchDTO ) {
-    return this.http.post(this.backEndUrl + '/search', query, this.httpOptions );
+  makeQuery(query: VehicleSearchDTO ): Observable<Vehicle[]> {
+    return this.http.post<Vehicle[]>(this.backEndUrl + '/search', query, this.httpOptions );
+
   }
 }

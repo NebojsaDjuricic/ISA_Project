@@ -1,7 +1,5 @@
 <app-nav></app-nav>
 
-<app-rent-a-car-search></app-rent-a-car-search>
-
 <div class="container-fluid" *ngFor="let info of data | async">
   <div class="jumbotron">
       <a class="btn btn-primary btn-lg" routerLink="/rent-a-car/{{info.id}}">{{ info.name }}</a>

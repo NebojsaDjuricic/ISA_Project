@@ -249,10 +249,15 @@ public class VehicleController {
     	ArrayList<VehicleDiscount> vehiclesOnDiscount = racs.getVehiclesOnDiscount();
     	
     	for (VehicleDiscount discount : vehiclesOnDiscount) {
-			if(!mapOfVehiclesToShow.containsKey(discount.getVehicleID())) {
-				returnValue.add(vehicleService.findByID(discount.getVehicleID()));
+			if(mapOfVehiclesToShow.containsKey(discount.getVehicleID())) {
+				mapOfVehiclesToShow.remove(discount.getVehicleID());
 			}
 		}
+    	
+    	for (Map.Entry<String, Vehicle> vehicle : mapOfVehiclesToShow.entrySet()) {
+			returnValue.add(vehicle.getValue());
+		}
+    	
 
         return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
@@ -271,15 +276,15 @@ public class VehicleController {
     
     public LocalDate stringToDate(String date) {
     	
-    	String[] token = date.split("/");
+    	String[] token = date.split("-");
     	
     	int year = 0;
     	int month = 0;
     	int dayOfMonth = 0;
     	
-    	month = Integer.parseInt(token[0]);
-    	dayOfMonth = Integer.parseInt(token[1]);
-    	year = Integer.parseInt(token[2]);
+    	month = Integer.parseInt(token[1]);
+    	dayOfMonth = Integer.parseInt(token[2]);
+    	year = Integer.parseInt(token[0]);
     	
     	LocalDate result = LocalDate.of(year, month, dayOfMonth);
     	
