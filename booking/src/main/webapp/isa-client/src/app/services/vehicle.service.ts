@@ -18,8 +18,8 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  makeQuery(query: VehicleSearchDTO ) {
-    return this.vehicleSearchQueryResult = this.http.post<Vehicle[]>(this.backEndUrl + '/search', query, this.httpOptions );
+  makeQuery(query: VehicleSearchDTO ): Observable<Vehicle[]> {
+    return this.http.post<Vehicle[]>(this.backEndUrl + '/search', query, this.httpOptions );
 
   }
 }
