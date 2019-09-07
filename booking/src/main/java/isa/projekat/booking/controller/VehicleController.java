@@ -2,6 +2,7 @@ package isa.projekat.booking.controller;
 
 import isa.projekat.booking.domain.*;
 import isa.projekat.booking.domain.dto.VehicleDTO;
+import isa.projekat.booking.domain.dto.VehicleReservationDTO;
 import isa.projekat.booking.domain.dto.VehicleSearchQuery;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IBranchService;
@@ -275,15 +276,27 @@ public class VehicleController {
 
 
     @RequestMapping(
-            value = "/makeReservation",
+            value = "/makeVehicleReservation",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> makeReservation() {
+    public ResponseEntity<Object> makeReservation(@RequestBody VehicleReservationDTO reservationDetails) {
+    	
+    	VehicleReservation newReservation = new VehicleReservation();
+    	
+    	newReservation.setVehicleID(reservationDetails.getVehicleID());
+    	newReservation.setRentACarServiceID(reservationDetails.getRentACarServiceID());
+    	newReservation.setStartDate(stringToDate(reservationDetails.getStartDate()));
+    	newReservation.setEndDate(stringToDate(reservationDetails.getEndDate()));
+    	newReservation.setPickUpLocation(reservationDetails.getStartPlace());
+    	newReservation.setDropUpLocation(reservationDetails.getEndPlace());
+    	
+    	vehicleReservationService.save(newReservation);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>("Reservation created", HttpStatus.OK);
     }
+    
     
     public LocalDate stringToDate(String date) {
     	
