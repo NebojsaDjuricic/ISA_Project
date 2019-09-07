@@ -179,14 +179,25 @@ public class VehicleController {
     	List<Vehicle> returnValue = new ArrayList<Vehicle>();
     	
     	List<Vehicle> vehicles = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
+    	RentACarService racs = rentACarService.findByID(query.getRentACarServiceID());
+    	
+    	Map<String, String> vehIDs = racs.getVehicles();
+    	
+    	List<Vehicle> tempVehicles = new ArrayList<Vehicle>();
+    	
+    	for (Vehicle vehicle : vehicles) {
+			if(vehIDs.containsKey(vehicle.getLicenceID())) {
+				tempVehicles.add(vehicle);
+			}
+		}
     	
     	Map<String, List<VehicleReservation>> reservationsByVehicleID = new HashMap<String, List<VehicleReservation>>();
     	
-    	if(vehicles.isEmpty()) {
+    	if(tempVehicles.isEmpty()) {
     		
     	}
     	else {
-    		for (Vehicle vehicle : vehicles) {
+    		for (Vehicle vehicle : tempVehicles) {
     			reservationsByVehicleID.put(
     					vehicle.getLicenceID(), 
     					vehicleReservationService.findByVehicleAndRentACarServiceID(vehicle.getLicenceID(), 
@@ -245,7 +256,7 @@ public class VehicleController {
     	}    	
     	
     	// Filter out vehicles on discount
-    	RentACarService racs = rentACarService.findByID(query.getRentACarServiceID());
+    	
     	ArrayList<VehicleDiscount> vehiclesOnDiscount = racs.getVehiclesOnDiscount();
     	
     	for (VehicleDiscount discount : vehiclesOnDiscount) {
