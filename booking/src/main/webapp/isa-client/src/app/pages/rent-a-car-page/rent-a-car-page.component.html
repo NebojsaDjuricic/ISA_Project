@@ -4,7 +4,7 @@
   
 </app-rent-a-car-search>
 
-<ul *ngIf="queryResult">
+<ul *ngIf="dataFromChild">
   This is search result:
   <li *ngFor="let vehicle of queryResult">
     Name: {{vehicle.name}}; 
@@ -13,7 +13,7 @@
     Manufacturing year: {{vehicle.manufacturingYear}}; 
     Vehicle type: {{vehicle.vehicleType}}; 
     Number of seats: {{vehicle.numberOfSeats}}; 
-    <a>Book</a>
+    <a (click)="makeVehicleReservation(vehicle)">Book</a>
   </li>
 </ul>
 

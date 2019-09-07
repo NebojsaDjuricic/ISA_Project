@@ -15,6 +15,7 @@ export class RentACarSearchComponent implements OnInit {
 
   searchForm: FormGroup;
   vehicleSearch: VehicleSearchDTO;
+  data: DataForParent;
 
   @Input() rentACarServiceID: String;
 
@@ -48,6 +49,7 @@ export class RentACarSearchComponent implements OnInit {
     });
 
     this.vehicleSearch = new VehicleSearchDTO();
+    this.data = new DataForParent();
     
 
   }
@@ -68,11 +70,32 @@ export class RentACarSearchComponent implements OnInit {
     this.vehicleService.makeQuery(this.vehicleSearch).subscribe(
       res => {
         this.searchResult = res;
-        this.queryResultEvent.emit(this.searchResult);
+      
+        this.data.vehicles = res;     
+        this.data.startPlace = this.vehicleSearch.startPlace;
+        this.data.endPlace = this.vehicleSearch.endPlace;
+        this.data.startDate = this.vehicleSearch.startDate;
+        this.data.endDate = this.vehicleSearch.endDate;
+        
+
+        this.queryResultEvent.emit(this.data);
       }
     );
 
     
   }
 
+}
+
+export class DataForParent {
+
+  constructor() {
+    this.vehicles = [];
+  }
+
+  vehicles : Vehicle[];
+  startDate: String;
+  endDate: String;
+  startPlace: String;
+  endPlace: String; 
 }
