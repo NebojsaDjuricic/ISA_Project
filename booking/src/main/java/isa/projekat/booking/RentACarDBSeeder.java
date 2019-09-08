@@ -3,6 +3,8 @@ package isa.projekat.booking;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -223,6 +225,21 @@ public class RentACarDBSeeder implements CommandLineRunner {
         rent1.setName("Giga rent");
         rent1.setRating(4.0);
         
+        rent1.getVehicles().put(v1.getLicenceID(), v1.getLicenceID());
+        rent1.getVehicles().put(v2.getLicenceID(), v2.getLicenceID());
+        rent1.getVehicles().put(v3.getLicenceID(), v3.getLicenceID());
+        rent1.getVehicles().put(v4.getLicenceID(), v4.getLicenceID());
+        
+        ArrayList<String> b1vehs = new ArrayList<String>();
+        b1vehs.add(v1.getLicenceID());
+        b1vehs.add(v2.getLicenceID());
+        ArrayList<String> b2vehs = new ArrayList<String>();
+        b2vehs.add(v3.getLicenceID());
+        b2vehs.add(v4.getLicenceID());
+        
+        rent1.getBranchesAndVehicles().put(branch1.getId(), b1vehs);
+        rent1.getBranchesAndVehicles().put(branch2.getId(), b2vehs);
+        
         VehicleDiscount vehDis1 = new VehicleDiscount();
         vehDis1.setVehicleID(v1.getLicenceID());
         vehDis1.setDiscount(10.0);
@@ -234,6 +251,7 @@ public class RentACarDBSeeder implements CommandLineRunner {
         vehdisclist1.add(vehDis1);
         rent1.setVehiclesOnDiscount(vehdisclist1);
 
+        
         RentACarService rent2 = new RentACarService();
         rent2.setId(Calendar.getInstance().getTimeInMillis()+"2");
         rent2.setAddress(adrs3);
@@ -243,6 +261,15 @@ public class RentACarDBSeeder implements CommandLineRunner {
         rent2.setDescription("Najjeftinija vozila za iznajmljivanje");
         rent2.setName("Cheap rent");
         rent2.setRating(4.4);
+        
+        rent2.getVehicles().put(v5.getLicenceID(), v5.getLicenceID());
+        rent2.getVehicles().put(v6.getLicenceID(), v6.getLicenceID());
+        
+        ArrayList<String> b3vehs = new ArrayList<String>();
+        b3vehs.add(v5.getLicenceID());
+        b3vehs.add(v6.getLicenceID());
+        
+        rent2.getBranchesAndVehicles().put(branch3.getId(), b3vehs);
 
         ArrayList<RentACarService> carRents = new ArrayList<>();
         carRents.add(rent1);

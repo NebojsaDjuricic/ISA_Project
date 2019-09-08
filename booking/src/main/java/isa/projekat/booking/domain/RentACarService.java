@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Document("RentACarServices")
 public class RentACarService {
@@ -16,10 +19,14 @@ public class RentACarService {
     private Double rating;
     private ArrayList<Branch> branches;
     private ArrayList<VehicleDiscount> vehiclesOnDiscount;
+    private Map<String, String> vehicles;
+    private Map<String, List<String>> branchesAndVehicles;
 
     public RentACarService() {
     	this.setBranches(new ArrayList<Branch>());
     	this.setVehiclesOnDiscount(new ArrayList<VehicleDiscount>());
+    	this.setVehicles(new HashMap<String, String>());
+    	this.setBranchesAndVehicles(new HashMap<String, List<String>>());
     }
 
     public String getName() {
@@ -76,5 +83,21 @@ public class RentACarService {
 
 	public void setVehiclesOnDiscount(ArrayList<VehicleDiscount> vehiclesOnDiscount) {
 		this.vehiclesOnDiscount = vehiclesOnDiscount;
+	}
+
+	public Map<String, String> getVehicles() {
+		return vehicles;
+	}
+
+	public void setVehicles(Map<String, String> vehicles) {
+		this.vehicles = vehicles;
+	}
+
+	public Map<String, List<String>> getBranchesAndVehicles() {
+		return branchesAndVehicles;
+	}
+
+	public void setBranchesAndVehicles(Map<String, List<String>> branchesAndVehicles) {
+		this.branchesAndVehicles = branchesAndVehicles;
 	}
 }

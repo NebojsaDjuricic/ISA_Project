@@ -2,6 +2,7 @@ package isa.projekat.booking.controller;
 
 import isa.projekat.booking.domain.*;
 import isa.projekat.booking.domain.dto.VehicleDTO;
+import isa.projekat.booking.domain.dto.VehicleReservationDTO;
 import isa.projekat.booking.domain.dto.VehicleSearchQuery;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IBranchService;
@@ -179,14 +180,25 @@ public class VehicleController {
     	List<Vehicle> returnValue = new ArrayList<Vehicle>();
     	
     	List<Vehicle> vehicles = vehicleService.findByVehicleTypeAndSeats(query.getType(), query.getPassengers());
+    	RentACarService racs = rentACarService.findByID(query.getRentACarServiceID());
+    	
+    	Map<String, String> vehIDs = racs.getVehicles();
+    	
+    	List<Vehicle> tempVehicles = new ArrayList<Vehicle>();
+    	
+    	for (Vehicle vehicle : vehicles) {
+			if(vehIDs.containsKey(vehicle.getLicenceID())) {
+				tempVehicles.add(vehicle);
+			}
+		}
     	
     	Map<String, List<VehicleReservation>> reservationsByVehicleID = new HashMap<String, List<VehicleReservation>>();
     	
-    	if(vehicles.isEmpty()) {
+    	if(tempVehicles.isEmpty()) {
     		
     	}
     	else {
-    		for (Vehicle vehicle : vehicles) {
+    		for (Vehicle vehicle : tempVehicles) {
     			reservationsByVehicleID.put(
     					vehicle.getLicenceID(), 
     					vehicleReservationService.findByVehicleAndRentACarServiceID(vehicle.getLicenceID(), 
@@ -245,7 +257,7 @@ public class VehicleController {
     	}    	
     	
     	// Filter out vehicles on discount
-    	RentACarService racs = rentACarService.findByID(query.getRentACarServiceID());
+    	
     	ArrayList<VehicleDiscount> vehiclesOnDiscount = racs.getVehiclesOnDiscount();
     	
     	for (VehicleDiscount discount : vehiclesOnDiscount) {
@@ -264,15 +276,27 @@ public class VehicleController {
 
 
     @RequestMapping(
-            value = "/makeReservation",
+            value = "/makeVehicleReservation",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> makeReservation() {
+    public ResponseEntity<Object> makeReservation(@RequestBody VehicleReservationDTO reservationDetails) {
+    	
+    	VehicleReservation newReservation = new VehicleReservation();
+    	
+    	newReservation.setVehicleID(reservationDetails.getVehicleID());
+    	newReservation.setRentACarServiceID(reservationDetails.getRentACarServiceID());
+    	newReservation.setStartDate(stringToDate(reservationDetails.getStartDate()));
+    	newReservation.setEndDate(stringToDate(reservationDetails.getEndDate()));
+    	newReservation.setPickUpLocation(reservationDetails.getStartPlace());
+    	newReservation.setDropUpLocation(reservationDetails.getEndPlace());
+    	
+    	vehicleReservationService.save(newReservation);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>("Reservation created", HttpStatus.OK);
     }
+    
     
     public LocalDate stringToDate(String date) {
     	

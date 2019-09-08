@@ -3,6 +3,7 @@ package isa.projekat.booking.domain.dto;
 public class VehicleReservationDTO {
 
     private String vehicleID;
+    private String rentACarServiceID;
     private String startDate;
     private String endDate;
     private String startPlace;
@@ -50,4 +51,12 @@ public class VehicleReservationDTO {
     public void setEndPlace(String endPlace) {
         this.endPlace = endPlace;
     }
+
+	public String getRentACarServiceID() {
+		return rentACarServiceID;
+	}
+
+	public void setRentACarServiceID(String rentACarServiceID) {
+		this.rentACarServiceID = rentACarServiceID;
+	}
 }
