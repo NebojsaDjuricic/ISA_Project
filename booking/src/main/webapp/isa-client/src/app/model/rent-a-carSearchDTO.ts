@@ -4,7 +4,7 @@ export class RentACarSearchDTO {
     location: String;
     startDate: String;
     endDate: String;
-
+    
     constructor() {
 
     }
