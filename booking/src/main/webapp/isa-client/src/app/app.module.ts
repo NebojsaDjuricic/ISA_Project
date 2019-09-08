@@ -24,6 +24,7 @@ import { RoomsComponent } from './pages/rooms/rooms.component';
 import { RoomsListComponent } from './pages/rooms/rooms-list/rooms-list.component';
 import { RoomItemComponent } from './pages/rooms/rooms-list/room-item/room-item.component';
 import { RoomDetailComponent } from './pages/rooms/room-detail/room-detail.component';
+import { FindRentACarServiceComponent } from './searches/find-rent-a-car-service/find-rent-a-car-service.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RoomDetailComponent } from './pages/rooms/room-detail/room-detail.compo
     RoomsComponent,
     RoomsListComponent,
     RoomItemComponent,
-    RoomDetailComponent
+    RoomDetailComponent,
+    FindRentACarServiceComponent
   ],
   imports: [
     BrowserModule,

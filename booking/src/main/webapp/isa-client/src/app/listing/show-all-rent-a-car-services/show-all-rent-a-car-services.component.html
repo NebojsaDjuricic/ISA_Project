@@ -1,8 +1,31 @@
 <app-nav></app-nav>
 
-<div class="container-fluid" *ngFor="let info of data | async">
-  <div class="jumbotron">
-      <a class="btn btn-primary btn-lg" routerLink="/rent-a-car/{{info.id}}">{{ info.name }}</a>
+<app-find-rent-a-car-service (queryResultEvent)="fetchQueryResults($event)"></app-find-rent-a-car-service>
+
+<div *ngIf="rentACarSearchResult">
+  Search result:
+
+  <div class="container-fluid" *ngFor="let temp of searchedRentACarServices">
+    <div class="jumbotron">
+      <a class="btn btn-primary btn-lg" routerLink="/rent-a-car/{{temp.id}}">{{ temp.name }}</a>
+      
+      <p>Rating: {{temp.rating}}</p>
+      
+      <li *ngFor="let branch of temp.branches">
+        {{branch.address.streetName}}, {{branch.address.buildingNumber}}, {{branch.address.city}}
+      </li>
+
+    </div>
   </div>
-  
 </div>
+
+<div *ngIf="!rentACarSearchResult">
+  All rent a car services:
+  <div class="container-fluid" *ngFor="let info of data | async">
+    <div class="jumbotron">
+        <a class="btn btn-primary btn-lg" routerLink="/rent-a-car/{{info.id}}">{{ info.name }}</a>
+    </div>
+    
+  </div>
+</div>
+

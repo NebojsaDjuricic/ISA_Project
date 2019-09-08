@@ -2,6 +2,8 @@ package isa.projekat.booking.controller;
 
 import isa.projekat.booking.domain.*;
 import isa.projekat.booking.domain.dto.BranchDTO;
+import isa.projekat.booking.domain.dto.RentACarSearchQueryDTO;
+import isa.projekat.booking.domain.dto.RentACarSearchResult;
 import isa.projekat.booking.domain.dto.RentACarServiceDTO;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IBranchService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.print.attribute.standard.Media;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @RestController
 @RequestMapping("rent-a-car")
@@ -133,6 +136,27 @@ public class RentACarServicesController {
         ArrayList<Branch> branches = rent_a_car_service.getBranches();
 
         return new ResponseEntity<>(branches, HttpStatus.OK);
+    }
+    
+    
+    //search racs
+    @RequestMapping(
+            value = "/search",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> search(@RequestBody String query) {
+    	
+    	System.out.println("Query input: " + query);
+    	
+    	//List<RentACarService> retVal = rentACarService.findByName(query.getQueryInput());
+    	List<RentACarService> retVal = rentACarService.findByName(query);
+
+    	RentACarSearchResult result = new RentACarSearchResult();
+    	result.setQueryResult(retVal);
+    	
+    	return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

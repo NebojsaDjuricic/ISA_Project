@@ -36,4 +36,13 @@ public class RentACarServiceImpl implements IRentACarService {
 
         return retVal;
     }
+
+	@Override
+	public List<RentACarService> findByName(String queryInput) {
+		// TODO Auto-generated method stub
+		
+		List<RentACarService> byName = rentACarServiceRepository.findByName(queryInput);
+		
+		return byName;
+	}
 }
