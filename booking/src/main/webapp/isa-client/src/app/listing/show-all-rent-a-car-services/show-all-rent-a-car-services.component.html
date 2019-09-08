@@ -8,6 +8,10 @@
   <div class="container-fluid" *ngFor="let temp of searchedRentACarServices">
     <div class="jumbotron">
       <a class="btn btn-primary btn-lg" routerLink="/rent-a-car/{{temp.id}}">{{ temp.name }}</a>
+      Rating: {{temp.rating}}
+      <li *ngFor="let branch of temp.branches">
+        {{branch.address.streetName}}, {{branch.address.buildingNumber}}, {{branch.address.city}}
+      </li>
     </div>
   </div>
 </div>
