@@ -146,9 +146,12 @@ public class RentACarServicesController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> search(@RequestBody RentACarSearchQueryDTO query) {
+    public ResponseEntity<Object> search(@RequestBody String query) {
     	
-    	List<RentACarService> retVal = rentACarService.findByName(query.getQueryInput());
+    	System.out.println("Query input: " + query);
+    	
+    	//List<RentACarService> retVal = rentACarService.findByName(query.getQueryInput());
+    	List<RentACarService> retVal = rentACarService.findByName(query);
 
     	RentACarSearchResult result = new RentACarSearchResult();
     	result.setQueryResult(retVal);

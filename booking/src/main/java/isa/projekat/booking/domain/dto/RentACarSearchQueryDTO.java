@@ -5,7 +5,6 @@ public class RentACarSearchQueryDTO {
 	private String queryInput;
 	
 	public RentACarSearchQueryDTO() {
-		
 	}
 
 	public String getQueryInput() {

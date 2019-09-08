@@ -1,0 +1,14 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-3">
+    <div class="form-group">
+      Name:
+  
+      <div class="form-field">
+        <i class="icon icon-calendar2"></i>
+        <input type="text" class="form-control text" formControlName="name">
+      </div>
+    </div>
+  </div>
+
+  <input type="submit" class="btn btn-primary btn-block" value="Search">
+</form>
