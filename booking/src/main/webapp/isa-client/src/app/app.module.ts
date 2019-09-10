@@ -21,10 +21,8 @@ import { HotelSearchComponent } from './searches/hotel-search/hotel-search.compo
 import { HotelItemComponent } from './pages/hotels-page/hotels/hotel-item/hotel-item.component';
 import { HotelDetailComponent } from './pages/hotels-page/hotel-detail/hotel-detail.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
-import { RoomsListComponent } from './pages/rooms/rooms-list/rooms-list.component';
-import { RoomItemComponent } from './pages/rooms/rooms-list/room-item/room-item.component';
-import { RoomDetailComponent } from './pages/rooms/room-detail/room-detail.component';
 import { FindRentACarServiceComponent } from './searches/find-rent-a-car-service/find-rent-a-car-service.component';
+import { FindHotelsComponent } from './searches/find-hotels/find-hotels.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +43,8 @@ import { FindRentACarServiceComponent } from './searches/find-rent-a-car-service
     HotelItemComponent,
     HotelDetailComponent,
     RoomsComponent,
-    RoomsListComponent,
-    RoomItemComponent,
-    RoomDetailComponent,
-    FindRentACarServiceComponent
+    FindRentACarServiceComponent,
+    FindHotelsComponent
   ],
   imports: [
     BrowserModule,

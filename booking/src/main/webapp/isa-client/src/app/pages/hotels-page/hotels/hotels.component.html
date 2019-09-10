@@ -1,6 +1,4 @@
 
-<!-- OVO IDE U HOTEL DETAIL COMPONENT -->
-
 <app-nav></app-nav>
 
 <div *ngIf="hotel">
@@ -18,21 +16,45 @@
             </span>
   </div>
 
-  <ul class="myul">
-    <li  *ngFor="let room of hotel.rooms">
-      <p class="card-title">
-        {{ room.id }}
-      </p>
-    </li>
-  </ul>
+<!--  <ul class="myul">-->
+<!--    <li  *ngFor="let room of hotel.rooms">-->
+<!--      <a class="card-title"-->
+<!--         routerLinkActive="active"-->
+<!--         [routerLink]="[room.id]">-->
+<!--        {{ room.id }}-->
+<!--      </a>-->
+<!--    </li>-->
+<!--  </ul>-->
+
+  <table class="table table-bordered table-dark">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Room Type</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Floor</th>
+      <th scope="col">Price Per Night</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of hotel.rooms">
+        <th scope="row">{{room.id}}</th>
+        <td>{{room.type}}</td>
+        <td>{{room.capacity}}</td>
+        <td>{{room.floor}}</td>
+        <td>{{room.pricePerNight}}</td>
+        <td><button class="btn btn-primary"
+                    (click)="onBookRoom(room.id)">Book Room</button></td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
 
 
 
 <!-- ############################################ -->
-
-
-
 
 <!--<div class="row">-->
 <!--  <div class="col-xs 12">-->
@@ -40,18 +62,7 @@
 <!--      *ngFor="let hotelElement of hotels | async; let i = index"-->
 <!--      [hotel]="hotelElement"-->
 <!--      [index]="i">-->
-<div class="col-md-3">
-  <div class="form-group">
-    <label for="checkInDate">Check-in:</label>
-    <div class="form-field">
-      <i class="icon icon-calendar2"></i>
-      <input type="date" id="checkInDate" class="form-control date" placeholder="Check-in date" formControlName="checkInDate">
-    </div>
-  </div>
-</div><!--    </app-hotel-item>-->
+<!--    </app-hotel-item>-->
 
 <!--  </div>-->
 <!--</div>-->
-
-
-

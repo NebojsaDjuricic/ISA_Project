@@ -1,5 +1,6 @@
 package isa.projekat.booking.domain.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class OrdinarySearchDTO {
@@ -11,9 +12,9 @@ public class OrdinarySearchDTO {
 
 	private Integer numberOfPerson;
 
-	private Date startDate;
+	private LocalDate startDate;
 
-	private Date endDate;
+	private LocalDate endDate;
 
 	public String getCountry() {
 		return country;
@@ -47,19 +48,19 @@ public class OrdinarySearchDTO {
 		this.numberOfPerson = numberOfPerson;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 }

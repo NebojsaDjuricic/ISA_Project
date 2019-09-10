@@ -29,50 +29,56 @@
 
   <!--  </div>-->
 
+  <app-find-hotels (queryResultEvent)="fetchQueryResults($event)"></app-find-hotels>
+
   <div id="hotelsLower" >
     <div id="hotelsContainer">
 
+      <div id="searchResult"
+           *ngIf="hotelSearchResult">
+
+      </div>
+
       <!--      <app-hotels></app-hotels>-->
-      <div class="row"
-           *ngFor="let hotel of hotels | async"
-           style="display: flow-root;">
+      <div *ngIf="!hotelSearchResult">
+        <div class="form-group"
+             *ngFor="let hotel of hotels | async"
+             style="float: left">
 
-        <div class="col-xs-4" style="border: solid 2px; border-color: orangered">
-          <a routerLinkActive="active"
-             [routerLink]="[hotel.id]">
-            <h3 class="heading">{{hotel.name}}</h3>
-          </a>
-          <div class="text">
-            <!--              <span class="price">$29/night</span>-->
+          <div style="min-width: 16vw">
+            <a routerLinkActive="active"
+               [routerLink]="[hotel.id]">
+              <h3 class="heading">{{hotel.name}}</h3>
+            </a>
+            <div class="text">
+              <!--              <span class="price">$29/night</span>-->
 
-            <div class="post-meta">
-              <span>{{hotel.address.city}}, {{hotel.address.country}}</span>
+              <div class="post-meta">
+                <span>{{hotel.address.city}}, {{hotel.address.country}}</span>
+              </div>
+              <p class="star-rate">
+                <span>Rating: {{hotel.rating}}</span>
+                <!--                <span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span>-->
+                <!--                <span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span>-->
+              </p>
             </div>
-            <p class="star-rate">
-              <span>Rating: {{hotel.rating}}</span>
-              <!--                <span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span>-->
-              <!--                <span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span>-->
-            </p>
-          </div>
-          <div class="hotelAddServices" >
+            <div>
+              <span>Stars: {{ hotel.stars }}</span>
+            </div>
+            <div class="hotelAddServices" >
 
+            </div>
 
           </div>
-
 
         </div>
 
-
       </div>
-      <!--      end row-->
 
-    </div>
+    </div>  <!-- end hotels container -->
 
-    <!--    <div class="col-md-7">-->
-    <!--      <router-outlet></router-outlet>-->
-    <!--    </div>-->
 
-  </div>
+  </div>  <!-- end hotels lower -->
 
 
 </div>

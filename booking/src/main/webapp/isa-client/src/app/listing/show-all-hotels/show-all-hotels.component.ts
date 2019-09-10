@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Hotel } from '../../model/hotel';
 import { HotelService } from '../../services/hotel.service';
+import {OrdinarySearchResultDTO} from '../../model/ordinarySearchResultDTO';
 
 @Component({
   selector: 'app-show-all-hotels',
@@ -11,6 +12,8 @@ import { HotelService } from '../../services/hotel.service';
 export class ShowAllHotelsComponent implements OnInit {
   selectedHotel: Hotel;
   hotels: Observable<Hotel[]>;
+  hotelSearchResult: OrdinarySearchResultDTO;
+  searchedHotel: Hotel[];
 
   // constructor() { }
   constructor(private hotelService: HotelService) { }
@@ -28,5 +31,10 @@ export class ShowAllHotelsComponent implements OnInit {
 
   getAllHotels() {
     this.hotels = this.hotelService.getAll();
+  }
+
+  fetchQueryResults($event) {
+    this.hotelSearchResult = $event;
+    this.searchedHotel = this.hotelSearchResult.queryResult;
   }
 }

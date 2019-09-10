@@ -27,21 +27,47 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <a class="navbar-brand" routerLink="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+      <a class="navbar-brand" routerLink="/">
+        <i class="glyphicon glyphicon-home"></i> Home
+      </a>
 
       <ul class="nav navbar-nav" id="navListFHClogged">
-        <li routerLinkActive="active"><a class="navbar-brand" routerLink="/flights">Flights</a></li>
-        <li routerLinkActive="active"><a class="navbar-brand" routerLink="/hotels">Hotels</a></li>
-        <li routerLinkActive="active"><a class="navbar-brand" routerLink="/rent-a-car-services">Cars</a></li>
+        <li routerLinkActive="active">
+          <a class="navbar-brand" routerLink="/flights">
+            <i class="glyphicon glyphicon-plane"></i> Flights
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a class="navbar-brand" routerLink="/hotels">
+            <i class="fa fa-bed"></i> Hotels
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a class="navbar-brand" routerLink="/rent-a-car-services">
+            <i class="fa fa-car"></i> Cars
+          </a>
+        </li>
       </ul>
 
     </div>
 
     <div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/profile"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
-        <li><a routerLink="/friends"><span class="glyphicon glyphicon-user"></span> Friends</a></li>
-        <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li>
+          <a routerLink="/profile">
+            <i class="glyphicon glyphicon-user"></i> My Profile
+          </a>
+        </li>
+        <li>
+          <a routerLink="/friends">
+            <i class="fa fa-users"></i> Friends
+          </a>
+        </li>
+        <li>
+          <a (click)="logout()">
+            <span class="glyphicon glyphicon-log-out"></span>Logout
+          </a>
+        </li>
       </ul>
     </div>
 

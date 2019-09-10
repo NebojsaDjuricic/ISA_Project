@@ -4,6 +4,7 @@ import { Hotel } from '../model/hotel';
 import {Observable, Subject} from 'rxjs';
 import { Response } from '@angular/http';
 import { map } from 'rxjs/operators';
+import {Room} from '../model/room';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,14 @@ export class HotelService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    this.hotels = this.http.get<Hotel[]>(this.backEndUrl);
-
-    return this.hotels;
+    return this.http.get<Hotel[]>(this.backEndUrl);
   }
 
   getHotel(id: String): Observable<Hotel> {
     return this.http.get<Hotel>(this.backEndUrl + '/' + id);
+  }
+
+  getRooms(hotelID: String) {
+    return this.http.get<Room[]>(this.backEndUrl + '/' + hotelID + '/rooms');
   }
 }

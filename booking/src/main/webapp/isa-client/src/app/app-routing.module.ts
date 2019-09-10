@@ -9,6 +9,7 @@ import { ShowAllHotelsComponent } from './listing/show-all-hotels/show-all-hotel
 import { HotelsComponent } from './pages/hotels-page/hotels/hotels.component';
 import { ShowAllFlightsComponent } from './listing/show-all-flights/show-all-flights.component';
 import { FlightsComponent } from './pages/flights/flights.component';
+import {RoomsComponent} from './pages/rooms/rooms.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'rent-a-car/:id', component: RentACarPageComponent },
   { path: 'hotels', component: ShowAllHotelsComponent },
   { path: 'hotels/:id', component: HotelsComponent },
+  { path: 'hotels/:id/:roomId', component: RoomsComponent },
   { path: 'flights', component: ShowAllFlightsComponent },
   { path: 'flights/:id', component: FlightsComponent }
 ];

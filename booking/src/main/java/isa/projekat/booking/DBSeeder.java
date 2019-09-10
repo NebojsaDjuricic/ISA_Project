@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
@@ -32,17 +33,20 @@ public class DBSeeder implements CommandLineRunner {
     
     @Autowired
     private PriceRepository priceRepository;
+    
+    @Autowired
+    private RoomReservationRepository roomReservationRepository;
 
     @Override
     public void run(String... args) throws Exception {
 
         userRepository.deleteAll();
-        
         roomRepository.deleteAll();
         hotelRepository.deleteAll();
         additionalServiceRepository.deleteAll();
         administratorRepository.deleteAll();
         priceRepository.deleteAll();
+        roomReservationRepository.deleteAll();
 
         //---------------- USERS ----------------//
 
@@ -164,7 +168,7 @@ public class DBSeeder implements CommandLineRunner {
         additionalServices.add(addService17); additionalServices.add(addService18); additionalServices.add(addService19);
 
         additionalServiceRepository.saveAll(additionalServices);
-        
+                
         
         //------------------ PRICES ------------------//
         
@@ -1773,7 +1777,7 @@ public class DBSeeder implements CommandLineRunner {
         rooms.add(room44); rooms.add(room45); rooms.add(room46);
 
         roomRepository.saveAll(rooms);
-
+        
 
         //------------------ HOTELS ------------------//
 
@@ -1943,7 +1947,130 @@ public class DBSeeder implements CommandLineRunner {
 	     
 	     hotelRepository.save(hotel5);
 	     
-	     
+     
+        // --------------- ROOM RESERVATIONS ---------//
+        
+        RoomReservation reservation1 = new RoomReservation();
+        reservation1.setResStart(LocalDate.of(2019, 9, 16));
+        reservation1.setResEnd(LocalDate.of(2019, 9, 23));
+        reservation1.setRoomID(room3.getId()); 
+        reservation1.setHotelID(hotel1.getId());
+        reservation1.setNoOfGuests(2);
+        Period period1 = Period.between(LocalDate.of(2019, 9, 16), LocalDate.of(2019, 9, 23));
+        Integer daysElapsed = period1.getDays ();
+        reservation1.setNoOfNights(daysElapsed);
+        ArrayList<AdditionalService> hotelAdditionalServices = new ArrayList<AdditionalService>();
+        hotelAdditionalServices.add(hotel1.getAdditionalServices().get(0));
+        hotelAdditionalServices.add(hotel1.getAdditionalServices().get(2));
+        hotelAdditionalServices.add(hotel1.getAdditionalServices().get(3));
+        hotelAdditionalServices.add(hotel1.getAdditionalServices().get(4));
+        reservation1.setAdditionalServices(hotelAdditionalServices);
+        reservation1.setRating(4.3);
+        reservation1.setUserID(user2.getUsername());
+        Double tempReservationPrice1 = 0.0;
+        for (AdditionalService add: hotelAdditionalServices) {
+        	tempReservationPrice1 += (double) add.getPrice();
+        }
+        Double resPrice1 = 0.0;
+        resPrice1 = daysElapsed * reservation1.getNoOfGuests() * (double) room3.getPrices().get(0).getPricePerNight() + tempReservationPrice1;
+        reservation1.setPrice(resPrice1);
+        
+
+        
+        RoomReservation reservation2 = new RoomReservation();
+        reservation2.setResStart(LocalDate.of(2019, 10, 6));
+        reservation2.setResEnd(LocalDate.of(2019, 10, 16));
+        reservation2.setRoomID(room11.getId()); 
+        reservation2.setHotelID(hotel3.getId());
+        reservation2.setNoOfGuests(2);
+        Period period2 = Period.between(LocalDate.of(2019, 10, 6), LocalDate.of(2019, 10, 16));
+        Integer daysElapsed2 = period2.getDays ();
+        reservation2.setNoOfNights(daysElapsed2);
+        ArrayList<AdditionalService> hotelAdditionalServices2 = new ArrayList<AdditionalService>();
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(0));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(2));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(3));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(4));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(5));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(6));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(7));
+        hotelAdditionalServices2.add(hotel3.getAdditionalServices().get(8));
+        reservation2.setAdditionalServices(hotelAdditionalServices2);
+        reservation2.setRating(4.6);
+        reservation2.setUserID(user2.getUsername());
+        Double tempReservationPrice2 = 0.0;
+        for (AdditionalService add: hotelAdditionalServices2) {
+        	tempReservationPrice2 += (double) add.getPrice();
+        }
+        Double resPrice2 = 0.0;
+        resPrice2 = daysElapsed2 * reservation2.getNoOfGuests() * (double) room11.getPrices().get(1).getPricePerNight() + tempReservationPrice2;
+        reservation2.setPrice(resPrice2);
+        
+        
+        RoomReservation reservation3 = new RoomReservation();
+        reservation3.setResStart(LocalDate.of(2019, 11, 21));
+        reservation3.setResEnd(LocalDate.of(2019, 11, 30));
+        reservation3.setRoomID(room21.getId()); 
+        reservation3.setHotelID(hotel4.getId());
+        reservation3.setNoOfGuests(2);
+        Period period3 = Period.between(LocalDate.of(2019, 11, 21), LocalDate.of(2019, 11, 30));
+        Integer daysElapsed3 = period3.getDays ();
+
+        reservation3.setNoOfNights(daysElapsed3);
+        ArrayList<AdditionalService> hotelAdditionalServices3 = new ArrayList<AdditionalService>();
+        hotelAdditionalServices3.add(hotel4.getAdditionalServices().get(0));
+        hotelAdditionalServices3.add(hotel4.getAdditionalServices().get(2));
+        hotelAdditionalServices3.add(hotel4.getAdditionalServices().get(3));
+        hotelAdditionalServices3.add(hotel4.getAdditionalServices().get(4));
+        reservation3.setAdditionalServices(hotelAdditionalServices3);
+        reservation3.setRating(4.4);
+        reservation3.setUserID(user2.getUsername());
+        Double tempReservationPrice3 = 0.0;
+        for (AdditionalService add: hotelAdditionalServices3) {
+        	tempReservationPrice3 += (double) add.getPrice();
+        }
+
+        Double resPrice3 = 0.0;
+        resPrice3 = daysElapsed3 * reservation3.getNoOfGuests() * (double) room21.getPrices().get(2).getPricePerNight() + tempReservationPrice3;
+        reservation3.setPrice(resPrice3);
+        
+        
+        RoomReservation reservation4 = new RoomReservation();
+        reservation4.setResStart(LocalDate.of(2019, 12, 14));
+        reservation4.setResEnd(LocalDate.of(2019, 12, 26));
+        reservation4.setRoomID(room28.getId()); 
+        reservation4.setHotelID(hotel5.getId());
+        reservation4.setNoOfGuests(2);
+        Period period4 = Period.between(LocalDate.of(2019, 12, 14), LocalDate.of(2019, 12, 26));
+        Integer daysElapsed4 = period4.getDays ();
+        reservation4.setNoOfNights(daysElapsed4);
+        ArrayList<AdditionalService> hotelAdditionalServices4 = new ArrayList<AdditionalService>();
+        hotelAdditionalServices4.add(hotel5.getAdditionalServices().get(0));
+        hotelAdditionalServices4.add(hotel5.getAdditionalServices().get(3));
+        hotelAdditionalServices4.add(hotel5.getAdditionalServices().get(4));
+        hotelAdditionalServices4.add(hotel5.getAdditionalServices().get(5));
+        hotelAdditionalServices4.add(hotel5.getAdditionalServices().get(6));
+        hotelAdditionalServices4.add(hotel5.getAdditionalServices().get(7));
+        reservation4.setAdditionalServices(hotelAdditionalServices4);
+        reservation4.setRating(4.2);
+        reservation4.setUserID(user2.getUsername());
+        Double tempReservationPrice4 = 0.0;
+        for (AdditionalService add: hotelAdditionalServices4) {
+        	tempReservationPrice4 += (double) add.getPrice();
+        }
+        Double resPrice4 = 0.0;
+        resPrice4 = daysElapsed4 * reservation4.getNoOfGuests() * (double) room28.getPrices().get(3).getPricePerNight() + tempReservationPrice4;
+        reservation4.setPrice(resPrice4);
+        
+        ArrayList<RoomReservation> roomReservations = new ArrayList<RoomReservation>();
+        roomReservations.add(reservation1);
+        roomReservations.add(reservation2);
+        roomReservations.add(reservation3);
+        roomReservations.add(reservation4);
+        
+        roomReservationRepository.saveAll(roomReservations);
+
+        
 
 	    //---------------- ADMINISTRATORS ----------------//
 	    Administrator admin1 = new Administrator(

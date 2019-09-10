@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import isa.projekat.booking.domain.Room;
+import isa.projekat.booking.domain.RoomType;
 
 public interface IRoomService {
 	
@@ -13,4 +14,8 @@ public interface IRoomService {
 	Room deleteRoom(String id);
 	List<Room> findAll();
 	ArrayList<Room> getAll();
+	
+	List<Room> findByRoomType(RoomType type);
+	List<Room> findByRoomCapacity(Integer capacity);
+	List<Room> findByRoomTypeAndCapacity(RoomType type, Integer capacity);
 }

@@ -6,6 +6,10 @@ export  class RoomSearchDTO {
   checkOutDate: String;
   guests: number;
   rooms: number;
+  minPrice: number;
+  maxPrice: number;
+  hotelID: String;
+  // type: String;
 
   constructor() {
   }

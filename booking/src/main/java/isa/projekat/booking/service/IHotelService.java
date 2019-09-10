@@ -11,7 +11,7 @@ public interface IHotelService {
 	
 	Hotel save(Hotel hotel);
 	Hotel findById(String id);
-	ArrayList<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto);
+	List<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto);
 	ArrayList<Hotel> getAll();
 	Hotel deleteHotel(String id);
 //	Room deleteHotelRoom(String roomId);

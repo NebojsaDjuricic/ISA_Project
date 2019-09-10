@@ -7,66 +7,163 @@
 
           <div class="col-md-3">
             <div class="form-group">
-              <label for="hotel">Find hotels</label>
+              <label for="hotel">Hotel name:</label>
               <div class="form-field">
                 <i class="icon icon-calendar2"></i>
-<!--                                                                                       formControlName=""-->
-                <input type="text" id="hotel" class="form-control date" placeholder="Enter city, country or hotel name" >
+                <input type="text"
+                       id="hotel"
+                       class="form-control date"
+                       formControlName="hotelName"
+                       placeholder="Enter hotel name" >
               </div>
             </div>
           </div>
 
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="city">City</label>
+              <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+                <input type="text"
+                       id="city"
+                       class="form-control date"
+                       formControlName="city"
+                       placeholder="Enter city" >
+              </div>
+            </div>
+          </div>
 
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="country">Country:</label>
+              <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+                <input type="text"
+                       id="country"
+                       class="form-control date"
+                       formControlName="country"
+                       placeholder="Enter country" >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="checkInDate">Check-in:</label>
+              <div class="form-field">
+                <i class="icon icon-calendar2"></i>
+                <input type="date"
+                       id="checkInDate"
+                       class="form-control date"
+                       placeholder="Check-in date"
+                       formControlName="checkInDate">
+              </div>
+            </div>
+          </div>
 
           <div class="col-md-3">
             <div class="form-group">
               <label for="checkOutDate">Check-out:</label>
               <div class="form-field">
                 <i class="icon icon-calendar2"></i>
-                <input type="date" id="checkOutDate" class="form-control date" placeholder="Check-out date" formControlName="checkOutDate">
+                <input type="date"
+                       id="checkOutDate"
+                       class="form-control date"
+                       placeholder="Check-out date"
+                       formControlName="checkOutDate">
               </div>
             </div>
           </div>
-
-          <div class="col-md-2">
+        </div>
+        <div class="row">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="guests">Guests</label>
               <div class="form-field">
                 <i class="icon icon-arrow-down3"></i>
-                <select name="people" id="guests" class="form-control" formControlName="guests">
-                  <option value="#">1</option>
-                  <option value="#">2</option>
-                  <option value="#">3</option>
-                  <option value="#">4</option>
-                  <option value="#">5</option>
-                  <option value="#">6</option>
-                  <option value="#">7</option>
-                  <option value="#">8</option>
-                  <option value="#">9</option>
-                  <option value="#">10</option>
-                </select>
+<!--                <select name="people"-->
+<!--                        id="guests"-->
+<!--                        class="form-control"-->
+<!--                        formControlName="guests">-->
+<!--                  <option value="#">1</option>-->
+<!--                  <option value="#">2</option>-->
+<!--                  <option value="#">3</option>-->
+<!--                  <option value="#">4</option>-->
+<!--                  <option value="#">5</option>-->
+<!--                  <option value="#">6</option>-->
+<!--                  <option value="#">7</option>-->
+<!--                  <option value="#">8</option>-->
+<!--                  <option value="#">9</option>-->
+<!--                  <option value="#">10</option>-->
+<!--                </select>-->
+                <input type="number"
+                       id="guests"
+                       class="form-control"
+                       formControlName="guests">
               </div>
             </div>
           </div>
 
-          <div class="col-md-2">
+<!--          <div class="col-md-3">-->
+<!--            <div class="form-group">-->
+<!--              <label for="rooms">Rooms</label>-->
+<!--              <div class="form-field">-->
+<!--                <i class="icon icon-arrow-down3"></i>-->
+<!--&lt;!&ndash;                <select name="room"&ndash;&gt;-->
+<!--&lt;!&ndash;                        id="rooms"&ndash;&gt;-->
+<!--&lt;!&ndash;                        class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                        formControlName="rooms">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="#">1</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="#">2</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="#">3</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="#">4</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option value="#">5</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--                <input type="number"-->
+<!--                       id="rooms"-->
+<!--                       class="form-control"-->
+<!--                       formControlName="rooms">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-md-3">-->
+<!--            <div class="form-group">-->
+<!--              <label for="minPrice">Minimum price:</label>-->
+<!--              <div class="form-field">-->
+<!--                <i class="icon icon-calendar2"></i>-->
+<!--                <input type="number"-->
+<!--                     id="minPrice"-->
+<!--                     class="form-control number"-->
+<!--                     formControlName="minPrice">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-md-3">-->
+<!--            <div class="form-group">-->
+<!--              <label for="maxPrice"> Maximum price:</label>-->
+<!--              <div class="form-field">-->
+<!--                <i class="icon icon-calendar2"></i>-->
+<!--                <input type="number"-->
+<!--                     id="maxPrice"-->
+<!--                     class="form-control number"-->
+<!--                     formControlName="maxPrice">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <div class="col-md-3">
             <div class="form-group">
-              <label for="rooms">Rooms</label>
+              <label></label>
               <div class="form-field">
-                <i class="icon icon-arrow-down3"></i>
-                <select name="room" id="rooms" class="form-control" formControlName="rooms">
-                  <option value="#">1</option>
-                  <option value="#">2</option>
-                  <option value="#">3</option>
-                  <option value="#">4</option>
-                  <option value="#">5</option>
-                </select>
+                <input type="submit"
+                       name="submit"
+                       id="submit"
+                       value="Search"
+                       class="btn btn-primary btn-block">
               </div>
             </div>
-          </div>
-
-          <div class="col-md-2">
-            <input type="submit" name="submit" id="submit" value="Search" class="btn btn-primary btn-block">
           </div>
 
         </div>

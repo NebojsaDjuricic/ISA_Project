@@ -13,6 +13,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 
 import isa.projekat.booking.domain.Room;
+import isa.projekat.booking.domain.RoomType;
 import isa.projekat.booking.repository.RoomRepository;
 import isa.projekat.booking.service.IRoomService;
 
@@ -64,6 +65,21 @@ public class RoomServiceImpl implements IRoomService {
 	@Override
 	public ArrayList<Room> getAll() {
 		return (ArrayList<Room>) roomRepository.findAll();
+	}
+
+	@Override
+	public List<Room> findByRoomType(RoomType type) {
+		return roomRepository.findByRoomType(type);
+	}
+
+	@Override
+	public List<Room> findByRoomTypeAndCapacity(RoomType type, Integer capacity) {
+		return roomRepository.findByRoomTypeAndCapacity(type, capacity);
+	}
+
+	@Override
+	public List<Room> findByRoomCapacity(Integer capacity) {
+		return roomRepository.findByRoomCapacity(capacity);
 	}
 	
 

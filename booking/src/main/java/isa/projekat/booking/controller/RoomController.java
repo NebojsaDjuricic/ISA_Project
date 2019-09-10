@@ -1,8 +1,14 @@
 package isa.projekat.booking.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 import isa.projekat.booking.domain.Hotel;
 import isa.projekat.booking.domain.Price;
 import isa.projekat.booking.domain.Room;
+import isa.projekat.booking.domain.RoomReservation;
 import isa.projekat.booking.domain.dto.PriceDTO;
 import isa.projekat.booking.domain.dto.RoomDTO;
+import isa.projekat.booking.domain.dto.RoomReservationDTO;
 import isa.projekat.booking.domain.dto.RoomSearchQuery;
 import isa.projekat.booking.service.IHotelService;
 import isa.projekat.booking.service.IPriceService;
+import isa.projekat.booking.service.IRoomReservationService;
 import isa.projekat.booking.service.IRoomService;
 
 @RestController
@@ -39,6 +48,8 @@ public class RoomController {
 
 	@Autowired
 	private IPriceService priceService;
+	
+	private IRoomReservationService roomResService;
 	
 	@RequestMapping(
             value="/{id}",
@@ -160,17 +171,154 @@ public class RoomController {
 
 	}
 	
+	public LocalDate stringToDate(String date) {
+    	
+    	String[] token = date.split("-");
+    	
+    	int year = 0;
+    	int month = 0;
+    	int dayOfMonth = 0;
+    	
+    	month = Integer.parseInt(token[1]);
+    	dayOfMonth = Integer.parseInt(token[2]);
+    	year = Integer.parseInt(token[0]);
+    	
+    	LocalDate result = LocalDate.of(year, month, dayOfMonth);
+    	
+    	return result;
+	}
+	
+//	@RequestMapping(
+//            value = "/search",
+//            method = RequestMethod.POST,
+//            consumes = MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE
+//    )
+//	public ResponseEntity<Object> search(@RequestBody RoomSearchQuery query) {
+//		
+//		return new ResponseEntity<>(null, HttpStatus.OK);
+//	}
+	
 	@RequestMapping(
             value = "/search",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-	public ResponseEntity<Object> search(@RequestBody RoomSearchQuery query) {
+	 public ResponseEntity<Object> search(@RequestBody RoomSearchQuery query) {
 		
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		LocalDate startDate = stringToDate(query.getCheckInDate());
+    	LocalDate endDate = stringToDate(query.getCheckOutDate());
+    	
+    	Map<String, Room> roomsToShowMap = new HashMap<String, Room>();
+    	List<Room> returnRooms = new ArrayList<Room>();
+    	List<Room> rooms = roomService.findByRoomCapacity(query.getGuests());
+
+    	Map<String, List<RoomReservation>> reservationsByRoomID = new HashMap<String, List<RoomReservation>>();
+    	
+    	if (rooms.isEmpty()) {
+			
+		} else {
+			for (Room r: rooms) {
+				reservationsByRoomID.put(
+						r.getId(),
+						roomResService.findByRoomAndHotelID(r.getId(), query.getHotelID())
+				);
+			}
+		}
+    	
+    	Iterator<Entry<String, List<RoomReservation>>> iterator = reservationsByRoomID.entrySet().iterator();
+    	
+    	while(iterator.hasNext()) {
+    		Map.Entry<String, List<RoomReservation>> pair = (Map.Entry<String, List<RoomReservation>>)iterator.next();
+    		
+    		List<RoomReservation> reservations = pair.getValue();
+    		Boolean alreadyBooked = false;
+    		
+    		if (reservations.isEmpty()) {
+				
+			} else {
+				for (RoomReservation res: reservations) {
+					alreadyBooked = false;
+					if (startDate.isAfter(res.getResStart())) {
+						if (startDate.isBefore(res.getResEnd())) {
+							alreadyBooked = true;
+							break;
+						}
+					}
+					
+					if (endDate.isAfter(res.getResStart())) {
+						if (endDate.isBefore(res.getResEnd())) {
+							alreadyBooked = true;
+							break;
+						}
+					}
+					
+					if (startDate.isBefore(res.getResStart())) {
+						if (endDate.isAfter(res.getResEnd())) {
+							alreadyBooked = true;
+							break;
+						}
+					}
+				}
+			}
+    		
+    		
+    		if (!alreadyBooked) {
+    			roomsToShowMap.put(pair.getKey(), roomService.findById(pair.getKey()));
+			}
+    		
+    		iterator.remove();
+    		
+    	}
+    	
+    	Hotel hotel = hotelService.findById(query.getHotelID());
+    	ArrayList<Room> allRooms = hotel.getRooms();
+//    	ArrayList<Room> roomsOnDiscount = new ArrayList<Room>();
+//    	ArrayList<Price> roomPrices = new ArrayList<Price>();
+    	
+    	for (Room roomOnDisc: allRooms) {
+    		for (Price price: roomOnDisc.getPrices()) {
+    			if (price.isNaPopustu()) {
+					if (roomsToShowMap.containsKey(roomOnDisc.getId())) {
+						roomsToShowMap.remove(roomOnDisc.getId());
+					}
+				}
+    		}
+    	}
+    	
+    	for (Map.Entry<String, Room> room : roomsToShowMap.entrySet()) {
+    		returnRooms.add(room.getValue());
+    	}
+    	
+    	return new ResponseEntity<>(returnRooms, HttpStatus.OK);
+    	
 	}
 	
+    @RequestMapping(
+            value = "/roomReservation",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> makeReservation(@RequestBody RoomReservationDTO reservationDTO) {
+    	
+    	RoomReservation newRes = new RoomReservation();
+    	
+    	newRes.setRoomID(reservationDTO.getRoomId());
+    	newRes.setHotelID(reservationDTO.getHotelID());
+    	newRes.setResStart(stringToDate(reservationDTO.getCheckInDate()));
+    	newRes.setResEnd(stringToDate(reservationDTO.getCheckOutDate()));
+    	newRes.setNoOfGuests(reservationDTO.getGuests());
+    	newRes.setNoOfNights(reservationDTO.getNights());
+    	newRes.setAdditionalServices(reservationDTO.getAdditionalServices());
+    	newRes.setPrice(reservationDTO.getPrice());
+    	
+    	roomResService.save(newRes);
+    	
+    	return new ResponseEntity<>("Reservation created", HttpStatus.OK);
+    	
+    }
 	
 //  ====================== Price ==================== //
 	

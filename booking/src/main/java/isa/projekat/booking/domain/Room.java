@@ -25,7 +25,7 @@ public class Room {
 	private ArrayList<RoomReservation> reservations;
 	
 	public Room() {
-		super();
+		
 	}
 	
 	public Room(String id, RoomStatus status, 

@@ -21,7 +21,6 @@ export class EditAdminComponent implements OnInit {
   errorMessage = 'Invalid value!';
   isSysAdmin: boolean;
   isNotSysAdmin: boolean;
-  admintip: any;
 
   constructor(private formBuilder: FormBuilder,
               private adminService: AdminServiceService,
@@ -99,7 +98,8 @@ export class EditAdminComponent implements OnInit {
     this.editedAdmin.username = this.adminUsername;
     this.editedAdmin.email = this.editAdminForm.controls.email.value;
     this.editedAdmin.password = this.editAdminForm.controls.password.value;
-    this.editedAdmin.type = this.editAdminForm.controls.type.value;
+    this.editedAdmin.type = this.admin.type;
+    this.editedAdmin.editingObjectID = this.admin.editingObjectID;
 
     console.log(this.editedAdmin);
 

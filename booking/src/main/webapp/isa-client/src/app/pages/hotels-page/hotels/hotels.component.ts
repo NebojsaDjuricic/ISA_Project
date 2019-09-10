@@ -34,4 +34,7 @@ export class HotelsComponent implements OnInit {
   }
 
 
+  onBookRoom(id: String) {
+    this.router.navigate(['/hotels/' + this.hotel.id + '/' + id]);
+  }
 }

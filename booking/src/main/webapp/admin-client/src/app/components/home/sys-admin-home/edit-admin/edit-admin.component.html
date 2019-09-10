@@ -55,14 +55,13 @@
         </span>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="isSysAdmin">
         <label class="col-xs-2">
           Admin Role:
         </label>
-        <div class="col-xs-6">
+        <div class="col-xs-6" >
           <select class="form-control"
                   formControlName="type"
-                  [disabled]="isNotSysAdmin"
                   [value]="admin.type"
                   >
             <option value="SYSTEM_ADMIN" selected>System Admin</option>

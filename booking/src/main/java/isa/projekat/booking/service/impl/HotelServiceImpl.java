@@ -1,5 +1,6 @@
 package isa.projekat.booking.service.impl;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import isa.projekat.booking.domain.Hotel;
+import isa.projekat.booking.domain.Price;
 import isa.projekat.booking.domain.Room;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.repository.HotelRepository;
@@ -70,9 +72,9 @@ public class HotelServiceImpl implements IHotelService {
 		return retVal;
 	}
 		
-	public ArrayList<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto) {
+	public List<Hotel> ordinarySearchHotel(OrdinarySearchDTO ordinarySearchDto) {
 		ArrayList<Hotel> hotels = null;
-		ArrayList<Hotel> hotelNumerOfPerson = null;
+		ArrayList<Hotel> hotelNumberOfPerson = null;
 		ArrayList<Hotel> hotelDate = null;
 		
 		if (ordinarySearchDto.getCity() == null && ordinarySearchDto.getHotelName() == null
@@ -82,102 +84,113 @@ public class HotelServiceImpl implements IHotelService {
 			
 		} else if (ordinarySearchDto.getHotelName() != null && ordinarySearchDto.getCity() == null
 				&& ordinarySearchDto.getCountry() == null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByName(ordinarySearchDto.getHotelName());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByName(ordinarySearchDto.getHotelName());
 			System.out.println("Pronadjen hotel sa imenom " + ordinarySearchDto.getHotelName());
 			
 		} else if (ordinarySearchDto.getHotelName() == null && ordinarySearchDto.getCity() != null
 				&& ordinarySearchDto.getCountry() == null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByAddressCity(ordinarySearchDto.getCity());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByAddressCity(ordinarySearchDto.getCity());
 			System.out.println("Pronadjen hotel u gradu " + ordinarySearchDto.getCity());
 			
 		} else if (ordinarySearchDto.getHotelName() == null && ordinarySearchDto.getCity() == null
 				&& ordinarySearchDto.getCountry() != null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByAddressCountry(ordinarySearchDto.getCountry());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByAddressCountry(ordinarySearchDto.getCountry());
 			System.out.println("Pronadjen hotel u zemlji " + ordinarySearchDto.getCountry());
 			
 		} else if (ordinarySearchDto.getHotelName() != null && ordinarySearchDto.getCity() != null
 				&& ordinarySearchDto.getCountry() == null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByNameAndAddressCity(ordinarySearchDto.getHotelName(), ordinarySearchDto.getCity());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByNameAndAddressCity(ordinarySearchDto.getHotelName(), ordinarySearchDto.getCity());
 			System.out.println("Pronadjen hotel sa imenom " + ordinarySearchDto.getHotelName()
 			+ " u gradu " + ordinarySearchDto.getCity());
 			
 		} else if (ordinarySearchDto.getHotelName() == null && ordinarySearchDto.getCity() != null
 				&& ordinarySearchDto.getCountry() != null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByAddressCityAndAddressCountry(ordinarySearchDto.getCity(), ordinarySearchDto.getCountry());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByAddressCityAndAddressCountry(ordinarySearchDto.getCity(), ordinarySearchDto.getCountry());
 			System.out.println("Pronadjen hotel u gradu " + ordinarySearchDto.getCity()
 			+ " u zemlji " + ordinarySearchDto.getCountry());
 			
 		} else if (ordinarySearchDto.getHotelName() != null && ordinarySearchDto.getCity() == null
 				&& ordinarySearchDto.getCountry() != null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByNameAndAddressCountry(ordinarySearchDto.getHotelName(), ordinarySearchDto.getCountry());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByNameAndAddressCountry(ordinarySearchDto.getHotelName(), ordinarySearchDto.getCountry());
 			System.out.println("Pronadjen hotel sa imenom " + ordinarySearchDto.getHotelName()
 			+ " u zemlji " + ordinarySearchDto.getCountry());
 			
 		} else if (ordinarySearchDto.getHotelName() != null && ordinarySearchDto.getCity() != null
 				&& ordinarySearchDto.getCountry() != null) {
-			hotels = (ArrayList<Hotel>) hotelRepository
-					.findByNameAndAddressCityAndAddressCountry(ordinarySearchDto.getHotelName(), ordinarySearchDto.getCity(), ordinarySearchDto.getCountry());
+			hotels = (ArrayList<Hotel>) hotelRepository.findByNameAndAddressCityAndAddressCountry(ordinarySearchDto.getHotelName(), ordinarySearchDto.getCity(), ordinarySearchDto.getCountry());
 			System.out.println("Pronadjen hotel sa imenom " + ordinarySearchDto.getHotelName()
 			+ " u gradu " + ordinarySearchDto.getCity() + " u zemlji " + ordinarySearchDto.getCountry());
 		}
 		
-//		if (ordinarySearchDto.getNumberOfPerson() != null && accommodations != null) {
-//			System.out.println("numberOfPerson");
-//			hotelNumerOfPerson = new ArrayList<Hotel>();
-//			for (Hotel a : hotels) {
-//				if (a.getNumberOfPerson() >= ordinarySearchDto.getNumberOfPerson()) {
-//					accommodationNumerOfPerson.add(a);
-//				}
-//			}
-//			if (accommodationNumerOfPerson != null) {
-//				if (ordinarySearchDto.getEndDate() != null && ordinarySearchDto.getStartDate() != null) {
-//					accommodationDate = new ArrayList<Accommodation>();
-//					for (Accommodation a : accommodationNumerOfPerson) {
-//						for (Price p : a.getPrices()) {
-//							if (ordinarySearchDto.getEndDate().before(p.getEndDate())
-//									&& ordinarySearchDto.getStartDate().after(p.getStartDate())
-//									&& ordinarySearchDto.getStartDate().before(ordinarySearchDto.getEndDate())) {
-//								if (accommodationDate != null) {
-//									if (!accommodationDate.contains(a)) {
-//										accommodationDate.add(a);
-//									}
-//								}
-//							}
-//						}
-//					}
-//				} else {
-//					return accommodationNumerOfPerson;
-//				}
-//			}
-//
-//			return accommodationNumerOfPerson;
-//
-//		}
-//
-//		if (ordinarySearchDto.getEndDate() != null && ordinarySearchDto.getStartDate() != null
-//				&& accommodations != null) {
-//			accommodationDate = new ArrayList<Accommodation>();
-//			for (Accommodation a : accommodations) {
-//				for (Price p : a.getPrices()) {
-//					if (ordinarySearchDto.getEndDate().before(p.getEndDate())
-//							&& ordinarySearchDto.getStartDate().after(p.getStartDate())
-//							&& ordinarySearchDto.getStartDate().before(ordinarySearchDto.getEndDate())) {
-//						if (accommodationDate != null) {
-//							if (!accommodationDate.contains(a)) {
-//								accommodationDate.add(a);
-//							}
-//						}
-//					}
-//				}
-//			}
-//			return accommodationDate;
-//		}
+		if (ordinarySearchDto.getNumberOfPerson() != null && hotels != null) {
+
+			hotelNumberOfPerson = new ArrayList<Hotel>();
+			for (Hotel hot : hotels) {
+				for(Room room: hot.getRooms()) {
+					if (room.getCapacity() >= ordinarySearchDto.getNumberOfPerson()) {
+						ArrayList<Room> roomsForHotel = new ArrayList<Room>();
+						roomsForHotel.add(room);
+						hot.setRooms(roomsForHotel);
+						hotelNumberOfPerson.add(hot);
+					}
+				}
+			}
+			
+			if (hotelNumberOfPerson != null) {
+				if (ordinarySearchDto.getEndDate() != null && ordinarySearchDto.getStartDate() != null) {
+					hotelDate = new ArrayList<Hotel>();
+					for (Hotel h : hotelNumberOfPerson) {
+						for (Room soba : h.getRooms()) {
+							for (Price p : soba.getPrices()) {
+								if (ordinarySearchDto.getEndDate().isBefore(p.getEndDate())
+										&& ordinarySearchDto.getStartDate().isAfter(p.getStartDate())
+										&& ordinarySearchDto.getStartDate().isBefore(ordinarySearchDto.getEndDate())) {
+									if (hotelDate != null) {
+										if (!hotelDate.contains(h)) {
+											ArrayList<Room> roomsForHotel = new ArrayList<Room>();
+											roomsForHotel.add(soba);
+											h.setRooms(roomsForHotel);
+											hotelDate.add(h);
+										}
+									}
+								}
+							}
+						}
+					}
+				} else {
+					return hotelNumberOfPerson;
+				}
+			}
+
+			return hotelNumberOfPerson;
+
+		}
+
+		if (ordinarySearchDto.getEndDate() != null && 
+				ordinarySearchDto.getStartDate() != null && hotels != null) {
+			
+			hotelDate = new ArrayList<Hotel>();
+			for (Hotel h : hotels) {
+				for (Room soba : h.getRooms()) {
+					for (Price p : soba.getPrices()) {
+						if ( ordinarySearchDto.getEndDate().isBefore(p.getEndDate()) && 
+							 ordinarySearchDto.getStartDate().isAfter(p.getStartDate()) &&
+							 ordinarySearchDto.getStartDate().isBefore(ordinarySearchDto.getEndDate()) ) {
+							
+							if (hotelDate != null) {
+								if (!hotelDate.contains(h)) {
+									ArrayList<Room> roomsForHotel = new ArrayList<Room>();
+									roomsForHotel.add(soba);
+									h.setRooms(roomsForHotel);
+									hotelDate.add(h);
+								}
+							}
+						}
+					}
+				}
+			}
+			return hotelDate;
+		}
 		
 		
 		return hotels;

@@ -3,13 +3,17 @@ package isa.projekat.booking.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +37,21 @@ import isa.projekat.booking.domain.Administrator;
 import isa.projekat.booking.domain.Branch;
 import isa.projekat.booking.domain.GPScoordinate;
 import isa.projekat.booking.domain.Hotel;
+import isa.projekat.booking.domain.Price;
 import isa.projekat.booking.domain.RentACarService;
 import isa.projekat.booking.domain.Room;
+import isa.projekat.booking.domain.RoomReservation;
 import isa.projekat.booking.domain.dto.BranchDTO;
 import isa.projekat.booking.domain.dto.HotelDTO;
 import isa.projekat.booking.domain.dto.OrdinarySearchDTO;
 import isa.projekat.booking.domain.dto.RoomDTO;
+import isa.projekat.booking.domain.dto.RoomSearchQuery;
+import isa.projekat.booking.domain.dto.VehicleSearchQuery;
 import isa.projekat.booking.repository.HotelRepository;
 import isa.projekat.booking.service.IAdditionalServiceService;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IHotelService;
+import isa.projekat.booking.service.IRoomReservationService;
 import isa.projekat.booking.service.IRoomService;
 import isa.projekat.booking.service.impl.HotelServiceImpl;
 
@@ -62,6 +71,8 @@ public class HotelController {
 	
 	@Autowired
 	private IAdditionalServiceService additionalServicesService;
+	
+	private IRoomReservationService roomResService;
 	
 	@RequestMapping( 
 			
@@ -95,7 +106,155 @@ public class HotelController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "/ordinarySearch", method = RequestMethod.PUT, produces = "application/json")
+	public LocalDate stringToDate(String date) {
+	    	
+	    	String[] token = date.split("-");
+	    	
+	    	int year = 0;
+	    	int month = 0;
+	    	int dayOfMonth = 0;
+	    	
+	    	month = Integer.parseInt(token[1]);
+	    	dayOfMonth = Integer.parseInt(token[2]);
+	    	year = Integer.parseInt(token[0]);
+	    	
+	    	LocalDate result = LocalDate.of(year, month, dayOfMonth);
+	    	
+	    	return result;
+	}
+	
+	
+	// ============ HOTEL SEARCH ===============	
+	
+    @RequestMapping(
+            value = "/search",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> search(@RequestBody RoomSearchQuery query) {
+		List<Hotel> result = new ArrayList<Hotel>();
+		
+		ArrayList<Hotel> hoteli = hotelService.getAll();
+		
+		for(int i=0; i<hoteli.size(); i++) {
+			result.add(hoteli.get(i));
+		}
+		
+//		for(int j=0; j<hoteli.size(); j++) {
+//			System.out.println("[HotelController: pretraga]: "
+//					+ "naziv hotela: " + hoteli.get(j).getName() + ", "
+//					+ "adresa hotela: " + hoteli.get(j).getAddress().getCity()
+//					+ " " + hoteli.get(j).getAddress().getCountry());
+			for(Hotel h: hoteli) {
+				if(!(h.getAddress().getCity().toLowerCase().contains(query.getCity()) || 
+					 h.getAddress().getCountry().toLowerCase().contains(query.getCountry()) ||
+					 h.getName().toLowerCase().contains(query.getHotelName()))) {
+					result.remove(h);
+					System.out.println("[HotelController: pretraga]: obrisan hotel sa nazivom - " + h.getName());
+				}
+			}
+//		}
+		
+		boolean postojiTerminSoba;
+		boolean postojiSoba;
+		
+		for (int i=0; i<result.size(); i++) {
+			Hotel hotel = result.get(i);
+			postojiSoba = false;
+			
+			if(hotel.getRooms().size() != 0) {
+				for(Iterator<Room> iteratorSoba = hotel.getRooms().iterator(); iteratorSoba.hasNext();) {
+					System.out.println("[HotelController: pretraga]: usao u for za prolazak kroz sobe; ima " + hotel.getRooms().size() + " soba.");
+					Room soba = (Room) iteratorSoba.next();
+					postojiTerminSoba = true;
+					
+						if(soba.getReservations().isEmpty()) {
+							postojiTerminSoba = true;
+							postojiSoba = true;
+							//break;
+						}else {
+							System.out.println("[HotelController: pretraga]: postoje rezervacije za sobu; ima ih " + soba.getReservations().size() + ".");
+							for(Iterator<RoomReservation> iteratorRezervacija = soba.getReservations().iterator(); iteratorRezervacija.hasNext();) {
+								RoomReservation rezervacijaHotel = iteratorRezervacija.next();
+//								System.out.println("[HotelController: pretraga]: zahtev:  datum dolaska: " + query.getCheckInDate() + ", datum odlaska: " + query.getCheckOutDate() + ".");
+//								System.out.println("[HotelController: pretraga]: rezervacija: " +
+//													rezervacijaHotel.getId() + ", datum dolaska: " +
+//													rezervacijaHotel.getResStart() + ", datum odlaska: " + 
+//													rezervacijaHotel.getResEnd() + ".");
+
+								if ( //rezervacijaHotel.isAktivirana() && 
+									(
+										stringToDate(query.getCheckInDate()).equals(rezervacijaHotel.getResStart()) || 
+										stringToDate(query.getCheckInDate()).equals(rezervacijaHotel.getResEnd()) || 
+										stringToDate(query.getCheckOutDate()).equals(rezervacijaHotel.getResStart()) || 
+										((rezervacijaHotel.getResStart()).isAfter(stringToDate(query.getCheckInDate())) && (rezervacijaHotel.getResStart()).isBefore(stringToDate(query.getCheckOutDate()))) || 
+										(stringToDate(query.getCheckInDate()).isAfter(rezervacijaHotel.getResStart()) && stringToDate(query.getCheckInDate()).isBefore(rezervacijaHotel.getResEnd())) || 
+										(stringToDate(query.getCheckOutDate()).isAfter(rezervacijaHotel.getResStart()) && stringToDate(query.getCheckOutDate()).isBefore(rezervacijaHotel.getResEnd()))
+									)
+								) {
+									System.out.println("[HotelController: pretraga]: soba je zauzeta u trazenom periodu.");
+									iteratorSoba.remove();
+									postojiTerminSoba = false;
+								}else {
+									System.out.println("[HotelController: pretraga]: soba je slobodna u trazenom periodu.");
+								}
+							}
+							
+							if(postojiTerminSoba) {
+								postojiSoba = true;
+							}
+						}
+					//}
+					
+				}
+				
+				if(!postojiSoba) {
+					result.remove(hotel);
+					i--;
+				}
+			}
+			
+		}
+		
+		
+		if(query.getGuests() != 0) {
+			boolean postoji;
+			
+			for(int i=0; i<result.size(); i++) {
+				postoji = false;
+				Hotel hotel = result.get(i);
+				System.out.println("[HotelController: pretraga]: hotel " + hotel.getName() + " ima " + hotel.getRooms().size() + " soba.");
+				for(Iterator<Room> iteratorSoba = hotel.getRooms().iterator(); iteratorSoba.hasNext();) {
+					Room soba = (Room) iteratorSoba.next();
+					if(soba.getCapacity() <= query.getGuests()) {
+						postoji = true;
+						//break;
+					} else {
+						iteratorSoba.remove();					
+					}
+				}
+				if(!postoji) {
+					result.remove(hotel);
+					i--;
+				}
+			}
+		}
+		
+		return new ResponseEntity<>(result, HttpStatus.OK);
+
+	}
+	
+	// =======================
+	
+	
+	
+	@RequestMapping(
+			value = "/ordinarySearch",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+	)
 	public ResponseEntity<Collection<Hotel>> ordinarySearchHotel(@RequestBody OrdinarySearchDTO ordinarySearchDto) {
 		
 		ArrayList<Hotel> hotels =  (ArrayList<Hotel>) hotelService.ordinarySearchHotel(ordinarySearchDto);
@@ -105,6 +264,17 @@ public class HotelController {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
+//	@RequestMapping(value = "/pretraga", method = RequestMethod.PUT, produces = "application/json")
+//	public ResponseEntity<Collection<Hotel>> searchByHotelNameAndCityAndCountry(String hotelName, String city, String country) {
+//		
+//		ArrayList<Hotel> hotels =  (ArrayList<Hotel>) hotelService.search(hotelName, city, country);
+//
+//		if (hotels != null) {
+//			return new ResponseEntity<Collection<Hotel>>(hotels, HttpStatus.OK);
+//		}
+//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//	}
 	
 //	@RequestMapping(
 //			value = "/search",
@@ -213,9 +383,7 @@ public class HotelController {
 		// images
 		
 		
-//		String hotelId = roomDto.getHotelID();
-//		String adminID = roomDto.getAdmin();
-//		
+		
 //		Hotel hotel = hotelService.findById(hotelId);
 //		ArrayList<Room> rooms = hotel.getRooms();
 //		

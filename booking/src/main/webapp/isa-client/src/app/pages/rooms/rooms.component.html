@@ -1,3 +1,16 @@
-<p>
-  rooms works!
-</p>
+<app-nav></app-nav>
+
+<a [routerLink]="'../'">Back</a>
+
+<div *ngIf="room">
+  <h1>{{room.id}}</h1>
+  <p>{{room.status}}</p>
+  <h4>Rating: {{room.rating}}</h4>
+
+</div>
+
+<div class="col-xs-2">
+  <button class="btn btn-primary"
+          (click)="onBookRoom(room.id)">Book Room</button>
+</div>
+
