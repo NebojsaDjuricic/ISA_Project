@@ -44,11 +44,11 @@ public class VehicleDiscountDTO {
 		this.discountEndDate = discountEndDate;
 	}
 
-	private Double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	private void setDiscount(Double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 	

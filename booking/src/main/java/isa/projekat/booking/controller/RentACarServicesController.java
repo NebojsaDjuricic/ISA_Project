@@ -2,12 +2,17 @@ package isa.projekat.booking.controller;
 
 import isa.projekat.booking.domain.*;
 import isa.projekat.booking.domain.dto.BranchDTO;
+import isa.projekat.booking.domain.dto.BranchesAndVehiclesMapDTO;
 import isa.projekat.booking.domain.dto.RentACarSearchQueryDTO;
 import isa.projekat.booking.domain.dto.RentACarSearchResult;
 import isa.projekat.booking.domain.dto.RentACarServiceDTO;
+import isa.projekat.booking.domain.dto.VehicleDTO;
+import isa.projekat.booking.domain.dto.VehicleDiscountDTO;
 import isa.projekat.booking.service.IAdministratorService;
 import isa.projekat.booking.service.IBranchService;
 import isa.projekat.booking.service.IRentACarService;
+import isa.projekat.booking.service.IVehicleService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,9 +20,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("rent-a-car")
@@ -32,6 +41,9 @@ public class RentACarServicesController {
 
     @Autowired
     private IAdministratorService administratorService;
+    
+    @Autowired
+    private IVehicleService vehicleService;
 
 
     @RequestMapping(
@@ -87,11 +99,85 @@ public class RentACarServicesController {
     }
     
     @RequestMapping(
-    		value = "/edit-branch",
+    		value = "/edit-rent-a-car",
     		method = RequestMethod.PUT,
     		consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> editRentACarService(@RequestBody RentACarServiceDTO rent_a_car) {
+    	
+    	RentACarService updatedRentACarService = new RentACarService();
+    	Address newAddress = new Address();
+    	newAddress.setBuildingNumber(rent_a_car.getAddress().getBuildingNumber());
+    	newAddress.setCity(rent_a_car.getAddress().getCity());
+    	newAddress.setCoordinatePosition(rent_a_car.getAddress().getCoordinatePosition());
+    	newAddress.setCountry(rent_a_car.getAddress().getCountry());
+    	newAddress.setStreetName(rent_a_car.getAddress().getStreetName());
+    	updatedRentACarService.setAddress(newAddress);
+    	
+    	ArrayList<Branch> newBranches = new ArrayList<Branch>();
+    	for (BranchDTO branch : rent_a_car.getBranches()) {
+			Branch newBranch = new Branch();
+			newBranch.setContactEmail(branch.getContactEmail());
+			newBranch.setId(branch.getId());
+			newBranch.setName(branch.getName());
+			newBranch.setPhoneNumber(branch.getPhoneNumber());
+			//address
+			Address tempAddress = new Address();
+			tempAddress.setBuildingNumber(branch.getAddress().getBuildingNumber());
+			tempAddress.setCity(branch.getAddress().getCity());
+			tempAddress.setCoordinatePosition(branch.getAddress().getCoordinatePosition());
+			tempAddress.setCountry(branch.getAddress().getCountry());
+			tempAddress.setStreetName(branch.getAddress().getStreetName());
+			newBranch.setAddress(newAddress);
+			//veh
+			ArrayList<Vehicle> newVehicleList = new ArrayList<Vehicle>();
+			for (VehicleDTO vehicle : branch.getVehicles()) {
+				newVehicleList.add(vehicleService.findByID(vehicle.getLicenceID()));
+			}
+			newBranch.setVehicles(newVehicleList);
+			
+		}
+    	updatedRentACarService.setBranches(newBranches);
+    	
+    	Map<String, List<String>> mapa = new HashMap<String, List<String>>();
+    	ArrayList<BranchesAndVehiclesMapDTO> tempLikeMap = rent_a_car.getBranchesAndVehicles();
+    	for (BranchesAndVehiclesMapDTO temp : tempLikeMap) {
+			ArrayList<String> vehicleIDs = new ArrayList<String>();
+			for (String id : temp.getVehiclesInBranch()) {
+				vehicleIDs.add(id);
+			}
+			mapa.put(temp.getBranchID(), vehicleIDs);
+		}
+    	updatedRentACarService.setBranchesAndVehicles(mapa);
+    	
+    	updatedRentACarService.setDescription(rent_a_car.getDescription());
+    	
+    	updatedRentACarService.setId(rent_a_car.getId());
+    	
+    	updatedRentACarService.setName(rent_a_car.getName());
+    	
+    	updatedRentACarService.setRating(rentACarService.findByID(rent_a_car.getId()).getRating());
+    	
+    	Map<String, String> vehicleIDMap = new HashMap<String, String>();
+    	for (String id : rent_a_car.getVehicles()) {
+			vehicleIDMap.put(id, id);
+		}
+    	updatedRentACarService.setVehicles(vehicleIDMap);
+    	
+    	//vehiclesOnDiscount
+    	ArrayList<VehicleDiscount> discountList = new ArrayList<VehicleDiscount>();
+    	for (VehicleDiscountDTO discountDTO : rent_a_car.getVehiclesOnDiscount()) {
+			VehicleDiscount newDiscount = new VehicleDiscount();
+			newDiscount.setDiscount(discountDTO.getDiscount());
+			newDiscount.setId(discountDTO.getId());
+			newDiscount.setVehicleID(discountDTO.getVehicleID());
+			newDiscount.setDiscountStartDate(stringToDate(discountDTO.getDiscountStartDate()));
+			newDiscount.setDiscountEndDate(stringToDate(discountDTO.getDiscountEndDate()));
+			discountList.add(newDiscount);
+    	}
+    	updatedRentACarService.setVehiclesOnDiscount(discountList);
+    	
+    	rentACarService.save(updatedRentACarService);    	
     	
     	return new ResponseEntity<>("", HttpStatus.OK);
     }
@@ -168,6 +254,23 @@ public class RentACarServicesController {
     	result.setQueryResult(retVal);
     	
     	return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    
+    public LocalDate stringToDate(String date) {
+    	
+    	String[] token = date.split("-");
+    	
+    	int year = 0;
+    	int month = 0;
+    	int dayOfMonth = 0;
+    	
+    	month = Integer.parseInt(token[1]);
+    	dayOfMonth = Integer.parseInt(token[2]);
+    	year = Integer.parseInt(token[0]);
+    	
+    	LocalDate result = LocalDate.of(year, month, dayOfMonth);
+    	
+    	return result;
     }
 
 }

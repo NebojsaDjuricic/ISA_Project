@@ -53,11 +53,11 @@ public class RentACarServiceDTO {
 		this.rating = rating;
 	}
 
-	private ArrayList<BranchDTO> getBranches() {
+	public ArrayList<BranchDTO> getBranches() {
 		return branches;
 	}
 
-	private void setBranches(ArrayList<BranchDTO> branches) {
+	public void setBranches(ArrayList<BranchDTO> branches) {
 		this.branches = branches;
 	}
 
@@ -69,11 +69,11 @@ public class RentACarServiceDTO {
 		this.vehiclesOnDiscount = vehiclesOnDiscount;
 	}
 
-	private ArrayList<String> getVehicles() {
+	public ArrayList<String> getVehicles() {
 		return vehicles;
 	}
 
-	private void setVehicles(ArrayList<String> vehicles) {
+	public void setVehicles(ArrayList<String> vehicles) {
 		this.vehicles = vehicles;
 	}
 
@@ -83,5 +83,13 @@ public class RentACarServiceDTO {
 
 	public void setBranchesAndVehicles(ArrayList<BranchesAndVehiclesMapDTO> branchesAndVehicles) {
 		this.branchesAndVehicles = branchesAndVehicles;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
