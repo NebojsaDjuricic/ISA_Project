@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Vehicle } from '../model/vehicle';
-import { VehicleDTO } from '../model/vehicleDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,7 @@ export class VehicleServiceService {
     return this.http.get<Vehicle>(this.backEndUrl + '/get/' + id);
   }
 
-  editVehicle(vehicle: VehicleDTO) {
+  editVehicle(vehicle: Vehicle) {
     return this.http.post(this.backEndUrl + '/save', vehicle, this.httpOptions);
   }
 }

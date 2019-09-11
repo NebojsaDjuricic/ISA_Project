@@ -10,13 +10,13 @@ public class BranchDTO {
     private String id;
     private String admin;
     private String name;
-    private Address address;
+    private AddressDTO address;
     private String phoneNumber;
     private String contactEmail;
-    private ArrayList<Vehicle> vehicles;
+    private ArrayList<VehicleDTO> vehicles;
 
     public BranchDTO() {
-
+    	this.setVehicles(new ArrayList<VehicleDTO>());
     }
 
     public String getName() {
@@ -27,11 +27,11 @@ public class BranchDTO {
         this.name = name;
     }
 
-    public Address getAddress() {
+    public AddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDTO address) {
         this.address = address;
     }
 
@@ -51,11 +51,11 @@ public class BranchDTO {
         this.contactEmail = contactEmail;
     }
 
-    public ArrayList<Vehicle> getVehicles() {
+    public ArrayList<VehicleDTO> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(ArrayList<Vehicle> vehicles) {
+    public void setVehicles(ArrayList<VehicleDTO> vehicles) {
         this.vehicles = vehicles;
     }
 

@@ -3,6 +3,7 @@ import { Vehicle } from '../model/vehicle';
 
 export class Branch {
     id: String;
+    admin: String;
     name: String;
     address: Address;
     phoneNumber: String;

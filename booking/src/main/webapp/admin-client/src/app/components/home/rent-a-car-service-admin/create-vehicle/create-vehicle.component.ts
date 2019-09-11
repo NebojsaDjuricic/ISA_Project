@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Vehicle } from '../../../../model/vehicle';
-import { VehicleDTO } from '../../../../model/vehicleDTO';
 import { Branch } from '../../../../model/branch';
 import { VehicleServiceService } from '../../../../services/vehicle-service.service';
 import { RentACarServiceServiceService } from '../../../../services/rent-a-car-service-service.service';
@@ -17,7 +16,7 @@ import { Observable } from 'rxjs';
 export class CreateVehicleComponent implements OnInit {
 
   createVehicleForm: FormGroup;
-  vehicle: VehicleDTO;
+  vehicle: Vehicle;
   branches: Branch[] = [];
 
   constructor(
@@ -44,7 +43,7 @@ export class CreateVehicleComponent implements OnInit {
         console.log('Branches size: ' + this.branches.length);
       }
     );
-    this.vehicle = new VehicleDTO();
+    this.vehicle = new Vehicle();
   }
 
   onSubmit() {

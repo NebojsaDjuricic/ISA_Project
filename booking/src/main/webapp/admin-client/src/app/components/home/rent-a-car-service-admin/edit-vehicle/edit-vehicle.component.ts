@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VehicleDTO } from '../../../../model//vehicleDTO';
 import { Vehicle } from '../../../../model//vehicle';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
@@ -16,7 +15,7 @@ export class EditVehicleComponent implements OnInit {
 
   editVehicleForm: FormGroup;
   vehicle: Vehicle;
-  editedVehicle: VehicleDTO;
+  editedVehicle: Vehicle;
   branchID: String;
   vehicleID: String;
   submitted = false;
@@ -39,7 +38,7 @@ export class EditVehicleComponent implements OnInit {
         licence: ['', Validators.required]
     });
 
-    this.editedVehicle = new VehicleDTO();
+    this.editedVehicle = new Vehicle();
 
     this.router.params.subscribe(
       params => {
@@ -48,7 +47,7 @@ export class EditVehicleComponent implements OnInit {
       }
     );
 
-    this.vehicle = new VehicleDTO();
+    this.vehicle = new Vehicle();
     // vehicle = popunjeno vozilo i branch
     this.vehicleService.getVehicle(this.vehicleID).subscribe(
       res => {

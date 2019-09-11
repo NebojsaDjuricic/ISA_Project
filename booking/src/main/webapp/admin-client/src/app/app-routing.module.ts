@@ -18,6 +18,7 @@ import {HotelsListComponent} from './components/home/sys-admin-home/hotels-list/
 import {EditAdminComponent} from './components/home/sys-admin-home/edit-admin/edit-admin.component';
 import {AdminListComponent} from './components/home/sys-admin-home/admin-list/admin-list.component';
 import {CreatePriceComponent} from './components/home/hotel-admin/create-room/create-price/create-price.component';
+import { EditRentACarServiceComponent } from './components/home/rent-a-car-service-admin/edit-rent-a-car-service/edit-rent-a-car-service.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'admins', component: AdminListComponent},
   { path: 'admins/edit-admin/:adminUsername', component: EditAdminComponent},
   { path: 'myProfile/:adminUsername', component: EditAdminComponent},
+  { path: 'edit-rent-a-car', component: EditRentACarServiceComponent}
   // { path: 'myHotel/:adminHotel', component: EditHotelComponent},
 ];
 
