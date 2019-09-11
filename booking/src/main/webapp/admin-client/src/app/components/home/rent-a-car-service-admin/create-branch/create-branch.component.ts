@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Branch } from '../../../../model/branch';
-import { BranchDTO } from '../../../../model/branchDTO';
 import { Address } from '../../../../model/address';
 import { RentACarServiceServiceService } from '../../../../services/rent-a-car-service-service.service';
 import { AuthServiceService } from '../../../../services/auth-service.service';
@@ -15,7 +14,7 @@ import {Router} from '@angular/router';
 export class CreateBranchComponent implements OnInit {
 
   createBranchForm: FormGroup;
-  branch: BranchDTO;
+  branch: Branch;
   address: Address;
   submitter = false;
 
@@ -37,7 +36,7 @@ export class CreateBranchComponent implements OnInit {
       contactEmail: ['', Validators.required],
     });
 
-    this.branch = new BranchDTO();
+    this.branch = new Branch();
     this.address = new Address();
   }
 

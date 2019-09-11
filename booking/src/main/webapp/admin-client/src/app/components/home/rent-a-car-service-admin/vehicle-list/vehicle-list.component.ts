@@ -31,13 +31,15 @@ export class VehicleListComponent implements OnInit {
     this.rentACar = new RentACar();
     this.rentACarServiceService.getRentACar(this.rentACarID).subscribe(
       res => {
-
+        /*
         for (const branch of res.branches) {
           this.branches.push(branch);
         }
+        */
         this.rentACar = res;
+        this.branches = res.branches;
 
-        console.log(this.branches.length);
+        console.log(this.rentACar.branches.length);
       }
     );
   }
