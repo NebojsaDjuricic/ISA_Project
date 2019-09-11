@@ -81,6 +81,7 @@ public class RentACarServicesController {
         retVal.setAddress(address);
         
         ArrayList<BranchDTO> branches = new ArrayList<BranchDTO>();
+        ArrayList<String> allVehicles = new ArrayList<String>();
         for (Branch dbBranch : fromDB.getBranches()) {
 			BranchDTO branch = new BranchDTO();
 			AddressDTO addressDTO = new AddressDTO();
@@ -98,6 +99,7 @@ public class RentACarServicesController {
 					break;
 				}
 			}
+			
 			branch.setContactEmail(dbBranch.getContactEmail());
 			branch.setId(dbBranch.getId());
 			branch.setName(dbBranch.getName());
@@ -120,9 +122,46 @@ public class RentACarServicesController {
 				vehicleDTO.setStatus(vehicle.getStatus());
 				vehicleDTO.setVehicleType(vehicle.getVehicleType());
 				listOfVehicles.add(vehicleDTO);
+				
+				allVehicles.add(vehicleDTO.getLicenceID());
 			}
 			branch.setVehicles(listOfVehicles);
+			
+			branches.add(branch);
 		}
+        
+        retVal.setBranches(branches);
+        
+        //retVal.setBranchesAndVehicles(branchesAndVehicles);
+        Map<String, List<String>> branchesAndVehicles = fromDB.getBranchesAndVehicles();
+        ArrayList<BranchesAndVehiclesMapDTO> mapDTO = new ArrayList<BranchesAndVehiclesMapDTO>();
+        for(Map.Entry<String, List<String>> entry : branchesAndVehicles.entrySet()) {
+        	BranchesAndVehiclesMapDTO item = new BranchesAndVehiclesMapDTO();
+        	item.setBranchID(entry.getKey());
+        	ArrayList<String> vehiceIDs = new ArrayList<String>();
+        	for (String vehicleID : entry.getValue()) {
+				vehiceIDs.add(vehicleID);
+			}
+        	item.setVehiclesInBranch(vehiceIDs);
+        	mapDTO.add(item);
+        }
+        retVal.setBranchesAndVehicles(mapDTO);
+        retVal.setVehicles(allVehicles);
+
+        //retVal.setVehiclesOnDiscount(vehiclesOnDiscount);
+        ArrayList<VehicleDiscount> vehiclesOnDiscount = fromDB.getVehiclesOnDiscount();
+        ArrayList<VehicleDiscountDTO> dtoVehiclesOnDiscount = new ArrayList<VehicleDiscountDTO>();
+        for (VehicleDiscount vehicleDiscount : vehiclesOnDiscount) {
+			VehicleDiscountDTO newDTODiscount = new VehicleDiscountDTO();
+			newDTODiscount.setDiscount(vehicleDiscount.getDiscount());
+			newDTODiscount.setId(vehicleDiscount.getId());
+			newDTODiscount.setVehicleID(vehicleDiscount.getVehicleID());
+			newDTODiscount.setDiscountStartDate(vehicleDiscount.getDiscountStartDate().toString());
+			newDTODiscount.setDiscountEndDate(vehicleDiscount.getDiscountEndDate().toString());
+			dtoVehiclesOnDiscount.add(newDTODiscount);
+		}
+        retVal.setVehiclesOnDiscount(dtoVehiclesOnDiscount);
+        retVal.setVehicles(allVehicles);
 
         return  new ResponseEntity<>(retVal, HttpStatus.OK);
     }
