@@ -10,7 +10,7 @@ public class BranchDTO {
     private String id;
     private String admin;
     private String name;
-    private Address address;
+    private AddressDTO address;
     private String phoneNumber;
     private String contactEmail;
     private ArrayList<VehicleDTO> vehicles;
@@ -27,11 +27,11 @@ public class BranchDTO {
         this.name = name;
     }
 
-    public Address getAddress() {
+    public AddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDTO address) {
         this.address = address;
     }
 

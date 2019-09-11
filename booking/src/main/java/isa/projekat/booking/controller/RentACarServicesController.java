@@ -1,6 +1,7 @@
 package isa.projekat.booking.controller;
 
 import isa.projekat.booking.domain.*;
+import isa.projekat.booking.domain.dto.AddressDTO;
 import isa.projekat.booking.domain.dto.BranchDTO;
 import isa.projekat.booking.domain.dto.BranchesAndVehiclesMapDTO;
 import isa.projekat.booking.domain.dto.RentACarSearchQueryDTO;
@@ -63,9 +64,65 @@ public class RentACarServicesController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Object> getRentACarService(@PathVariable("id")String id ) {
-        RentACarService retVal = rentACarService.findByID(id);
+        RentACarService fromDB = rentACarService.findByID(id);
+        RentACarServiceDTO retVal = new RentACarServiceDTO();
+        
+        retVal.setDescription(fromDB.getDescription());
+        retVal.setId(id);
+        retVal.setName(fromDB.getName());
+        retVal.setRating(fromDB.getRating());
+        
+        AddressDTO address = new AddressDTO();
+        address.setBuildingNumber(fromDB.getAddress().getBuildingNumber());
+        address.setCity(fromDB.getAddress().getCity());
+        address.setCountry(fromDB.getAddress().getCountry());
+        address.setStreetName(fromDB.getAddress().getStreetName());
+        address.setCoordinatePosition(fromDB.getAddress().getCoordinatePosition());
+        retVal.setAddress(address);
+        
+        ArrayList<BranchDTO> branches = new ArrayList<BranchDTO>();
+        for (Branch dbBranch : fromDB.getBranches()) {
+			BranchDTO branch = new BranchDTO();
+			AddressDTO addressDTO = new AddressDTO();
+			addressDTO.setBuildingNumber(dbBranch.getAddress().getBuildingNumber());
+			addressDTO.setCity(dbBranch.getAddress().getCity());
+			addressDTO.setCountry(dbBranch.getAddress().getCountry());
+			addressDTO.setStreetName(dbBranch.getAddress().getStreetName());
+			address.setCoordinatePosition(dbBranch.getAddress().getCoordinatePosition());
+			branch.setAddress(addressDTO);
+			
+			ArrayList<Administrator> admins = administratorService.getAll();
+			for (Administrator admin : admins) {
+				if(id.equals(admin.getEditingObjectID())) {
+					branch.setAdmin(admin.getUsername());
+					break;
+				}
+			}
+			branch.setContactEmail(dbBranch.getContactEmail());
+			branch.setId(dbBranch.getId());
+			branch.setName(dbBranch.getName());
+			branch.setPhoneNumber(dbBranch.getPhoneNumber());
 
-        //System.out.println(retVal.getBranches().get(0).getVehicles().get(0).getStatus());
+			ArrayList<VehicleDTO> listOfVehicles = new ArrayList<VehicleDTO>();
+			ArrayList<Vehicle> vehicles = dbBranch.getVehicles();
+			for (Vehicle vehicle : vehicles) {
+				VehicleDTO vehicleDTO = new VehicleDTO();
+				vehicleDTO.setAdmin(branch.getAdmin());
+				vehicleDTO.setBranchID(branch.getId());
+				vehicleDTO.setBrand(vehicle.getBrand());
+				vehicleDTO.setLicenceID(vehicle.getLicenceID());
+				vehicleDTO.setManufacturingYear(vehicle.getManufacturingYear());
+				vehicleDTO.setModel(vehicle.getModel());
+				vehicleDTO.setName(vehicle.getName());
+				vehicleDTO.setNumberOfSeats(vehicle.getNumberOfSeats());
+				vehicleDTO.setPrice(vehicle.getPrice());
+				vehicleDTO.setRating(vehicle.getRating());
+				vehicleDTO.setStatus(vehicle.getStatus());
+				vehicleDTO.setVehicleType(vehicle.getVehicleType());
+				listOfVehicles.add(vehicleDTO);
+			}
+			branch.setVehicles(listOfVehicles);
+		}
 
         return  new ResponseEntity<>(retVal, HttpStatus.OK);
     }
@@ -199,7 +256,13 @@ public class RentACarServicesController {
         newBranch.setPhoneNumber(branch.getPhoneNumber());
         newBranch.setName(branch.getName());
         newBranch.setContactEmail(branch.getContactEmail());
-        newBranch.setAddress(branch.getAddress());
+        Address address = new Address();
+        address.setBuildingNumber(branch.getAddress().getBuildingNumber());
+        address.setCity(branch.getAddress().getCity());
+        address.setCountry(branch.getAddress().getCountry());
+        address.setStreetName(branch.getAddress().getStreetName());
+        address.setCoordinatePosition(branch.getAddress().getCoordinatePosition());
+        newBranch.setAddress(address);
 
         branchService.save(newBranch);
 
