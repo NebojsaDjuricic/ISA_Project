@@ -1,10 +1,13 @@
 package isa.projekat.booking.domain.dto;
 
 import isa.projekat.booking.domain.VehicleStatus;
+import isa.projekat.booking.domain.VehicleType;
+
 import org.springframework.data.annotation.Id;
 
 public class VehicleDTO {
 
+	private String name;
     private String brand;
     private String model;
 
@@ -15,6 +18,9 @@ public class VehicleDTO {
     private Double rating;
     private String branchID;
     private String admin;
+    private int manufacturingYear;
+    private int numberOfSeats;
+    private VehicleType vehicleType;
 
     public VehicleDTO() {
 
@@ -83,4 +89,36 @@ public class VehicleDTO {
     public void setAdmin(String admin) {
         this.admin = admin;
     }
+
+	public int getManufacturingYear() {
+		return manufacturingYear;
+	}
+
+	public void setManufacturingYear(int manufacturingYear) {
+		this.manufacturingYear = manufacturingYear;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
+	}
+
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
 }

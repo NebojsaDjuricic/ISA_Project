@@ -30,6 +30,7 @@ import { HotelsListComponent } from './components/home/sys-admin-home/hotels-lis
 import {DisableControlDirective, EditAdminComponent} from './components/home/sys-admin-home/edit-admin/edit-admin.component';
 import { AdminListComponent } from './components/home/sys-admin-home/admin-list/admin-list.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { EditRentACarServiceComponent } from './components/home/rent-a-car-service-admin/edit-rent-a-car-service/edit-rent-a-car-service.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
     HotelsListComponent,
     EditAdminComponent,
     AdminListComponent,
-    DisableControlDirective
+    DisableControlDirective,
+    EditRentACarServiceComponent
   ],
   imports: [
     BrowserModule,

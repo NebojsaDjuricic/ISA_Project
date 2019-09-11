@@ -85,6 +85,17 @@ public class RentACarServicesController {
 
         return new ResponseEntity<>(newRentACar, HttpStatus.OK);
     }
+    
+    @RequestMapping(
+    		value = "/edit-branch",
+    		method = RequestMethod.PUT,
+    		consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> editRentACarService(@RequestBody RentACarServiceDTO rent_a_car) {
+    	
+    	return new ResponseEntity<>("", HttpStatus.OK);
+    }
+    
 
     @RequestMapping(
             value="/add-branch",
